@@ -119,5 +119,3 @@ El proyecto pretende abarcar el cultivo en 3 principales ramas que son cultivo e
 1.4 Usuario debe poder ingresar a sus reseñas en no mas de 2 click.
 1.5 Usuario debe poder comentar y/o puntuar en reseñas ajenas de forma directa.
 1.6 Usuario puede acceder a otros Usuarios mediante la busqueda de su nickname.
-
-
