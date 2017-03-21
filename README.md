@@ -5,7 +5,7 @@ Hoy en día donde el crecimiento demografico ha llevado a que se tenga un 90% de
 Aplicación web para compartir experiencias y reseñas de diversos tipos de cultivos, desde los mas simples jardines hasta complejos cultivos hidroponicos. Siempre con el fin de compartir nuestras experiencias y resultados para dar mejoras continuas a los cultivadores de nuestra plataforma.
 
 
-#Alcances :
+# Alcances :
 Con el proyecto de comunidad de cultivo se pretende mejorar de forma constante y continua el desarrollo de cultivos de variados tipos de ortalizas y plantas, con colaboración
 por parte de los mismos usuarios, esperando que de esta forma se logre una especialización por parte de los cultivadores y reconocimiento por parte de estos a los cultivadores mas experimentados,
 como también datos y consejos para el desarrollo optimo de los necesario para el desarrollo de cultivos.
@@ -14,7 +14,7 @@ fomentando el respeto de opiniones desde y hacia los demás usuarios.
 
 
 
-#Limitaciones :
+# Limitaciones :
 El proyecto pretende abarcar el cultivo en 3 principales ramas que son cultivo en exterior, indoor e hidroponico.
   La aplicación permitirá solo la colaboración y el uso compartido de conocimiento del desarrollo de cultivos, no contemplando la venta
   de los productos cuya forma de cultivo se reseñe por parte de los usuarios. el uso de la aplicación quedara limitado al uso solo por parte mayores de
@@ -22,7 +22,7 @@ El proyecto pretende abarcar el cultivo en 3 principales ramas que son cultivo e
 
 
 
-#Requisitos funcionales:
+# Requisitos funcionales:
 
 
 - [	] Modulo usuario
