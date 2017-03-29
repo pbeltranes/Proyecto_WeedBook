@@ -113,6 +113,7 @@ return [
         /*
          * Laravel Framework Service Providers...
          */
+
         Illuminate\Foundation\Providers\ArtisanServiceProvider::class,
         Illuminate\Auth\AuthServiceProvider::class,
         Illuminate\Broadcasting\BroadcastServiceProvider::class,
@@ -140,6 +141,7 @@ return [
         /*
          * Application Service Providers...
          */
+        Krlove\EloquentModelGenerator\Provider\GeneratorServiceProvider::class,
         App\Providers\AppServiceProvider::class,
         App\Providers\AuthServiceProvider::class,
         App\Providers\EventServiceProvider::class,
