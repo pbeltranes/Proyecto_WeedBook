@@ -19,15 +19,17 @@ Route::controllers([
 ]); //auth
 Route::group(['middleware' => ['auth']], function()
 {
-	TRUE;
 	Route::get('new-review', 'ReviewController@create');
 	Route::post('new-review', 'ReviewController@save');
 	Route::get('edit/{slug}', 'ReviewController@edit');
 	Route::post('update', 'ReviewController@update');
 	Route::get('delete/{id}', 'ReviewController@destroy');
 	Route::get('my-all-review', 'ReviewController@user_reviews_draft');
-	Route::post('comment/add', 'CommentController@create');
+	Route::get('comment/add', 'CommentController@create');
+	Route::post('comment/save', 'CommentController@save');
 	Route::post('comment/delete/{id}', 'CommentController@destroy');
+	Route::post('comment/update', 'CommentController@update');
+	Route::get('comment/edit/{id}', 'CommentController@edit');
 }); // Acciones que solo pueden hacer los usuarios logueados
 
 Route::get('user/{id}', 'UserController@profile')->where('id', '[0-9]+');

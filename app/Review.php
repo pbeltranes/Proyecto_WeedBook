@@ -15,6 +15,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $updated_at
  * @property User $user
  * @property Comment[] $comments
+ * @property ReviewUpVote[] $reviewUpVotes
+ * @property ReviewUpVote[] $reviewUpVotes
  * @property Strain[] $strains
  */
 class Review extends Model
@@ -38,6 +40,22 @@ class Review extends Model
     public function comments()
     {
         return $this->hasMany('App\Comment', 'on_review');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function reviewUpVotes()
+    {
+        return $this->hasMany('App\ReviewUpVote');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function reviewUpVotes()
+    {
+        return $this->hasMany('App\ReviewUpVote');
     }
 
     /**

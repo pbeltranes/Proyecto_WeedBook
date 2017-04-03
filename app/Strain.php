@@ -20,6 +20,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $grow_type
  * @property string $seed_type
  * @property Review $review
+ * @property ProductOnStrain[] $productOnStrains
  */
 class Strain extends Model
 {
@@ -34,5 +35,13 @@ class Strain extends Model
     public function review()
     {
         return $this->belongsTo('App\Review');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function productOnStrains()
+    {
+        return $this->hasMany('App\ProductOnStrain', 'strains_id');
     }
 }
