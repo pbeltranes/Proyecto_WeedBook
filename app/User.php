@@ -1,76 +1,33 @@
 <?php
-
 namespace App;
-
+use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
-
-/**
- * @property integer $id
- * @property string $name
- * @property string $email
- * @property string $password
- * @property string $remember_token
- * @property string $created_at
- * @property string $updated_at
- * @property CommentUpVote[] $commentUpVotes
- * @property Comment[] $comments
- * @property ReviewUpVote[] $reviewUpVotes
- * @property ReviewUpVote[] $reviewUpVotes
- * @property Review[] $reviews
- * @property UsersProfile[] $usersProfiles
- */
-class User extends Model
+use Illuminate\Auth\Passwords\CanResetPassword;
+use Illuminate\Foundation\Auth\Access\Authorizable;
+use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
+use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
+use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
+class User extends Model implements AuthenticatableContract,
+                                    AuthorizableContract,
+                                    CanResetPasswordContract
 {
+    use Authenticatable, Authorizable, CanResetPassword;
     /**
+     * The database table used by the model.
+     *
+     * @var string
+     */
+    protected $table = 'users';
+    /**
+     * The attributes that are mass assignable.
+     *
      * @var array
      */
-    protected $fillable = ['name', 'email', 'password', 'remember_token', 'created_at', 'updated_at'];
-
+    protected $fillable = ['name', 'email', 'password'];
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * The attributes excluded from the model's JSON form.
+     *
+     * @var array
      */
-    public function commentUpVotes()
-    {
-        return $this->hasMany('App\CommentUpVote');
-    }
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function comments()
-    {
-        return $this->hasMany('App\Comment', 'from_user');
-    }
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function reviewUpVotes()
-    {
-        return $this->hasMany('App\ReviewUpVote');
-    }
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function reviewUpVotes()
-    {
-        return $this->hasMany('App\ReviewUpVote');
-    }
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function reviews()
-    {
-        return $this->hasMany('App\Review', 'author_id');
-    }
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function usersProfiles()
-    {
-        return $this->hasMany('App\UsersProfile');
-    }
+    protected $hidden = ['password', 'remember_token'];
 }
