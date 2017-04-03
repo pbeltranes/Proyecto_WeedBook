@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Review;
 
 class ReviewController extends Controller
 {
@@ -18,7 +20,7 @@ class ReviewController extends Controller
     {
         //saca 5 reseñas en orden por rep
 
-        $reviews = Reviews::join('reviews', 'reviews.id', '=', 'reviews_up_votes.review_id')
+        $reviews = Review::join('review_up_votes', 'reviews.id', '=', 'review_up_votes.review_id')
         ->groupBy('reviews.id')
         ->orderBy(DB::raw('COUNT(reviews.id)'), 'DESC')
         ->paginate(5);

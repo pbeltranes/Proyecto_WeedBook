@@ -49,15 +49,6 @@ class Review extends Model
     {
         return $this->hasMany('App\ReviewUpVote');
     }
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function reviewUpVotes()
-    {
-        return $this->hasMany('App\ReviewUpVote');
-    }
-
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
