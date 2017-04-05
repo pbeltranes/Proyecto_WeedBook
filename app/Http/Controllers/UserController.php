@@ -6,6 +6,10 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\User;
+use App\Review;
+use App\Comment;
+use App\UsersProfile;
 
 class UserController extends Controller
 {
@@ -84,4 +88,38 @@ class UserController extends Controller
     {
         //
     }
+
+    public function profile(Request $request, $id){
+        $data['user'] = User::find($id);
+        $data['user_profile'] = UsersProfile::where('user_id', $id);
+        
+
+        $totalReviewsRep = Review::join('review_up_votes', 'reviews.id', '=', 'review_up_votes.review_id')
+        ->groupBy('reviews.id')
+        ->where('reviews.author_id', $id)
+        ->count();
+        $totalUserReviews = Review::where('author_id', $id)
+        -> count();
+
+        $totalUserReviews = $totalUserReviews > 0 ? $totalUserReviews : 1;
+
+        $data['prom_rev_rep'] = $totalReviewsRep / $totalUserReviews;
+
+
+        $totalCommentRep = Comment::join('comment_up_votes', 'comments.id', '=', 'comment_up_votes.comment_id')
+        ->groupBy('comments.id')
+        ->where('comments.from_user', $id)
+        ->count();
+        $totalUserComments = Comment::where('from_user', $id)
+        -> count();
+
+        $totalUserComments = $totalUserComments > 0 ? $totalUserComments : 1;
+
+        $data['prom_comments_rep'] = $totalCommentRep / $totalUserComments;
+
+
+
+        return view('profile', $data);
+    }
+
 }

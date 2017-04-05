@@ -30,4 +30,18 @@ class User extends Model implements AuthenticatableContract,
      * @var array
      */
     protected $hidden = ['password', 'remember_token'];
+
+    //user has many reviews
+    function reviews(){
+        return $this->hasMany('App\Review');
+    }
+
+    //user has many comments
+    function comments(){
+        return $this->hasMany('App\Comment');
+    }
+
+    function profile(){
+        return $this->hasOne('App\UsersProfile');
+    }
 }
