@@ -20,7 +20,7 @@ class ReviewController extends Controller
     {
         //saca 5 reseñas en orden por rep
 
-        $reviews = Review::join('review_up_votes', 'reviews.id', '=', 'review_up_votes.review_id')
+        $reviews = Review::join('review_up_vote', 'reviews.id', '=', 'review_up_vote.review_id')
         ->groupBy('reviews.id')
         ->orderBy(DB::raw('COUNT(reviews.id)'), 'DESC')
         ->paginate(5);
