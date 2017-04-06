@@ -7,7 +7,9 @@ use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
-
+use App\UsersProfile;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Contracts\Auth\Authenticatable;
 class AuthController extends Controller
 {
     /*
@@ -56,13 +58,23 @@ class AuthController extends Controller
      */
     protected function create(array $data)
     {
-        return $user = User::create([
+        $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
-        ]);
+        ]);        
 
-        $user = $user->profile()->save(new UsersProfile);
 
+        $user = $user->profile()->save(UsersProfile::create([
+            'user_id' => $user->id,    
+            'bio' => 'Soy la bio',
+            'user_name' => $data['name'],
+            'growing_since' => '1-1-1994',
+            'birthdate' => '28-11-1994',
+            'avatar_url' => 'google',
+            'comment_rep' => 0,
+            'review_rep' => 0,
+        ]));
+        return $user;
     }
 }

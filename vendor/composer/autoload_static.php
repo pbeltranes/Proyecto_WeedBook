@@ -316,9 +316,12 @@ class ComposerStaticInit6ee61fb74a3d667f8bfb0e1af69c57df
     );
 
     public static $classMap = array (
+        'AddCreatedAtAndUpdatedAtColumnsOnUsersProfiles' => __DIR__ . '/../..' . '/database/migrations/2017_04_05_181858_add_created_at_and_updated_at_columns_on_users_profiles.php',
         'AddGrowTypeAndSeedTypeAndDropTypeToStrains' => __DIR__ . '/../..' . '/database/migrations/2017_03_29_140049_add_grow_type_and_seed_type_and_drop_type_to_strains.php',
         'Comment' => __DIR__ . '/../..' . '/database/migrations/2017_03_27_175319_comment.php',
+        'CreateCommentUpVoteTable' => __DIR__ . '/../..' . '/database/migrations/2017_03_30_230345_create_comment_up_vote_table.php',
         'CreatePasswordResetsTable' => __DIR__ . '/../..' . '/database/migrations/2014_10_12_100000_create_password_resets_table.php',
+        'CreateReviewUpVoteTable' => __DIR__ . '/../..' . '/database/migrations/2017_03_30_230157_create_review_up_vote_table.php',
         'CreateUsersTable' => __DIR__ . '/../..' . '/database/migrations/2014_10_12_000000_create_users_table.php',
         'DatabaseSeeder' => __DIR__ . '/../..' . '/database/seeds/DatabaseSeeder.php',
         'File_Iterator' => __DIR__ . '/..' . '/phpunit/php-file-iterator/src/Iterator.php',
