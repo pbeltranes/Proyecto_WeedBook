@@ -10,7 +10,7 @@ use App\User;
 use App\Review;
 use App\Comment;
 use App\UsersProfile;
-
+use Illuminate\Support\Facades\DB;
 class UserController extends Controller
 {
     /**
@@ -75,7 +75,9 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
+        $data = DB::table('UsersProfile')->get();
+        return('editprofile', $data);
     }
 
     /**
@@ -84,6 +86,11 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
+     public function save()
+     {
+
+     }
     public function destroy($id)
     {
         //
