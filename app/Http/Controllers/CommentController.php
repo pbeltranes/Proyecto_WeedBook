@@ -11,6 +11,7 @@ use App\Review;
 use App\Comment;
 use App\UsersProfile;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class CommentController extends Controller
 {
@@ -35,11 +36,17 @@ class CommentController extends Controller
    {
 
      //on_post, from_user, body
-     $data = array (
+    //la ruta esta dentro del middleware de Auth, por lo que solo se puede acceder si estamos logeados
+    //Por lo que podemos usar el Auth::user() para obtener el usuario y todas las weas que tiene dentro
+    //tambien en la vista teniai que se imprimiera la variable $name y esa era pablo siempre, teniai que imprimir $Nombre (actual $name2).
+
+     $name = Auth::user()->name;
+      $data = [
       "name" => "pablo",
       "id" => "1",
-      "Nombre"=>"$request->name",
-    );
+      "name2"=> $name,
+    ];
+
      return view('addcomment', $data);
 
    }
