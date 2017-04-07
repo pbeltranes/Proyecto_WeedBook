@@ -6,6 +6,11 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\User;
+use App\Review;
+use App\Comment;
+use App\UsersProfile;
+use Illuminate\Support\Facades\DB;
 
 class CommentController extends Controller
 {
@@ -24,10 +29,22 @@ class CommentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        //
-    }
+
+
+   public function create(Request $request)
+   {
+
+     //on_post, from_user, body
+     $data = array (
+      "name" => "pablo",
+      "id" => "1",
+      "Nombre"=>"$request->name",
+    );
+     return view('addcomment', $data);
+
+   }
+
+
 
     /**
      * Store a newly created resource in storage.
@@ -35,9 +52,14 @@ class CommentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function save(array $data)
     {
-        //
+      $comment = Comment::create([
+        'from_user'=> $data ['user_id'],
+        'on_review'=> $data ['on_review'],
+        'body' => $data ['body'],
+      ]);
+
     }
 
     /**

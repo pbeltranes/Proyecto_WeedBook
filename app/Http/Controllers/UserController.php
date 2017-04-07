@@ -77,7 +77,7 @@ class UserController extends Controller
     {
 
         $data = DB::table('UsersProfile')->get();
-        return('editprofile', $data);
+        return view('editprofile', $data);
     }
 
     /**
@@ -99,7 +99,7 @@ class UserController extends Controller
     public function profile(Request $request, $id){
         $data['user'] = User::find($id);
         $data['user_profile'] = UsersProfile::where('user_id', $id);
-        
+
 
         $totalReviewsRep = Review::join('review_up_votes', 'reviews.id', '=', 'review_up_votes.review_id')
         ->groupBy('reviews.id')
