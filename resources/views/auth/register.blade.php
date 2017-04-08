@@ -18,6 +18,18 @@
     </div>
 
     <div>
+        Bio
+        <textarea type="text" name="bio" value="{{ old('bio') }}">
+             Short description of yourself
+        </textarea>
+    </div>
+
+    <div>
+        user name
+        <input type="textarea" name="user_name" value="{{ old('user_name') }}">
+    </div>
+
+    <div>
         Password
         <input type="password" name="password">
     </div>
