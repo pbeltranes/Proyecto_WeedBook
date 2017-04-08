@@ -6,6 +6,12 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\User;
+use App\Review;
+use App\Comment;
+use App\UsersProfile;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class CommentController extends Controller
 {
@@ -24,10 +30,29 @@ class CommentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        //
-    }
+
+
+   public function create(Request $request)
+   {
+
+    //la ruta esta dentro del middleware de Auth, por lo que solo se puede acceder si estamos logeados
+    //Por lo que podemos usar el Auth::user() para obtener el usuario y todas las weas que tiene dentro
+    //tambien en la vista teniai que se imprimiera la variable $name y esa era pablo siempre, teniai que imprimir $Nombre (actual $name2).
+
+     $name = Auth::user()->name;
+     $id = Auth::user()->id;
+      $data = [
+      "name" => "$name",
+      "id" => "$id",
+      "on_review" =>1,
+
+    ];
+
+     return view('addcomment', $data);
+
+   }
+
+
 
     /**
      * Store a newly created resource in storage.
@@ -35,9 +60,18 @@ class CommentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function save(Request $request)
     {
-        //
+
+      $body= $request->comment;
+      $from_user = Auth::user()->id;
+
+      $comment = Comment::create([
+        'from_user'=> "$from_user",
+        'on_review'=> 1, //-->>ingresar id de la review que se esta comentando
+        'body' => "$body",
+      ]);
+      //return view('review/{on_review}');
     }
 
     /**
@@ -46,7 +80,7 @@ class CommentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id)//-->mostrar todas los comentarios de la review
     {
         //
     }

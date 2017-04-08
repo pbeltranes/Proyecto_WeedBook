@@ -77,7 +77,7 @@ class UserController extends Controller
     {
 
         $data = DB::table('UsersProfile')->get();
-        return('editprofile', $data);
+        return view('editprofile', $data);
     }
 
     /**
