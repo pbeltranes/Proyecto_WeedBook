@@ -99,7 +99,7 @@ class UserController extends Controller
     public function profile(Request $request, $id){
         $data['user'] = User::find($id);
         $data['user_profile'] = UsersProfile::where('user_id', $id);
-        
+
 
         $totalReviewsRep = Review::join('review_up_votes', 'reviews.id', '=', 'review_up_votes.review_id')
         ->groupBy('reviews.id')
@@ -120,7 +120,7 @@ class UserController extends Controller
         $totalUserComments = Comment::where('from_user', $id)
         -> count();
 
-        $totalUserComments = $totalUserComments > 0 ? $totalUserComments : 1;
+        $totalUserComments = $totalUserComments > 0 ? $totalUserComments : 1; // si es mayor a 0  total UserComments es 1 si no se hace 0
 
         $data['prom_comments_rep'] = $totalCommentRep / $totalUserComments;
 

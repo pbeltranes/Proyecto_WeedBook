@@ -44,8 +44,12 @@ Route::group(['middleware' => ['auth']], function()
 
 Route::get('user/{id}', 'UserController@profile')->where('id', '[0-9]+');
 
-Route::get('user/{id}/edit', 'UserController@edit')->where('id', '[0-9]+');
-Route::post('user/edit/save', 'UserController@save')->where('id', '[0-9]+');
+Route::get('user/{id}/edit', 'UserController@edit')->where('id', '[0-9]+'); // -where parametros solo de [0-9]
+Route::post('user/edit/save', 'UserController@save')->where('id', '[0-9]+'); // /x?/y  function(x==null) estaremos pasando parametros nulos
 
 Route::get('user/{id}/reviews', 'UserController@user_reviews')->where('id', '[0-9]+');
-Route::get('/{slug}', ['as' => 'review', 'uses' => 'ReviewController@show'])->where('slug', '[A-Za-z0-9-_]+');
+Route::get('/{slug}', ['as' => 'review', 'uses' => 'ReviewController@show'])->where('slug', '[A-Za-z0-9-_]+'); // Parametros solo [A-Z,a-z,0,9]
+
+Route::get('prueba/{pp?}/{holi?}',function($pp,$holi=null){
+  return $pp;
+});
