@@ -59,7 +59,9 @@ class ReviewController extends Controller
      */
     public function show($id)
     {
-        $data['comments'] = Comment::where('on_review','=',$id);
+        $data['comments'] = Comment::where('on_review','=',$id)->get();
+        // print_r($data['comments']);
+        // die();
         $data['review'] = Review::where('id','=',$id)->first();
         $author_id = $data['review']->author_id;
         $data['author'] = UsersProfile::find($author_id)->first();
