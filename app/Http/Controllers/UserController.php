@@ -118,27 +118,30 @@ class UserController extends Controller
         $this->middleware('auth');
         $data['user'] = User::find($id);
         $data['user_profile'] = UsersProfile::where('user_id', $id)->first();
+        $data['profile_options'] = FALSE;
 
-        $data['profile_options'] = TRUE;
+        if(!Auth::guest()){
+            $data['profile_options'] = Auth::user()->id == $id;            
+        }
 
         $totalReviewsRep = Review::join('review_up_votes', 'reviews.id', '=', 'review_up_votes.review_id')
-        ->groupBy('reviews.id')
-        ->where('reviews.author_id', $id)
-        ->count();
+                            ->groupBy('reviews.id')
+                            ->where('reviews.author_id', $id)
+                            ->count();
         $totalUserReviews = Review::where('author_id', $id)
-        -> count();
+                            -> count();
         $data['reviews_count'] = $totalUserReviews;
         $totalUserReviews = $totalUserReviews > 0 ? $totalUserReviews : 1;
         $data['prom_rev_rep'] = $totalReviewsRep / $totalUserReviews;
 
 
         $totalCommentRep = Comment::join('comment_up_votes', 'comments.id', '=', 'comment_up_votes.comment_id')
-        ->groupBy('comments.id')
-        ->where('comments.from_user', $id)
-        ->count();
+                            ->groupBy('comments.id')
+                            ->where('comments.from_user', $id)
+                            ->count();
 
         $totalUserComments = Comment::where('from_user', $id)
-        -> count();
+                            -> count();
         $data['comments_count'] = $totalUserComments;
         $totalUserComments = $totalUserComments > 0 ? $totalUserComments : 1;
         $data['prom_comments_rep'] = $totalCommentRep / $totalUserComments;

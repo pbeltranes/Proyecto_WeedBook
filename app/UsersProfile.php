@@ -3,7 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-
+use Carbon\Carbon;
 /**
  * @property integer $id
  * @property integer $user_id
@@ -29,5 +29,10 @@ class UsersProfile extends Model
     public function user()
     {
         return $this->belongsTo('App\User');
+    }
+
+    public function getAgeAttribute()
+    {
+    return Carbon::parse($this->attributes['birthdate'])->age;
     }
 }

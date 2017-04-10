@@ -10,7 +10,7 @@ Edit Profile
 
     Bio
     <div>
-        <input type="textarea" name="bio" value="{{ $bio }}">
+        <textarea type="text" name="bio">{{ $bio }}</textarea>
     </div>
 
     Birthdate

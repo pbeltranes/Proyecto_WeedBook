@@ -322,6 +322,8 @@ class ComposerStaticInit6ee61fb74a3d667f8bfb0e1af69c57df
         'CreateCommentUpVoteTable' => __DIR__ . '/../..' . '/database/migrations/2017_03_30_230345_create_comment_up_vote_table.php',
         'CreatePasswordResetsTable' => __DIR__ . '/../..' . '/database/migrations/2014_10_12_100000_create_password_resets_table.php',
         'CreateReviewUpVoteTable' => __DIR__ . '/../..' . '/database/migrations/2017_03_30_230157_create_review_up_vote_table.php',
+        'CreateReviewUpdatesTable' => __DIR__ . '/../..' . '/database/migrations/2017_04_10_220343_create_review_updates_table.php',
+        'CreateStrainUpdates' => __DIR__ . '/../..' . '/database/migrations/2017_04_10_221459_create_strain_updates.php',
         'CreateUsersTable' => __DIR__ . '/../..' . '/database/migrations/2014_10_12_000000_create_users_table.php',
         'DatabaseSeeder' => __DIR__ . '/../..' . '/database/seeds/DatabaseSeeder.php',
         'File_Iterator' => __DIR__ . '/..' . '/phpunit/php-file-iterator/src/Iterator.php',
