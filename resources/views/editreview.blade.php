@@ -4,21 +4,26 @@
 {{$user->name}}
 @endsection
 @section('content')
-<form method="POST" action="/review/edit/save">
+<form method="POST" action="/new-review">
     {!! csrf_field() !!}
 
     <div>
         Titulo de tu cultivo
-        <input type="title" name="title" value="{{ old('title') }}">
+        <input type="text" name="title" value="{{ old('title') }}">
+    </div>
+
+    <div>
+      Banco
+      <input type="text" name="bank" value="{{ ('bank') }}">
     </div>
 
     <div>
         Tipo de Cultivo
           <select name="state">
-            <option value="hidroponico">Hidroponico</option>
-            <option value="interior">interior</option>
-            <option value="exterior" selected>Exterior</option>
-            <option value="otro">Otro</option>
+            <option value="{{ ('state') }}">Hidroponico</option>
+            <option value="{{ ('state') }}">interior</option>
+            <option value="{{ ('state') }}">Exterior</option>
+            <option value="{{ ('state') }}">Otro</option>
         </select>
     </div>
 
@@ -26,45 +31,45 @@
           Cepas
             <div>
               Nombre
-              <input type="strain_name" name="strain_name" value="Nombre de cepa">
+              <input type="text" name="strain_name" value="{{ ('strain_name') }}">
             </div>
             <div>
                 Tipo de semilla
-                <select name="Variedad">
-                  <option value="feminizada">Feminizada</option>
-                  <option value="automatica">Automatica</option>
-                  <option value="regular" selected>Regular</option>
+                <select name="type">
+                  <option value="{{ ('type') }}">Feminizada</option>
+                  <option value="{{ ('type') }}">Automatica</option>
+                  <option value="{{ ('type') }}">Regular</option>
                 </select>
               </div>
               <div>
                 tecnica de poda
                 <select name="technique">
-                  <option value="Apical">Feminizada</option>
-                  <option value="fim">F.I.M.</option>
-                  <option value="lollypop" selected>Lollypop</option>
-                  <option value="lst" selected>Lst</option>
-                  <option value="otra" selected>Otra</option>
-                  <option value="ninguna">Ninguna</option>
+                  <option value="{{ ('technique') }}">Apical</option>
+                  <option value="{{ ('technique') }}">F.I.M.</option>
+                  <option value="{{ ('technique') }}">Lollypop</option>
+                  <option value="{{ ('technique') }}">Lst</option>
+                  <option value="{{ ('technique') }}">Otra</option>
+                  <option value="{{ ('technique') }}">Ninguna</option>
                 </select>
               </div>
               <div>
-                <input type="date" name="germ_date">
+                <input type="date" name="germ_date" value="{{ ('germ_date') }}">
               </div>
               <div>
-                <input type="date" name="veg_start">
+                <input type="date" name="veg_start" value="{{ ('veg_start') }}">
               </div>
               <div>
-                <input type="date" name="flow_start">
+                <input type="date" name="flow_start" value="{{ ('flow_start') }}">
               </div>
               <div>
-                <input type="date" name="harvest_date">
+                <input type="date" name="harvest_date" value="{{ ('harvest_date') }}">
               </div>
           </div>
 
 
 
     <div>
-        <button type="submit">Login</button>
+        <button type="submit">Create</button>
     </div>
 </form>
 @endsection
