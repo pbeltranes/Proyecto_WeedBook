@@ -68,9 +68,10 @@ class AuthController extends Controller
 
 
         $user_profile = $user->profile()->save(UsersProfile::create([
+            'avatar_url' => 'DEFAULT_AVATAR_URL',
             'user_id' => $user->id,    
             'bio' => $data['bio'],
-            'user_name' => $data['user_name'],
+            'user_name' => $user->name,
             'growing_since' => '1-1-1994',
             'birthdate' => '28-11-1994',
             'avatar_url' => 'google',
