@@ -35,15 +35,36 @@
          <td>Comment Rep</td>
          <td> {{$prom_comments_rep}}</td>
        </tr>
+       <tr>
+          <td>Published Reviews</td>
+          <td> {{$reviews_count}}</td>
+       </tr>
+       <tr>
+          <td>Published Comments</td>
+          <td> {{$comments_count}}</td>
+       </tr>
       </table>
+      @if($profile_options)
+      <a href="{{url('/user/'.Auth::id().'/edit')}}">Edit Profile</a><br>
+      <a href="{{url('/user/delete/'.Auth::id().'')}}">DELETE PROFILE!</a>
+      @endif
     </li>
-    <li class="list-group-item">
-      
-    </li>
-    @if($profile_options)
-    <a href="{{url('/user/'.Auth::id().'/edit')}}">Edit Profile</a>
-    <a href="{{url('/user/delete/'.Auth::id().'')}}">DELETE PROFILE!</a>
-    @endif
   </ul>
 </div>
+
+<div>
+  <ul class="list-group">
+    <li class="list-group-item">
+      {{$user->name}}'s Reviews
+    </li>
+    <li class="list-group-item panel-body">
+      @if($reviews_count == 0)
+      This user has no reviews yet :(
+      @else
+      trabajando para ud :)
+      @endif
+    </li>
+  </ul>
+</div>
+
 @endsection

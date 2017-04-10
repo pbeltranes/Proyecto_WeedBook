@@ -115,11 +115,11 @@ class UserController extends Controller
     }
 
     public function profile(Request $request, $id){
-
-        $data['profile_options'] = TRUE;
+        $this->middleware('auth');
         $data['user'] = User::find($id);
         $data['user_profile'] = UsersProfile::where('user_id', $id)->first();
 
+        $data['profile_options'] = TRUE;
 
         $totalReviewsRep = Review::join('review_up_votes', 'reviews.id', '=', 'review_up_votes.review_id')
         ->groupBy('reviews.id')
@@ -127,9 +127,8 @@ class UserController extends Controller
         ->count();
         $totalUserReviews = Review::where('author_id', $id)
         -> count();
-
+        $data['reviews_count'] = $totalUserReviews;
         $totalUserReviews = $totalUserReviews > 0 ? $totalUserReviews : 1;
-
         $data['prom_rev_rep'] = $totalReviewsRep / $totalUserReviews;
 
 
@@ -137,12 +136,15 @@ class UserController extends Controller
         ->groupBy('comments.id')
         ->where('comments.from_user', $id)
         ->count();
+
         $totalUserComments = Comment::where('from_user', $id)
         -> count();
-
+        $data['comments_count'] = $totalUserComments;
         $totalUserComments = $totalUserComments > 0 ? $totalUserComments : 1;
-
         $data['prom_comments_rep'] = $totalCommentRep / $totalUserComments;
+
+        $data['user_reviews'] = Review::where('author_id', $id);
+
 
 
 
