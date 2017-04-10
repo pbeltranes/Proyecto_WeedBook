@@ -7,23 +7,35 @@
 <form method="POST" action="/auth/register">
     {!! csrf_field() !!}
 
+    User Name
     <div>
-        Name
         <input type="text" name="name" value="{{ old('name') }}">
     </div>
-
+    Email
     <div>
-        Email
         <input type="email" name="email" value="{{ old('email') }}">
     </div>
 
+    Bio
     <div>
-        Password
-        <input type="password" name="password">
+        <textarea type="text" name="bio" value="{{ old('bio') }}">Short description of yourself
+        </textarea>
+    </div>
+    You're Growing Since?
+    <div>
+        <input type="date" name="growing_since" value="{{ old ('growing_since') }}">    
     </div>
 
+    Birthday
     <div>
-        Confirm Password
+        <input type="date" name="birthdate" value="{{ old ('birthdate') }}">    
+    </div>
+    Password
+    <div>
+        <input type="password" name="password">
+    </div>
+    Confirm Password
+    <div>
         <input type="password" name="password_confirmation">
     </div>
 

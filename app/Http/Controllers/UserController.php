@@ -11,6 +11,7 @@ use App\Review;
 use App\Comment;
 use App\UsersProfile;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 class UserController extends Controller
 {
     /**
@@ -63,7 +64,12 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        $can_edit = Auth::user()->id == $id ?TRUE:FALSE;
+        if($can_edit){
+            $data = UsersProfile::where('user_id', $id)->first();
+            return view('editprofile', $data);   
+        }
+        return redirect('/');
     }
 
     /**
@@ -75,9 +81,7 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-
-        $data = DB::table('UsersProfile')->get();
-        return view('editprofile', $data);
+        //
     }
 
     /**
@@ -87,18 +91,34 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-     public function save()
-     {
+    public function save(Request $request)
+    {
+        $user_id = $request->input('id');
+        $user_profile = UsersProfile::where("user_id", $user_id)->first();
+        $user_profile->bio = $request->input('bio');
+        $user_profile->birthdate = $request->input('birthdate');
+        $user_profile->avatar_url = $request->input('avatar_url');
+        $user_profile->save();
+        return redirect()->action('UserController@profile', ['id' => $user_id]);
 
-     }
+    }
     public function destroy($id)
     {
-        //
+        $can_delete = Auth::user()->id == $id ? TRUE:FALSE;
+        if($can_delete){
+            $user = User::find($id);
+            $user->delete();
+        }
+
+        return redirect('/');
+
     }
 
     public function profile(Request $request, $id){
+
+        $data['profile_options'] = TRUE;
         $data['user'] = User::find($id);
-        $data['user_profile'] = UsersProfile::where('user_id', $id);
+        $data['user_profile'] = UsersProfile::where('user_id', $id)->first();
 
 
         $totalReviewsRep = Review::join('review_up_votes', 'reviews.id', '=', 'review_up_votes.review_id')

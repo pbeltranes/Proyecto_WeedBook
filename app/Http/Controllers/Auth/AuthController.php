@@ -47,6 +47,8 @@ class AuthController extends Controller
             'name' => 'required|max:255',
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required|confirmed|min:6',
+            'bio' => 'max:120',
+            'user_name' => 'max:8',
         ]);
     }
 
@@ -65,10 +67,11 @@ class AuthController extends Controller
         ]);        
 
 
-        $user = $user->profile()->save(UsersProfile::create([
+        $user_profile = $user->profile()->save(UsersProfile::create([
+            'avatar_url' => 'DEFAULT_AVATAR_URL',
             'user_id' => $user->id,    
-            'bio' => 'Soy la bio',
-            'user_name' => $data['name'],
+            'bio' => $data['bio'],
+            'user_name' => $user->name,
             'growing_since' => '1-1-1994',
             'birthdate' => '28-11-1994',
             'avatar_url' => 'google',
