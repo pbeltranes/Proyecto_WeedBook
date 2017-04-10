@@ -43,9 +43,9 @@ Route::group(['middleware' => ['auth']], function()
 }); // Acciones que solo pueden hacer los usuarios logueados
 
 Route::get('user/{id}', 'UserController@profile')->where('id', '[0-9]+');
-
 Route::get('user/{id}/edit', 'UserController@edit')->where('id', '[0-9]+');
 Route::post('user/edit/save', 'UserController@save')->where('id', '[0-9]+');
 
 Route::get('user/{id}/reviews', 'UserController@user_reviews')->where('id', '[0-9]+');
-Route::get('/{slug}', ['as' => 'review', 'uses' => 'ReviewController@show'])->where('slug', '[A-Za-z0-9-_]+');
+//Route::get('review/{id}', ['as' => 'review', 'uses' => 'ReviewController@show'])->where('slug', '[A-Za-z0-9-_]+');
+Route::get('review/{id}', 'ReviewController@show')->where('id', '[0-9]+');

@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-
+use App\User;
+use App\Comment;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Review;
+use App\UsersProfile;
 
 class ReviewController extends Controller
 {
@@ -57,9 +59,12 @@ class ReviewController extends Controller
      */
     public function show($id)
     {
-        //
+        $data['comments'] = Comment::where('on_review','=',$id);
+        $data['review'] = Review::where('id','=',$id)->first();
+        $author_id = $data['review']->author_id;
+        $data['author'] = UsersProfile::find($author_id)->first();
+        return view('showreview',$data);
     }
-
     /**
      * Show the form for editing the specified resource.
      *
