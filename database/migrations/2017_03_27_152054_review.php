@@ -19,9 +19,9 @@ class Review extends Migration
                 ->references('id')->on('users')
                 ->onDelete('cascade');
             $table->integer('strain_number');
-            $table->string('title')->unique();
-            $table->string('state');
-            $table->boolean('active');
+            $table->string('title')->unique(); // nombre
+            $table->string('state'); // hidroponico , exterior, feminizada , interior
+            $table->boolean('active'); // activo , terminado
             $table->timestamps();
         });
     }

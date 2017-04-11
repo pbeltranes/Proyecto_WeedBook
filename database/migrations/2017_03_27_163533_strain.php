@@ -18,15 +18,15 @@ class Strain extends Migration
             $table->foreign('review_id')
                 ->references('id')->on('reviews')
                 ->onDelete('cascade');
-            $table->string('type');
-            $table->string('bank');
+            $table->string('type'); // feminizada , automatica
+            $table->string('bank'); /
             $table->string('strain_name');
             $table->string('technique');
             $table->date('germ_start');
             $table->date('veg_start');
             $table->date('flow_start');
             $table->date('harvest_date');
-            $table->boolean('active');
+            $table->boolean('active'); //
             $table->timestamps();
         });
     }

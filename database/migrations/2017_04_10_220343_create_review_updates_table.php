@@ -3,8 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-
-class CreateReviewUpVoteTable extends Migration
+class CreateReviewUpdatesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +12,16 @@ class CreateReviewUpVoteTable extends Migration
      */
     public function up()
     {
-        Schema::create('review_up_votes', function(Blueprint $table){
+        Schema::create('review_updates', function(Blueprint $table){
             $table->increments('id');
             $table->integer('review_id') -> unsigned() -> default(0);
             $table->foreign('review_id')
                 ->references('id')->on('reviews')
                 ->onDelete('cascade');
-            $table->integer('user_id') -> unsigned() -> default(0);
-            $table->foreign('user_id')
-                ->references('id')->on('users')
-                ->onDelete('cascade');
+            $table->string('update_text');
+            $table->timestamp('created_at');
+            $table->timestamp('updated_at');
+
         });
     }
 
@@ -33,7 +32,6 @@ class CreateReviewUpVoteTable extends Migration
      */
     public function down()
     {
-        Schema::drop('review_up_votes');
+        Schema::drop('review_updates');
     }
 }
-

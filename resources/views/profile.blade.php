@@ -1,6 +1,6 @@
 @extends('app')
 @section('title')
-{{ $user->name }}
+<?php echo '@' ?>{{ $user->name }}
 @endsection
 @section('content')
 <nav class="w3-sidebar w3-collapse w3-white w3-animate-left" style="z-index:3;width:300px;" id="mySidebar"><br>
@@ -17,8 +17,8 @@
   <ul class="list-group">
     <li class="list-group-item">
       Joined on {{$user->created_at->format('M d,Y \a\t h:i a') }} <br>
-      Growing Since {{$user_profile->growing_since}} <br>
-      Birthdate {{$user_profile->birthdate}} <br>
+      Growing Since {{$user_profile->growing_since }} <br>
+      {{$user_profile->age}} Years old <br>
     </li>
     <li class="list-group-item panel-body">
       <table class="table-padding">
@@ -37,7 +37,7 @@
        </tr>
        <tr>
           <td>Published Reviews</td>
-          <td> {{$reviews_count}}</td>
+          <td> {{$reviews_count}} </td>
        </tr>
        <tr>
           <td>Published Comments</td>
@@ -55,7 +55,7 @@
 <div>
   <ul class="list-group">
     <li class="list-group-item">
-      {{$user->name}}'s Reviews
+      <?php echo "@"; ?>{{$user->name}}'s Reviews
     </li>
     <li class="list-group-item panel-body">
       @if($reviews_count == 0)
