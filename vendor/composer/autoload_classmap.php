@@ -12,6 +12,8 @@ return array(
     'CreateCommentUpVoteTable' => $baseDir . '/database/migrations/2017_03_30_230345_create_comment_up_vote_table.php',
     'CreatePasswordResetsTable' => $baseDir . '/database/migrations/2014_10_12_100000_create_password_resets_table.php',
     'CreateReviewUpVoteTable' => $baseDir . '/database/migrations/2017_03_30_230157_create_review_up_vote_table.php',
+    'CreateReviewUpdatesTable' => $baseDir . '/database/migrations/2017_04_10_220343_create_review_updates_table.php',
+    'CreateStrainUpdates' => $baseDir . '/database/migrations/2017_04_10_221459_create_strain_updates.php',
     'CreateUsersTable' => $baseDir . '/database/migrations/2014_10_12_000000_create_users_table.php',
     'DatabaseSeeder' => $baseDir . '/database/seeds/DatabaseSeeder.php',
     'File_Iterator' => $vendorDir . '/phpunit/php-file-iterator/src/Iterator.php',

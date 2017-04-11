@@ -1,6 +1,6 @@
 @extends('app')
 @section('title')
-{{ $user->name }}
+<?php echo '@' ?>{{ $user->name }}
 @endsection
 @section('content')
 <nav class="w3-sidebar w3-collapse w3-white w3-animate-left" style="z-index:3;width:300px;" id="mySidebar"><br>
@@ -17,8 +17,8 @@
   <ul class="list-group">
     <li class="list-group-item">
       Joined on {{$user->created_at->format('M d,Y \a\t h:i a') }} <br>
-      Growing Since {{$user_profile->growing_since}} <br>
-      Birthdate {{$user_profile->birthdate}} <br>
+      Growing Since {{$user_profile->growing_since }} <br>
+      {{$user_profile->age}} Years old <br>
     </li>
     <li class="list-group-item panel-body">
       <table class="table-padding">
@@ -35,15 +35,36 @@
          <td>Comment Rep</td>
          <td> {{$prom_comments_rep}}</td>
        </tr>
+       <tr>
+          <td>Published Reviews</td>
+          <td> {{$reviews_count}} </td>
+       </tr>
+       <tr>
+          <td>Published Comments</td>
+          <td> {{$comments_count}}</td>
+       </tr>
       </table>
+      @if($profile_options)
+      <a href="{{url('/user/'.Auth::id().'/edit')}}">Edit Profile</a><br>
+      <a href="{{url('/user/delete/'.Auth::id().'')}}">DELETE PROFILE!</a>
+      @endif
     </li>
-    <li class="list-group-item">
-      
-    </li>
-    @if($profile_options)
-    <a href="{{url('/user/'.Auth::id().'/edit')}}">Edit Profile</a>
-    <a href="{{url('/user/delete/'.Auth::id().'')}}">DELETE PROFILE!</a>
-    @endif
   </ul>
 </div>
+
+<div>
+  <ul class="list-group">
+    <li class="list-group-item">
+      <?php echo "@"; ?>{{$user->name}}'s Reviews
+    </li>
+    <li class="list-group-item panel-body">
+      @if($reviews_count == 0)
+      This user has no reviews yet :(
+      @else
+      trabajando para ud :)
+      @endif
+    </li>
+  </ul>
+</div>
+
 @endsection
