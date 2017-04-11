@@ -140,15 +140,10 @@ class UserController extends Controller
                             ->where('comments.from_user', $id)
                             ->count();
 
-<<<<<<< HEAD
-        $totalUserComments = $totalUserComments > 0 ? $totalUserComments : 1; // si es mayor a 0  total UserComments es 1 si no se hace 0
-
-=======
         $totalUserComments = Comment::where('from_user', $id)
                             -> count();
         $data['comments_count'] = $totalUserComments;
         $totalUserComments = $totalUserComments > 0 ? $totalUserComments : 1;
->>>>>>> 7f4edf4ad5a32f00400b9c1fd3866e555925affe
         $data['prom_comments_rep'] = $totalCommentRep / $totalUserComments;
 
         $data['user_reviews'] = Review::where('author_id', $id);
