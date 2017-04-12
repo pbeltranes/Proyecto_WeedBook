@@ -30,7 +30,7 @@ Route::post('auth/register', 'Auth\AuthController@postRegister');
 Route::group(['middleware' => ['auth']], function()
 {
 	Route::get('new-review', 'ReviewController@create');
-	Route::post('new-review', 'ReviewController@save');
+	Route::post('new-review', 'ReviewController@store');
 	Route::get('edit/{slug}', 'ReviewController@edit');
 	Route::post('update', 'ReviewController@update');
 	Route::get('delete/{id}', 'ReviewController@destroy');

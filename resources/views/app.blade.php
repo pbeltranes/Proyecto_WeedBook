@@ -47,10 +47,10 @@
               <ul class="dropdown-menu" role="menu">
                 @if (!Auth::guest())
                 <li>
-                  <a href="{{ url('/new-post') }}">Add new post</a>
+                  <a href="{{ url('/new-review') }}">Add new review</a>
                 </li>
                 <li>
-                  <a href="{{ url('/user/'.Auth::id().'/posts') }}">My Posts</a>
+                  <a href="{{ url('/user/'.Auth::id().'/Reviws') }}">My Reviews</a>
                 </li>
                 @endif
                 <li>

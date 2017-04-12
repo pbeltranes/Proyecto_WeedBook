@@ -4,12 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use App\User;
-use App\Comment;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Review;
-use App\UsersProfile;
+use App\User;
+use App\Strain;
 
 class ReviewController extends Controller
 {
@@ -35,9 +35,17 @@ class ReviewController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+      $name = Auth::user()->name;
+      $id = Auth::user()->id;
+      $bank = "chucha";
+       $data = [
+       'bank' => $bank,
+       'name' => $name,
+       'id' => $id,
+       'on_review' =>1,];
+      return view('newreview',$data);
     }
 
     /**
@@ -46,9 +54,31 @@ class ReviewController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
     public function store(Request $request)
     {
-        //
+      $R = Review::create([
+        'author_id'=> $request->user()->id,
+        'strain_number'=> 1, //-->>ingresar id de la review que se esta comentando
+        'title' => $request->title,
+        'state' => 1,
+        'active' =>1,
+
+      ]);
+      $S = Strain::create([
+        'review_id' => $R->id,
+        'bank' => $request->bank,
+        'seed_type' =>$request->seed_type,
+        'grow_type' =>$request->grow_type,
+        'strain_name' => $request->strain_name,
+        'technique' => $request->technique,
+        'germ_date' => $request->germ_date,
+        'veg_start' => $request->veg_start,
+        'flow_start' => $request->flow_start,
+        'harvest_date' => $request->harvest_date,
+        'active' => 'true',
+      ]);
+      return redirect('home');
     }
 
     /**
@@ -59,14 +89,9 @@ class ReviewController extends Controller
      */
     public function show($id)
     {
-        $data['comments'] = Comment::where('on_review','=',$id)->get();
-        // print_r($data['comments']);
-        // die();
-        $data['review'] = Review::where('id','=',$id)->first();
-        $author_id = $data['review']->author_id;
-        $data['author'] = UsersProfile::find($author_id)->first();
-        return view('showreview',$data);
+        //
     }
+
     /**
      * Show the form for editing the specified resource.
      *
@@ -75,7 +100,7 @@ class ReviewController extends Controller
      */
     public function edit($id)
     {
-        //
+
     }
 
     /**
@@ -87,7 +112,7 @@ class ReviewController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
     }
 
     /**
