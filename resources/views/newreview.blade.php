@@ -1,6 +1,6 @@
 @extends('app')
 @section('title')
-<td><p>Review </p></td>
+<td><p>New review</p></td>
 @endsection
 
 @section('content')
@@ -19,10 +19,10 @@
   <div class="form-group">
       Type of cutlive
         <select name="state" class="form-control">
-          <option value="{{ old('state') }}">Hidroponico</option>
-          <option value="{{ old('state') }}">Interior</option>
-          <option value="{{ old('state') }}">Exterior</option>
-          <option value="{{ old('state') }}">Otro</option>
+          <option value="{{ old('state') }}">Hidroponic</option>
+          <option value="{{ old('state') }}">Indoor</option>
+          <option value="{{ old('state') }}">Outdoor</option>
+          <option value="{{ old('state') }}">Other</option>
       </select>
   </div>
 <div class="form-group">
@@ -43,7 +43,7 @@
       <select name="seed_type" class="form-control">
         <option value="{{ old('seed_type') }}">Sativa</option>
         <option value="{{ old('seed_type') }}">Indica</option>
-        <option value="{{ old('seed_type') }}">Otra</option>
+        <option value="{{ old('seed_type') }}">Hybrid</option>
       </select>
   </div>
 
@@ -51,8 +51,8 @@
   <div class="form-group">
     Grow type
       <select name="grow_type" class="form-control">
-        <option value="{{ old('grow_type') }}">Feminizada</option>
-        <option value="{{ old('grow_type') }}">Automatica</option>
+        <option value="{{ old('grow_type') }}">Feminised</option>
+        <option value="{{ old('grow_type') }}">Automatic</option>
         <option value="{{ old('grow_type') }}">Regular</option>
       </select>
   </div>
@@ -63,8 +63,8 @@
       <option value="{{ old('technique') }}">F.I.M.</option>
       <option value="{{ old('technique') }}">Lollypop</option>
       <option value="{{ old('technique') }}">Lst</option>
-      <option value="{{ old('technique') }}">Otra</option>
-      <option value="{{ old('technique') }}">Ninguna</option>
+      <option value="{{ old('technique') }}">Other</option>
+      <option value="{{ old('technique') }}">Neither</option>
     </select>
   </div>
 

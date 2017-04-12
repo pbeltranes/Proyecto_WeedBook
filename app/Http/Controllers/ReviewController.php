@@ -57,28 +57,36 @@ class ReviewController extends Controller
 
     public function store(Request $request)
     {
-      $R = Review::create([
-        'author_id'=> $request->user()->id,
-        'strain_number'=> 1, //-->>ingresar id de la review que se esta comentando
-        'title' => $request->title,
-        'state' => 1,
-        'active' =>1,
-
-      ]);
-      $S = Strain::create([
-        'review_id' => $R->id,
-        'bank' => $request->bank,
-        'seed_type' =>$request->seed_type,
-        'grow_type' =>$request->grow_type,
-        'strain_name' => $request->strain_name,
-        'technique' => $request->technique,
-        'germ_date' => $request->germ_date,
-        'veg_start' => $request->veg_start,
-        'flow_start' => $request->flow_start,
-        'harvest_date' => $request->harvest_date,
-        'active' => 'true',
-      ]);
-      return redirect('home');
+      $duplicate = Review::where('title',$request->title)->first();
+      if($request->title == '')
+        return redirect('new-review')->withErrors('Please write the title of your review, bitch!.')->withInput();
+      if($duplicate)
+      {
+        return redirect('new-review')->withErrors('   Title already exists.')->withInput();
+      }
+      else{
+        $R = Review::create([
+          'author_id'=> $request->user()->id,
+          'strain_number'=> 1, //-->>ingresar id de la review que se esta comentando
+          'title' => $request->title,
+          'state' => 1,
+          'active' =>1,
+        ]);
+        $S = Strain::create([
+          'review_id' => $R->id,
+          'bank' => $request->bank,
+          'seed_type' =>$request->seed_type,
+          'grow_type' =>$request->grow_type,
+          'strain_name' => $request->strain_name,
+          'technique' => $request->technique,
+          'germ_date' => $request->germ_date,
+          'veg_start' => $request->veg_start,
+          'flow_start' => $request->flow_start,
+          'harvest_date' => $request->harvest_date,
+          'active' => 'true',
+        ]);
+        return redirect('home')->withMessage(' Review create with successfully');;
+      }
     }
 
     /**
