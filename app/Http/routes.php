@@ -29,12 +29,12 @@ Route::post('auth/register', 'Auth\AuthController@postRegister');
 
 Route::group(['middleware' => ['auth']], function()
 {
-	Route::get('new-review', 'ReviewController@create');
-	Route::post('new-review', 'ReviewController@store');
-	Route::get('edit/{slug}', 'ReviewController@edit');
+	Route::get('new-review', 'ReviewController@create'); // Usado para crear
+	Route::post('new-review', 'ReviewController@store'); // Usado para mostrar
+	Route::get('review/{id_review}/edit', 'ReviewController@edit'); // Usado para editar perfil
 	Route::post('update', 'ReviewController@update');
 	Route::get('delete/{id}', 'ReviewController@destroy');
-	Route::get('my-all-review', 'ReviewController@user_reviews_draft');
+  Route::get('user/{id}/reviews', 'ReviewController@show') ->where('id', '[0-9]+');//*****(*) // ver reviews del usuario {id}
 	Route::get('comment/add', 'CommentController@create');
 	Route::post('comment/save', 'CommentController@save');
 	Route::get('comment/delete/{id}', 'CommentController@destroy');
@@ -48,13 +48,10 @@ Route::group(['middleware' => ['auth']], function()
 Route::get('user/{id}', 'UserController@profile')->where('id', '[0-9]+');
 Route::get('user/{id}/edit', 'UserController@edit')->where('id', '[0-9]+');
 Route::post('user/edit/save', 'UserController@save')->where('id', '[0-9]+');
-Route::get('user/{id}/reviews', 'UserController@user_reviews')->where('id', '[0-9]+');
+//Route::get('user/{id}/reviews', 'UserController@user_reviews')->where('id', '[0-9]+'); // revisar (*)
 //Route::get('review/{id}', ['as' => 'review', 'uses' => 'ReviewController@show'])->where('slug', '[A-Za-z0-9-_]+');
 Route::get('review/{id}', 'ReviewController@show')->where('id', '[0-9]+');
 Route::get('user/{id}/edit', 'UserController@edit')->where('id', '[0-9]+'); // -where parametros solo de [0-9]
 Route::post('user/edit/save', 'UserController@save')->where('id', '[0-9]+'); // /x?/y  function(x==null) estaremos pasando parametros nulos
-Route::get('user/{id}/reviews', 'UserController@user_reviews')->where('id', '[0-9]+');
+//Route::get('user/{id}/reviews', 'UserController@user_reviews')->where('id', '[0-9]+');
 Route::get('/{slug}', ['as' => 'review', 'uses' => 'ReviewController@show'])->where('slug', '[A-Za-z0-9-_]+'); // Parametros solo [A-Z,a-z,0,9]
-Route::get('prueba/{pp?}/{holi?}',function($pp,$holi=null){
-  return $pp;
-});

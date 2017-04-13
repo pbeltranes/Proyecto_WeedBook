@@ -69,19 +69,19 @@
   </div>
 
   <div class="form-group">
-    Germination date (ej: xx-xx-xxxx)
+    Germination date
     <input type="date" name="germ_date" value="{{ old('germ_date') }}" class="form-control">
   </div>
   <div class="form-group">
-    Vegetation date (ej: xx-xx-xxxx)
+    Vegetation date
     <input type="date" name="veg_start" value="{{ old('veg_start') }}"class="form-control">
   </div>
   <div class="form-group">
-    Floration date (ej: xx-xx-xxxx)
+    Floration date
     <input type="date" name="flow_start" value="{{ old('flow_start') }}" class="form-control">
   </div>
   <div class="form-group">
-    Harvest date (ej: xx-xx-xxxx)
+    Harvest date
     <input type="date" name="harvest_date" value="{{ old('harvest_date') }}" class="form-control">
   </div>
 </div>

@@ -39,13 +39,11 @@ class ReviewController extends Controller
     {
       $name = Auth::user()->name;
       $id = Auth::user()->id;
-      $bank = "chucha";
        $data = [
-       'bank' => $bank,
        'name' => $name,
        'id' => $id,
        'on_review' =>1,];
-      return view('newreview',$data);
+      return view('reviews/newreview',$data);
     }
 
     /**
@@ -58,14 +56,14 @@ class ReviewController extends Controller
     public function store(Request $request)
     {
       $duplicate = Review::where('title',$request->title)->first();
-      if($request->title == '')
-        return redirect('new-review')->withErrors('Please write the title of your review, bitch!.')->withInput();
+      if($request->title == '') // verificar que el nombre no este pelado
+        return redirect('reviews/new-review')->withErrors('  Please write the title of your review, bitch!.')->withInput();
       if($duplicate)
       {
-        return redirect('new-review')->withErrors('   Title already exists.')->withInput();
+        return redirect('reviews/new-review')->withErrors('   Title already exists.')->withInput();// verificar que no exista el nombre
       }
       else{
-        $R = Review::create([
+        $R = Review::create([ // creamos review
           'author_id'=> $request->user()->id,
           'strain_number'=> 1, //-->>ingresar id de la review que se esta comentando
           'title' => $request->title,
@@ -73,7 +71,7 @@ class ReviewController extends Controller
           'active' =>1,
         ]);
         $S = Strain::create([
-          'review_id' => $R->id,
+          'review_id' => $R->id, // se crea strain
           'bank' => $request->bank,
           'seed_type' =>$request->seed_type,
           'grow_type' =>$request->grow_type,
@@ -95,9 +93,20 @@ class ReviewController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(request $request) // se visualiza solo para el author_id
     {
-        //
+      $id = Auth::user()->id;
+      if($id == $request->id){ // validar que usuario que entra es el mismo que visitante
+      $reviews=DB::table('reviews')
+            ->where('reviews.author_id', '=', $request->id)
+            ->select('reviews.id', 'reviews.title', 'reviews.active', 'reviews.state','reviews.created_at','reviews.updated_at')
+            ->get();
+      $title= 'Your Reviews';
+        return view('reviews/myreviews',compact('reviews'))->withTitle($title)->withInput($id);
+      }
+      else{
+        return back()->withErrors('You can not edit this review');
+      }
     }
 
     /**
@@ -108,6 +117,9 @@ class ReviewController extends Controller
      */
     public function edit($id)
     {
+      $request = Review::where('id',$id)->first();
+
+      return view('editreview',$request);
 
     }
 
