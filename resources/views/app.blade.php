@@ -50,7 +50,7 @@
                   <a href="{{ url('/new-review') }}">Add new review</a>
                 </li>
                 <li>
-                  <a href="{{ url('/user/'.Auth::id().'/Reviws') }}">My Reviews</a>
+                  <a href="{{ url('/user/'.Auth::id().'/reviews') }}">My Reviews</a>
                 </li>
                 @endif
                 <li>

@@ -22,12 +22,15 @@ class ReviewController extends Controller
     {
         //saca 5 reseñas en orden por rep
 
-        $reviews = Review::join('review_up_votes', 'reviews.id', '=', 'review_up_votes.review_id')
+        $data['reviews'] = Review::join('review_up_votes', 'reviews.id', '=', 'review_up_votes.review_id')
         ->groupBy('reviews.id')
         ->orderBy(DB::raw('COUNT(reviews.id)'), 'DESC')
         ->paginate(5);
-        $title = 'Inicio WeedBook';
-        return view('home')->withReviews($reviews)->withTitle($title);
+
+        $data['reviews'] = $data['reviews']->count() > 0 ? $data['reviews'] : Review::take(5)->get(); 
+        $data['title'] = 'WeedBook Index';
+
+        return view('home', $data);
     }
 
     /**

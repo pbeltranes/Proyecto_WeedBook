@@ -61,7 +61,7 @@
       @if($reviews_count == 0)
       This user has no reviews yet :(
       @else
-      trabajando para ud :)
+      
       @endif
     </li>
   </ul>
