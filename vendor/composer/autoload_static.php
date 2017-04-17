@@ -17,6 +17,9 @@ class ComposerStaticInit6ee61fb74a3d667f8bfb0e1af69c57df
         '65fec9ebcfbb3cbb4fd0d519687aea01' => __DIR__ . '/..' . '/danielstjules/stringy/src/Create.php',
         'f0906e6318348a765ffb6eb24e0d0938' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Foundation/helpers.php',
         '58571171fd5812e6e447dce228f52f4d' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Support/helpers.php',
+        'c964ee0ededf28c96ebd9db5099ef910' => __DIR__ . '/..' . '/guzzlehttp/promises/src/functions_include.php',
+        'a0edc8309cc5e1d60e3047b5df6b7052' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/functions_include.php',
+        '37a3dc5111fe8f707ab4c132ef1dbc62' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/functions_include.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -57,6 +60,7 @@ class ComposerStaticInit6ee61fb74a3d667f8bfb0e1af69c57df
         array (
             'Psy\\' => 4,
             'Psr\\Log\\' => 8,
+            'Psr\\Http\\Message\\' => 17,
             'PhpParser\\' => 10,
         ),
         'M' => 
@@ -75,6 +79,12 @@ class ComposerStaticInit6ee61fb74a3d667f8bfb0e1af69c57df
         'I' => 
         array (
             'Illuminate\\' => 11,
+        ),
+        'G' => 
+        array (
+            'GuzzleHttp\\Psr7\\' => 16,
+            'GuzzleHttp\\Promise\\' => 19,
+            'GuzzleHttp\\' => 11,
         ),
         'F' => 
         array (
@@ -194,6 +204,10 @@ class ComposerStaticInit6ee61fb74a3d667f8bfb0e1af69c57df
         array (
             0 => __DIR__ . '/..' . '/psr/log/Psr/Log',
         ),
+        'Psr\\Http\\Message\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/psr/http-message/src',
+        ),
         'PhpParser\\' => 
         array (
             0 => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser',
@@ -217,6 +231,18 @@ class ComposerStaticInit6ee61fb74a3d667f8bfb0e1af69c57df
         'Illuminate\\' => 
         array (
             0 => __DIR__ . '/..' . '/laravel/framework/src/Illuminate',
+        ),
+        'GuzzleHttp\\Psr7\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/guzzlehttp/psr7/src',
+        ),
+        'GuzzleHttp\\Promise\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/guzzlehttp/promises/src',
+        ),
+        'GuzzleHttp\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/guzzlehttp/guzzle/src',
         ),
         'Faker\\' => 
         array (
@@ -316,12 +342,12 @@ class ComposerStaticInit6ee61fb74a3d667f8bfb0e1af69c57df
     );
 
     public static $classMap = array (
+        'AddBackgroundImageUrlToReviewsAndUpdateImageUrlToStrainsUpdate' => __DIR__ . '/../..' . '/database/migrations/2017_04_17_115422_add_background_image_url_to_reviews_and_update_image_url_to_strains_update.php',
         'AddCreatedAtAndUpdatedAtColumnsOnUsersProfiles' => __DIR__ . '/../..' . '/database/migrations/2017_04_05_181858_add_created_at_and_updated_at_columns_on_users_profiles.php',
         'AddGrowTypeAndSeedTypeAndDropTypeToStrains' => __DIR__ . '/../..' . '/database/migrations/2017_03_29_140049_add_grow_type_and_seed_type_and_drop_type_to_strains.php',
         'Comment' => __DIR__ . '/../..' . '/database/migrations/2017_03_27_175319_comment.php',
         'CreateCommentUpVoteTable' => __DIR__ . '/../..' . '/database/migrations/2017_03_30_230345_create_comment_up_vote_table.php',
         'CreatePasswordResetsTable' => __DIR__ . '/../..' . '/database/migrations/2014_10_12_100000_create_password_resets_table.php',
-        'CreateReviewUpVoteTable' => __DIR__ . '/../..' . '/database/migrations/2017_03_30_230157_create_review_up_vote_table.php',
         'CreateReviewUpdatesTable' => __DIR__ . '/../..' . '/database/migrations/2017_04_10_220343_create_review_updates_table.php',
         'CreateStrainUpdates' => __DIR__ . '/../..' . '/database/migrations/2017_04_10_221459_create_strain_updates.php',
         'CreateUsersTable' => __DIR__ . '/../..' . '/database/migrations/2014_10_12_000000_create_users_table.php',
