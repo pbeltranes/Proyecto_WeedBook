@@ -7,12 +7,16 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Database\Eloquent\Model;
 use App\Review;
 use App\User;
 use App\Strain;
+
 use App\ReviewUpdate;
 use App\StrainUpdate;
 use App\UsersProfile;
+use App\Comment;
+
 
 class ReviewController extends Controller
 {
@@ -30,7 +34,7 @@ class ReviewController extends Controller
         ->orderBy(DB::raw('COUNT(reviews.id)'), 'DESC')
         ->paginate(5);
 
-        $data['reviews'] = $data['reviews']->count() > 0 ? $data['reviews'] : Review::take(5)->get(); 
+        $data['reviews'] = $data['reviews']->count() > 0 ? $data['reviews'] : Review::take(5)->get();
         $data['title'] = 'WeedBook Index';
 
         return view('home', $data);
@@ -126,6 +130,10 @@ class ReviewController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
+
+
+
     public function update(Request $request, $id)
     {
 
@@ -151,6 +159,11 @@ class ReviewController extends Controller
       $data['rev_count'] = $data['rev_updates']->count();
       $data['strains'] = Strain::where('review_id', $id)->get();
       $data['strain_count'] = $data['strains']->count();
+
+      $data['comments'] = DB::table('comments')
+       ->where('comments.on_review','=',$id)
+       ->select('comments.from_user', 'comments.on_review', 'comments.body', 'comments.created_at', 'comments.updated_at')
+       ->get();
 
       return view('reviews/showreview', $data);
 

@@ -71,7 +71,20 @@
       <div >
         <h3>Comentarios</h3>
         <ul class="comments-list">
-          
+          @foreach($comments as $comment)
+            <tr class="comment">
+                <a class="pull-left" href="#">
+                    <img class="avatar" src="http://www.31minutos.cl/wp-content/uploads/2014/02/thumb-bodoque-300x300.jpg" alt="avatar" width="50" height="50">
+                </a>
+                <div class="comment-body">
+                    <div class="comment-heading">
+                        <h4 class="user">{{$author->user_name}}</h4>
+                        <h6 class="time">{{$comment->created_at}}</h5>
+                    </div>
+                    <p>{{$comment->body}}</p>
+                </div>
+            </tr>
+          @endforeach
         </ul>
       </div>
 

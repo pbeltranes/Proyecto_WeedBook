@@ -12,7 +12,8 @@ There is no reviews till now. Login and write a new post now!!!
     <div class="list-group-item">
       <h3><a href="{{ url('/review/'.$post->id) }}">{{ $post->title }}</a>
           <!--<button class="btn" style="float: right"><a href="{{ url('review/edit/'.$post->title)}}">Delete Post</a></button>-->
-          <button class="btn" style="float: right"><a href="{{ url('review/edit/'.$post->title)}}">Edit Post</a></button>
+          <button class="btn" style="float: right"><a href="{{ url('review/.$post->title./edit/')}}">Edit Post</a></button>
+          <button class="btn" style="float: right"><a href="{{ route('showreview',['$id' => $post->id])}}">ver vista</a></button>
       </h3>
   </div>
     <div class="list-group-item">
