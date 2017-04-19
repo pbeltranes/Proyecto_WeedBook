@@ -7,9 +7,9 @@ namespace Composer\Autoload;
 class ComposerStaticInit6ee61fb74a3d667f8bfb0e1af69c57df
 {
     public static $files = array (
+        '1d1b89d124cc9cb8219922c9d5569199' => __DIR__ . '/..' . '/hamcrest/hamcrest-php/hamcrest/Hamcrest.php',
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
         '667aeda72477189d0494fecd327c3641' => __DIR__ . '/..' . '/symfony/var-dumper/Resources/functions/dump.php',
-        '1d1b89d124cc9cb8219922c9d5569199' => __DIR__ . '/..' . '/hamcrest/hamcrest-php/hamcrest/Hamcrest.php',
         '2c102faa651ef8ea5874edb585946bce' => __DIR__ . '/..' . '/swiftmailer/swiftmailer/lib/swift_required.php',
         'bd9634f2d41831496de0d3dfe4c94881' => __DIR__ . '/..' . '/symfony/polyfill-php56/bootstrap.php',
         'e7223560d890eab89cda23685e711e2c' => __DIR__ . '/..' . '/psy/psysh/src/Psy/functions.php',
@@ -53,6 +53,7 @@ class ComposerStaticInit6ee61fb74a3d667f8bfb0e1af69c57df
             'Symfony\\Component\\Debug\\' => 24,
             'Symfony\\Component\\CssSelector\\' => 30,
             'Symfony\\Component\\Console\\' => 26,
+            'Symfony\\Bridge\\PsrHttpMessage\\' => 30,
             'SuperClosure\\' => 13,
             'Stringy\\' => 8,
         ),
@@ -187,6 +188,10 @@ class ComposerStaticInit6ee61fb74a3d667f8bfb0e1af69c57df
         'Symfony\\Component\\Console\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/console',
+        ),
+        'Symfony\\Bridge\\PsrHttpMessage\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/psr-http-message-bridge',
         ),
         'SuperClosure\\' => 
         array (
@@ -344,8 +349,11 @@ class ComposerStaticInit6ee61fb74a3d667f8bfb0e1af69c57df
     public static $classMap = array (
         'AddBackgroundImageUrlToReviewsAndUpdateImageUrlToStrainsUpdate' => __DIR__ . '/../..' . '/database/migrations/2017_04_17_115422_add_background_image_url_to_reviews_and_update_image_url_to_strains_update.php',
         'AddCreatedAtAndUpdatedAtColumnsOnUsersProfiles' => __DIR__ . '/../..' . '/database/migrations/2017_04_05_181858_add_created_at_and_updated_at_columns_on_users_profiles.php',
+        'AddCreatedAtAndUpdatedAtOnApiBanksAndApiStrains' => __DIR__ . '/../..' . '/database/migrations/2017_04_19_011032_add_created_at_and_updated_at_on_api_banks_and_api_strains.php',
         'AddGrowTypeAndSeedTypeAndDropTypeToStrains' => __DIR__ . '/../..' . '/database/migrations/2017_03_29_140049_add_grow_type_and_seed_type_and_drop_type_to_strains.php',
         'Comment' => __DIR__ . '/../..' . '/database/migrations/2017_03_27_175319_comment.php',
+        'CreateApiBanks' => __DIR__ . '/../..' . '/database/migrations/2017_04_19_004640_create_api_banks.php',
+        'CreateApiStrains' => __DIR__ . '/../..' . '/database/migrations/2017_04_19_004632_create_api_strains.php',
         'CreateCommentUpVoteTable' => __DIR__ . '/../..' . '/database/migrations/2017_03_30_230345_create_comment_up_vote_table.php',
         'CreatePasswordResetsTable' => __DIR__ . '/../..' . '/database/migrations/2014_10_12_100000_create_password_resets_table.php',
         'CreateReviewUpdatesTable' => __DIR__ . '/../..' . '/database/migrations/2017_04_10_220343_create_review_updates_table.php',

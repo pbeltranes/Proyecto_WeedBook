@@ -8,8 +8,11 @@ $baseDir = dirname($vendorDir);
 return array(
     'AddBackgroundImageUrlToReviewsAndUpdateImageUrlToStrainsUpdate' => $baseDir . '/database/migrations/2017_04_17_115422_add_background_image_url_to_reviews_and_update_image_url_to_strains_update.php',
     'AddCreatedAtAndUpdatedAtColumnsOnUsersProfiles' => $baseDir . '/database/migrations/2017_04_05_181858_add_created_at_and_updated_at_columns_on_users_profiles.php',
+    'AddCreatedAtAndUpdatedAtOnApiBanksAndApiStrains' => $baseDir . '/database/migrations/2017_04_19_011032_add_created_at_and_updated_at_on_api_banks_and_api_strains.php',
     'AddGrowTypeAndSeedTypeAndDropTypeToStrains' => $baseDir . '/database/migrations/2017_03_29_140049_add_grow_type_and_seed_type_and_drop_type_to_strains.php',
     'Comment' => $baseDir . '/database/migrations/2017_03_27_175319_comment.php',
+    'CreateApiBanks' => $baseDir . '/database/migrations/2017_04_19_004640_create_api_banks.php',
+    'CreateApiStrains' => $baseDir . '/database/migrations/2017_04_19_004632_create_api_strains.php',
     'CreateCommentUpVoteTable' => $baseDir . '/database/migrations/2017_03_30_230345_create_comment_up_vote_table.php',
     'CreatePasswordResetsTable' => $baseDir . '/database/migrations/2014_10_12_100000_create_password_resets_table.php',
     'CreateReviewUpdatesTable' => $baseDir . '/database/migrations/2017_04_10_220343_create_review_updates_table.php',

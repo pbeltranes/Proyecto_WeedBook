@@ -18,13 +18,14 @@ use Illuminate\Database\Eloquent\Model;
  * @property ReviewUpVote[] $reviewUpVotes
  * @property ReviewUpVote[] $reviewUpVotes
  * @property Strain[] $strains
+ * @property string $background_image_url
  */
 class Review extends Model
 {
     /**
      * @var array
      */
-    protected $fillable = ['author_id', 'strain_number', 'title', 'state', 'active', 'created_at', 'updated_at'];
+    protected $fillable = ['author_id', 'strain_number', 'title', 'state', 'active', 'created_at', 'updated_at', 'background_image_url'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

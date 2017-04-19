@@ -11,18 +11,12 @@ There is no reviews till now. Login and write a new post now!!!
 ?>
 <div class="w3-row-padding">
   @foreach( $reviews as $post )
+  <?php $back = $post->background_image_url ? $post->background_image_url : 'http://www.acnur.org/fileadmin/Images/ACNUR/noticias/2016/Octubre_2016/5809ae163.jpg';  ?>
     <div class="w3-third w3-container w3-margin-bottom">
-      <img src="/w3images/mountains.jpg" alt="IMG1" style="width:20%" class="w3-hover-opacity">
+      <img src="{{$back}}" alt="Background" style="width:20%" class="w3-hover-opacity">
       <div class="w3-container w3-white">
         <p><b>{{$post->title}}</b></p>
         <p>{!! str_limit($post->body, $limit = 1500, $end = '....... <a href='.url("/".$post->slug).'>Read More</a>') !!}</p>
-          @if(!Auth::guest() && ($post->author_id == Auth::user()->id ))
-            @if($post->active == '1')
-            <button class="btn"><a href="{{ url('edit/'.$post->slug)}}">Edit Post</a></button>
-            @else
-            <button class="btn"><a href="{{ url('edit/'.$post->slug)}}">Edit Draft</a></button>
-            @endif
-          @endif
       </div>
     </div>
 
