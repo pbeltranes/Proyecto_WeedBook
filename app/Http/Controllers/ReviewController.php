@@ -10,6 +10,9 @@ use App\Http\Controllers\Controller;
 use App\Review;
 use App\User;
 use App\Strain;
+use App\ReviewUpdate;
+use App\StrainUpdate;
+use App\UsersProfile;
 
 class ReviewController extends Controller
 {
@@ -42,10 +45,11 @@ class ReviewController extends Controller
     {
       $name = Auth::user()->name;
       $id = Auth::user()->id;
-       $data = [
-       'name' => $name,
-       'id' => $id,
-       'on_review' =>1,];
+      $data = [
+        'name' => $name,
+        'id' => $id,
+        'on_review' =>1,
+      ];
       return view('reviews/newreview',$data);
     }
 
@@ -70,23 +74,12 @@ class ReviewController extends Controller
           'author_id'=> $request->user()->id,
           'strain_number'=> 1, //-->>ingresar id de la review que se esta comentando
           'title' => $request->title,
-          'state' => 1,
-          'active' =>1,
+          'state' => 0,
+          'active' => 0,
+          'background_image_url' => $request->background_image_url,
         ]);
-        $S = Strain::create([
-          'review_id' => $R->id, // se crea strain
-          'bank' => $request->bank,
-          'seed_type' =>$request->seed_type,
-          'grow_type' =>$request->grow_type,
-          'strain_name' => $request->strain_name,
-          'technique' => $request->technique,
-          'germ_date' => $request->germ_date,
-          'veg_start' => $request->veg_start,
-          'flow_start' => $request->flow_start,
-          'harvest_date' => $request->harvest_date,
-          'active' => 'true',
-        ]);
-        return redirect('home')->withMessage(' Review create with successfully');;
+
+        return redirect('review/' . $R->id . '/new-strain')->withMessage('Review created successfully, it wont be shown until you add at least 1 strain to your grow.');
       }
     }
 
@@ -96,7 +89,7 @@ class ReviewController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(request $request) // se visualiza solo para el author_id
+    public function showUserReviews(request $request) // se visualiza solo para el author_id
     {
       $id = Auth::user()->id;
       if($id == $request->id){ // validar que usuario que entra es el mismo que visitante
@@ -147,5 +140,19 @@ class ReviewController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function show($id){
+
+      $data['review'] = Review::find($id);
+      $data['author'] = UsersProfile::where('user_id', $data['review']->author_id)->first();
+      $data['rev_updates'] = ReviewUpdate::join('reviews', 'reviews.id', '=', 'review_updates.review_id')
+                            ->where('review_id', $id);
+      $data['rev_count'] = $data['rev_updates']->count();
+      $data['strains'] = Strain::where('review_id', $id)->get();
+      $data['strain_count'] = $data['strains']->count();
+
+      return view('reviews/showreview', $data);
+
     }
 }

@@ -10,6 +10,7 @@ return array(
     'AddCreatedAtAndUpdatedAtColumnsOnUsersProfiles' => $baseDir . '/database/migrations/2017_04_05_181858_add_created_at_and_updated_at_columns_on_users_profiles.php',
     'AddCreatedAtAndUpdatedAtOnApiBanksAndApiStrains' => $baseDir . '/database/migrations/2017_04_19_011032_add_created_at_and_updated_at_on_api_banks_and_api_strains.php',
     'AddGrowTypeAndSeedTypeAndDropTypeToStrains' => $baseDir . '/database/migrations/2017_03_29_140049_add_grow_type_and_seed_type_and_drop_type_to_strains.php',
+    'AddLightTypeAndLightPowerToStrains' => $baseDir . '/database/migrations/2017_04_19_174625_add_light_type_and_light_power_to_strains.php',
     'Comment' => $baseDir . '/database/migrations/2017_03_27_175319_comment.php',
     'CreateApiBanks' => $baseDir . '/database/migrations/2017_04_19_004640_create_api_banks.php',
     'CreateApiStrains' => $baseDir . '/database/migrations/2017_04_19_004632_create_api_strains.php',

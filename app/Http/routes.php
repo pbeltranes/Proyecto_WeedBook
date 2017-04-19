@@ -34,7 +34,7 @@ Route::group(['middleware' => ['auth']], function()
 	Route::get('review/{id_review}/edit', 'ReviewController@edit'); // Usado para editar perfil
 	Route::post('update', 'ReviewController@update');
 	Route::get('delete/{id}', 'ReviewController@destroy');
-  Route::get('user/{id}/reviews', 'ReviewController@show') ->where('id', '[0-9]+');//*****(*) // ver reviews del usuario {id}
+  	Route::get('user/{id}/reviews', 'ReviewController@showUserReviews') ->where('id', '[0-9]+');//*****(*) // ver reviews del usuario {id}
 	Route::get('comment/add', 'CommentController@create');
 	Route::post('comment/save', 'CommentController@save');
 	Route::get('comment/delete/{id}', 'CommentController@destroy');
@@ -44,7 +44,7 @@ Route::group(['middleware' => ['auth']], function()
 	Route::post('user/edit/save', 'UserController@save')->where('id', '[0-9]+');
 	Route::get('user/delete/{id}', 'UserController@destroy');
 	Route::get('review/{review_id}/new-strain', 'StrainController@create');
-	Route::get('review/{review_id}/new-strain', 'StrainController@store');
+	Route::post('review/save-strain', 'StrainController@store');
 	Route::get('review/{review_id}/delete-strain/{id}', 'StrainController@delete');
 	Route::get('review/{review_id}/update-strain/{id}', 'StrainController@update');
 

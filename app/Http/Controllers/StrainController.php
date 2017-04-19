@@ -10,7 +10,7 @@ use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Client;
 use App\ApiBanks;
 use App\ApiStrains;
-
+use App\Strain;
 class StrainController extends Controller
 {
     /**
@@ -28,9 +28,12 @@ class StrainController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($review_id)
     {
-        //
+        $data = [
+            'review_id' => $review_id,
+        ];
+        return view('strains/newstrain', $data);
     }
 
     /**
@@ -41,7 +44,24 @@ class StrainController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $strain = Strain::create([
+            'review_id' => $request->input('review_id'),
+            'bank' => $request->input('bank'),
+            'strain_name' => $request->input('strain_name'),
+            'technique' => $request->get('technique'),
+            'seed_type' => $request->get('seed_type'),
+            'germ_start' => $request->input('germ_start'),
+            'veg_start' => $request->input('veg_start'),
+            'flow_strat' => $request->input('flow_strat'),
+            'harvest_date' => $request->input('harvest_date'),
+            'active' => 1,
+            'grow_type' => $request->get('grow_type'),
+            'light_type' => $request->get('light_type'),
+            'light_power' => $request->input('light_power'),
+
+            ]);
+        $strain->save();
+        return redirect('/home')->withMessage('Strain Succesfully added');
     }
 
     /**
@@ -133,6 +153,7 @@ class StrainController extends Controller
                
            }
         }
+        die();
         return back()->withMessage('Api Actualizada con exito');
     }
 }

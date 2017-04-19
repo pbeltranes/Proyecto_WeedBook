@@ -51,9 +51,15 @@
             </div>
             <div class="tab-pane fade in" id="tab2">
               <tr>
-                <td><h4>Strain Number</h4>{{$review->strain_number}}</td>
-                <td><h4>State</h4>{{$review->state}}</td>
-                <td><h4>Active</h4>{{$review->active}}</td>
+                <td><h4>Strain Number</h4>{{$strain_count}}</td>
+                <td><h4>Setup:</h4></td>
+                @foreach($strains as $strain)
+                @if($strain->light_type == 'Sun')
+                <td>{{$strain->strain_name}} from {{$strain->bank}} with {{$strain->technique}} under {{$strain->light_type}}</td><br>
+                @else
+                <td>{{$strain->strain_name}} from {{$strain->bank}} with {{$strain->technique}} under {{$strain->light_type}} with {{$strain->light_power}} Watts</td><br>
+                @endif
+                @endforeach
                 <td><h4>Date init</h4>{{$review->created_at}}</td>
               </tr>
             </div>
@@ -65,20 +71,7 @@
       <div >
         <h3>Comentarios</h3>
         <ul class="comments-list">
-          @foreach($comments as $comment)
-            <tr class="comment">
-                <a class="pull-left" href="#">
-                    <img class="avatar" src="http://www.31minutos.cl/wp-content/uploads/2014/02/thumb-bodoque-300x300.jpg" alt="avatar" width="50" height="50">
-                </a>
-                <div class="comment-body">
-                    <div class="comment-heading">
-                        <h4 class="user">{{$author->user_name}}</h4>
-                        <h6 class="time">{{$comment->created_at->format('d/m/Y')}}</h5>
-                    </div>
-                    <p>{{$comment->body}}</p>
-                </div>
-            </tr>
-          @endforeach
+          
         </ul>
       </div>
 

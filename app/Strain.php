@@ -19,6 +19,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $updated_at
  * @property string $grow_type
  * @property string $seed_type
+ * @property string $light_type
+ * @property integer $light_power
  * @property Review $review
  * @property ProductOnStrain[] $productOnStrains
  */
@@ -27,7 +29,7 @@ class Strain extends Model
     /**
      * @var array
      */
-    protected $fillable = ['review_id', 'bank', 'strain_name', 'technique', 'germ_start', 'veg_start', 'flow_start', 'harvest_date', 'active', 'created_at', 'updated_at', 'grow_type', 'seed_type'];
+    protected $fillable = ['review_id', 'bank', 'strain_name', 'technique', 'germ_start', 'veg_start', 'flow_start', 'harvest_date', 'active', 'created_at', 'updated_at', 'grow_type', 'seed_type', 'light_type', 'light_power'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
