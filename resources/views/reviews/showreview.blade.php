@@ -73,7 +73,7 @@
                 <div class="comment-body">
                     <div class="comment-heading">
                         <h4 class="user">{{$author->user_name}}</h4>
-                        <h6 class="time">{{$comment->created_at->format('d/m/Y')}}</h5>
+                        <h6 class="time">{{$comment->created_at}}</h5>
                     </div>
                     <p>{{$comment->body}}</p>
                 </div>
