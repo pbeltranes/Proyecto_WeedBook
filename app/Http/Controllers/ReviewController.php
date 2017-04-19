@@ -130,7 +130,18 @@ class ReviewController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    public function showThisReview($id){
+       $data['author'] = UsersProfile::where('id',$data['review']->author_id)->first();
 
+       $data['comments'] = DB::table('comments')
+       ->where('comments.on_review','=',$id)
+       ->select('comments.from_user', 'comments.on_review', 'comments.body', 'comments.created_at', 'comments.updated_at')
+       ->get();
+        // print_r($data['comments']);
+        // die();
+
+       return view('reviews/showreview',$data);
+    }
 
 
 
