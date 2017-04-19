@@ -60,18 +60,18 @@ class CommentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function save(Request $request)
+    public function save(Request $request, $review_id)
     {
-
+      // verificar que el body no venga vacio o se jode todo
       $body= $request->comment;
       $from_user = Auth::user()->id;
 
       $comment = Comment::create([
         'from_user'=> "$from_user",
-        'on_review'=> 1, //-->>ingresar id de la review que se esta comentando
+        'on_review'=> $review_id, //-->>ingresar id de la review que se esta comentando
         'body' => "$body",
       ]);
-      //return view('review/{on_review}');
+       return redirect()->route('showreview',[$review_id]);
     }
 
     /**

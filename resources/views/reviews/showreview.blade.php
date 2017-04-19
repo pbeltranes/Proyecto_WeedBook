@@ -22,19 +22,19 @@
 
         </div>
     </div>
-    <div class="btn-pref btn-group btn-group-justified btn-group-lg" role="group" aria-label="...">
+    <div class="btn-pref btn-group btn-group-justified btn-group-lg" role="group" aria-label="..." >
         <div class="btn-group" role="group">
-            <button type="button" id="stars" class="btn btn-primary" href="#tab1" data-toggle="tab"><span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+            <button type="button" id="stars" class="btn btn-primary " href="#tab1" data-toggle="tab"><span class="fa fa-user-circle" aria-hidden="true"></span>
                 <div class="hidden-xs">Author info</div>
             </button>
         </div>
         <div class="btn-group" role="group">
-            <button type="button" id="favorites" class="btn btn-default" href="#tab2" data-toggle="tab"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span>
+            <button type="button" id="favorites" class="btn btn-default" href="#tab2" data-toggle="tab"><span class="fa fa-envira" aria-hidden="true"></span>
                 <div class="hidden-xs">Grow info</div>
             </button>
         </div>
         <div class="btn-group" role="group">
-            <button type="button" id="following" class="btn btn-default" href="#tab3" data-toggle="tab"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+            <button type="button" id="following" class="btn btn-default" href="#tab3" data-toggle="tab"><span class="fa fa-file-o" aria-hidden="true"></span>
                 <div class="hidden-xs">Products</div>
             </button>
         </div>
@@ -58,7 +58,7 @@
               </tr>
             </div>
             <div class="tab-pane fade in" id="tab3">
-              <h3>This is tab 3</h3>
+              <h3>Products </h3>
             </div>
           </div>
         </div>
@@ -71,18 +71,29 @@
                     <img class="avatar" src="http://www.31minutos.cl/wp-content/uploads/2014/02/thumb-bodoque-300x300.jpg" alt="avatar" width="50" height="50">
                 </a>
                 <div class="comment-body">
-                    <div class="comment-heading">
-                        <h4 class="user">{{$author->user_name}}</h4>
-                        <h6 class="time">{{$comment->created_at}}</h5>
+                    <!-- <div class="comment-heading">
+                    </div> -->
+                    <div class="commentText">
+                      <h6 class="user">{{$author->user_name}}</h4>
+                      <p class="">{{$comment->body}}</p><span class="date" style="color:#aaa; font-family:verdana; font-size:11px;">Publicado {{$comment->created_at}}</span>
                     </div>
-                    <p>{{$comment->body}}</p>
                 </div>
             </tr>
+            <br>
           @endforeach
         </ul>
+        <form class="form-group-lg col-xs-6 " role="form" method="POST" action="/comment/save/{{$review->id}}">
+              {!! csrf_field() !!}
+           <div class="form-group">
+               <textarea class="form-control" rows="3" cols="2" style = "font-size:13px;" name="comment"></textarea>
+           </div>
+           <div class="form-group">
+               <button class="btn btn-success" >Submit</button>
+           </div>
+       </form>
       </div>
-
     </div>
+
 
 
 

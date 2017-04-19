@@ -148,7 +148,7 @@ class ReviewController extends Controller
        ->get();
         // print_r($data['comments']);
         // die();
-        
+
        return view('reviews/showreview',$data);
     }
 

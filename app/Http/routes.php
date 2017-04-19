@@ -37,7 +37,7 @@ Route::group(['middleware' => ['auth']], function()
 	Route::get('delete/{id}', 'ReviewController@destroy');
   Route::get('user/{id}/reviews', 'ReviewController@show') ->where('id', '[0-9]+');//*****(*) // ver reviews del usuario {id}
 	Route::get('comment/add', 'CommentController@create');
-	Route::post('comment/save', 'CommentController@save');
+	Route::post('comment/save/{review_id}', 'CommentController@save');
 	Route::get('comment/delete/{id}', 'CommentController@destroy');
 	Route::post('comment/update', 'CommentController@update');
 	Route::get('comment/edit/{id}', 'CommentController@edit');

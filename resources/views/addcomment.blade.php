@@ -13,7 +13,7 @@
 
   <textarea class="form-control" rows="3" cols="3" name="comment"></textarea>
   <td>Comment:</td>
-  <td><button type="submit" class="btn btn-default btn-md">Submit</button></td>
+  <td><button type="submit" class="btn btn-default btn-lg">Submit</button></td>
 </tr>
 </form>
 
