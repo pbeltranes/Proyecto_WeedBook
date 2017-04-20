@@ -35,11 +35,11 @@ Route::group(['middleware' => ['auth']], function()
   	Route::post('update', 'ReviewController@update');
 	Route::get('delete/{id}', 'ReviewController@destroy');
   	Route::get('user/{id}/reviews', 'ReviewController@showUserReviews') ->where('id', '[0-9]+');//*****(*) // ver reviews del usuario {id}
-	Route::get('comment/add', 'CommentController@create');
+  Route::get('comment/add', 'CommentController@create');
 	Route::post('comment/save/{review_id}', 'CommentController@save');
 	Route::get('comment/delete/{id}', 'CommentController@destroy');
 	Route::post('comment/update', 'CommentController@update');
-	Route::get('comment/edit/{id}', 'CommentController@edit');
+	Route::get('comment/edit/{review_id}{comment_id}{author_id}', 'CommentController@edit');
 	Route::get('user/{id}/edit', 'UserController@edit')->where('id', '[0-9]+');
 	Route::post('user/edit/save', 'UserController@save')->where('id', '[0-9]+');
 	Route::get('user/delete/{id}', 'UserController@destroy');

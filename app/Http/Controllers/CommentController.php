@@ -32,27 +32,6 @@ class CommentController extends Controller
      */
 
 
-   public function create(Request $request)
-   {
-
-    //la ruta esta dentro del middleware de Auth, por lo que solo se puede acceder si estamos logeados
-    //Por lo que podemos usar el Auth::user() para obtener el usuario y todas las weas que tiene dentro
-    //tambien en la vista teniai que se imprimiera la variable $name y esa era pablo siempre, teniai que imprimir $Nombre (actual $name2).
-
-     $name = Auth::user()->name;
-     $id = Auth::user()->id;
-      $data = [
-      "name" => "$name",
-      "id" => "$id",
-      "on_review" =>1,
-
-    ];
-
-     return view('addcomment', $data);
-
-   }
-
-
 
     /**
      * Store a newly created resource in storage.
@@ -91,9 +70,16 @@ class CommentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request, $review_id, $author_id)
     {
-        //
+        $data['author'] = $author_id
+        $data['review'] = Review::find($id);
+        $data['comments'] = DB::table('comments')
+        ->where('comments.on_review','=',$review_id)
+        ->select('comments.id','comments.from_user', 'comments.on_review', 'comments.body', 'comments.created_at', 'comments.updated_at')
+        ->get();
+
+          return view('comments/editcomment', $data);
     }
 
     /**

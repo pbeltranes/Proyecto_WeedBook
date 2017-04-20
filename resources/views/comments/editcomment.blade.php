@@ -81,26 +81,7 @@
                     </div> -->
                     <div class="commentText">
                       <h6 class="user">{{$author->user_name}}</h4>
-                        <table>
-                          <tr>
-                            <th><p class="">{{$comment->body}}</p></th>
-
-
-
-                            <th>
-                              @if($comment->from_user == Auth::user()->id)
-                              <form class="form-group " role="form" method="POST" action="/comment/edit/{{$review->id}}{{$comment->from_user}}">
-                                {!! csrf_field() !!}
-                                <div class="form-group">
-                                  <button class="btn btn-primary btn-xs" style="float: right" >Edit</button>
-                                </div>
-                              </form>
-                              @endif
-                            </th>
-                        </tr>
-                      </table>
-
-                      <span class="date" style="color:#aaa; font-family:verdana; font-size:11px;">commented on {{$comment->created_at}}</span>
+                      <p class="" value="{{$comment->body}}"></p><span class="date" style="color:#aaa; font-family:verdana; font-size:11px;">commented on {{$comment->created_at}}</span>
                     </div>
                 </div>
             </tr>
