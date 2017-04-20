@@ -44,7 +44,7 @@
           <div class="tab-content">
             <div class="tab-pane fade in active" id="tab1">
               <tr>
-                <img class="card-bkimg" alt="" src="https://68.media.tumblr.com/4a03ed0af43c1721d8c3c8e7b3870d14/tumblr_nlabfnp8Ro1tr4gulo1_500.jpg" width="50" height="50">
+                <img class="card-bkimg" alt="" src="{{$author->avatar_url}}" width="50" height="50">
                 <td><h4>Name</h4>{{$author->user_name}}</td>
                 <td><h4>Srowing Since</h4>{{$author->growing_since}}</td>
               </tr>
@@ -69,19 +69,19 @@
           </div>
         </div>
       <div >
-        <h3>Comentarios</h3>
+        <h3>Comments</h3>
         <ul class="comments-list">
           @foreach($comments as $comment)
             <tr class="comment">
                 <a class="pull-left" href="#">
-                    <img class="avatar" src="http://www.31minutos.cl/wp-content/uploads/2014/02/thumb-bodoque-300x300.jpg" alt="avatar" width="50" height="50">
+                    <img class="avatar" src="{{$comment->avatar_url}}" alt="avatar" width="50" height="50">
                 </a>
                 <div class="comment-body">
                     <!-- <div class="comment-heading">
                     </div> -->
                     <div class="commentText">
                       <h6 class="user">{{$author->user_name}}</h4>
-                      <p class="">{{$comment->body}}</p><span class="date" style="color:#aaa; font-family:verdana; font-size:11px;">Publicado {{$comment->created_at}}</span>
+                      <p class="">{{$comment->body}}</p><span class="date" style="color:#aaa; font-family:verdana; font-size:11px;">commented on {{$comment->created_at}}</span>
                     </div>
                 </div>
             </tr>

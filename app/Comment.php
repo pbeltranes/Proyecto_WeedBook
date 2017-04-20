@@ -3,7 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-
+use App\UsersProfile;
 /**
  * @property integer $id
  * @property integer $from_user
@@ -44,5 +44,9 @@ class Comment extends Model
     public function commentUpVotes()
     {
         return $this->hasMany('App\CommentUpVote');
+    }
+
+    public function avatar(){
+        return $this->belongsTo('App\UsersProfile', 'from_user', 'user_id');
     }
 }

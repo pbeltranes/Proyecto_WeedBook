@@ -172,8 +172,9 @@ class ReviewController extends Controller
       $data['strain_count'] = $data['strains']->count();
 
       $data['comments'] = DB::table('comments')
-       ->where('comments.on_review','=',$id)
-       ->select('comments.from_user', 'comments.on_review', 'comments.body', 'comments.created_at', 'comments.updated_at')
+       ->join('users_profiles', 'comments.from_user', '=',  'users_profiles.user_id')
+       ->select('users_profiles.avatar_url', 'comments.from_user', 'comments.on_review', 'comments.body', 'comments.created_at', 'comments.updated_at')
+       ->where('comments.on_review',$id)
        ->get();
 
       return view('reviews/showreview', $data);
