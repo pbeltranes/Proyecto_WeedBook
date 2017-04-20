@@ -15,8 +15,8 @@ There is no reviews till now. Login and write a new post now!!!
     <div class="w3-third w3-container w3-margin-bottom">
       <img src="{{$back}}" alt="Background" style="width:20%" class="w3-hover-opacity">
       <div class="w3-container w3-white">
-        <p><b>{{$post->title}}</b></p>
-        <p>{!! str_limit($post->body, $limit = 1500, $end = '....... <a href='.url("/".$post->slug).'>Read More</a>') !!}</p>
+        <p><b><h4>{{$post->title}}</h4></b></p>
+        <p><a href='{{url("/review/".$post->id)}}'>Read More</a></p>
       </div>
     </div>
 
