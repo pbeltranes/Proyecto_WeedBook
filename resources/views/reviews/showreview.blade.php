@@ -89,12 +89,20 @@
                               <th>
                                 @if($comment->from_user == Auth::user()->id)
                                 <!-- envia comment id, el cual no se estaba enviando, pero no estoy seguro de si la url lo recibe bien  -->
-                                                                                                    <!-- route('remindHelper',['event'=>$eventId,'user'=>$userId]); -->
-                                <form class="form-group " role="form" method="GET"   action="{{ route('edit',['review_id' =>$review->id, 'comment_id'=> $comment->id, 'author_id'=> $comment->from_user]) }}">
-                                  <div class="form-group">
-                                    <button class="btn btn-primary btn-xs" style="float: right" >Edit</button>
-                                  </div>
-                                </form>
+                                <th>                                                                    <!-- route('remindHelper',['event'=>$eventId,'user'=>$userId]); -->
+                                  <form class="form-group " role="form" method="GET"   action="{{ route('edit',['review_id' =>$review->id, 'comment_id'=> $comment->id, 'author_id'=> $comment->from_user]) }}">
+                                    <div class="form-group">
+                                      <button class="btn btn-primary btn-xs" style="float: right" >Edit</button>
+                                    </div>
+                                  </form>
+                                </th>
+                                <th>
+                                  <form class="form-group " role="form" method="GET"   action="/comment/delete/{{$comment->id}}/{{$review->id}}">
+                                    <div class="form-group">
+                                      <button class="btn btn-danger btn-xs" style="float: right" >Delete</button>
+                                    </div>
+                                  </form>
+                                </th>
                                 @endif
                               </th>
                         </tr>

@@ -114,7 +114,7 @@ class CommentController extends Controller
       //print_r($review_id);
       //print_r($comment_id);
       // verificar que el usuario es quien es quien debe poder modificar el comentario
-      DB::table('comments')
+      $update = DB::table('comments')
             ->where('id', $comment_id)
             ->update(['body' => $body]);
 
@@ -127,8 +127,9 @@ class CommentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($comment_id, $review_id)
     {
-        //
+      $destroy = DB::table('comments')->where('id', $comment_id)->delete();
+      return redirect()->route('showreview',[$review_id]);
     }
 }
