@@ -1,3 +1,4 @@
+
 @extends('app')
 @section('title')
 @endsection
@@ -24,12 +25,12 @@
     </div>
     <div class="btn-pref btn-group btn-group-justified btn-group-lg" role="group" aria-label="..." >
         <div class="btn-group" role="group">
-            <button type="button" id="stars" class="btn btn-primary " href="#tab1" data-toggle="tab"><span class="fa fa-user-circle" aria-hidden="true"></span>
+            <button type="button" id="stars" class="btn btn-default " href="#tab1" data-toggle="tab"><span class="fa fa-user-circle" aria-hidden="true"></span>
                 <div class="hidden-xs">Author info</div>
             </button>
         </div>
         <div class="btn-group" role="group">
-            <button type="button" id="favorites" class="btn btn-default" href="#tab2" data-toggle="tab"><span class="fa fa-envira" aria-hidden="true"></span>
+            <button type="button" id="favorites" class="btn btn-primary" href="#tab2" data-toggle="tab"><span class="fa fa-envira" aria-hidden="true"></span>
                 <div class="hidden-xs">Grow info</div>
             </button>
         </div>
@@ -42,14 +43,14 @@
 
         <div class="well">
           <div class="tab-content">
-            <div class="tab-pane fade in active" id="tab1">
+            <div class="tab-pane fade in" id="tab1">
               <tr>
                 <img class="card-bkimg" alt="" src="{{$author->avatar_url}}" width="50" height="50">
                 <td><h4>Name</h4>{{$author->user_name}}</td>
                 <td><h4>Srowing Since</h4>{{$author->growing_since}}</td>
               </tr>
             </div>
-            <div class="tab-pane fade in" id="tab2">
+            <div class="tab-pane fade in active" id="tab2">
               <tr>
                 <td><h4>Strain Number</h4>{{$strain_count}}</td>
                 <td><h4>Setup:</h4></td>
@@ -72,6 +73,7 @@
         <h3>Comments</h3>
         <ul class="comments-list">
           @foreach($comments as $comment)
+
             <tr class="comment">
                 <a class="pull-left" href="#">
                     <img class="avatar" src="{{$comment->avatar_url}}" alt="avatar" width="50" height="50">
@@ -84,19 +86,17 @@
                         <table>
                           <tr>
                             <th><p class="">{{$comment->body}}</p></th>
-
-
-
-                            <th>
-                              @if($comment->from_user == Auth::user()->id)
-                              <form class="form-group " role="form" method="POST" action="/comment/edit/{{$review->id}}{{$comment->from_user}}">
-                                {!! csrf_field() !!}
-                                <div class="form-group">
-                                  <button class="btn btn-primary btn-xs" style="float: right" >Edit</button>
-                                </div>
-                              </form>
-                              @endif
-                            </th>
+                              <th>
+                                @if($comment->from_user == Auth::user()->id)
+                                <!-- envia comment id, el cual no se estaba enviando, pero no estoy seguro de si la url lo recibe bien  -->
+                                                                                                    <!-- route('remindHelper',['event'=>$eventId,'user'=>$userId]); -->
+                                <form class="form-group " role="form" method="GET"   action="{{ route('edit',['review_id' =>$review->id, 'comment_id'=> $comment->id, 'author_id'=> $comment->from_user]) }}">
+                                  <div class="form-group">
+                                    <button class="btn btn-primary btn-xs" style="float: right" >Edit</button>
+                                  </div>
+                                </form>
+                                @endif
+                              </th>
                         </tr>
                       </table>
 

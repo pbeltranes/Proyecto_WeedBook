@@ -81,7 +81,30 @@
                     </div> -->
                     <div class="commentText">
                       <h6 class="user">{{$author->user_name}}</h4>
-                      <p class="" value="{{$comment->body}}"></p><span class="date" style="color:#aaa; font-family:verdana; font-size:11px;">commented on {{$comment->created_at}}</span>
+                        <table>
+                          <tr>
+
+                            @if($commentedit == $comment->id)
+                            <form class="form-group-lg col-xs-6 " role="form" method="POST" action="/comment/update/{{$review->id}}/{{$comment->id}}">
+                                  {!! csrf_field() !!}
+                               <div class="form-group">
+                                   <textarea class="form-control" rows="3" cols="2" style ="font-size:13px;" name ="commentedit">{{$comment->body}}</textarea>
+
+                               </div>
+                               <div class="form-group">
+                                   <button class="btn btn-success" >Save</button>
+                               </div>
+                           </form>
+                            @else
+                            <th>
+                              <p class="">{{$comment->body}}</p>
+                            </th>
+                            @endif
+
+                        </tr>
+                      </table>
+
+                      <span class="date" style="color:#aaa; font-family:verdana; font-size:11px;">commented on {{$comment->created_at}}</span>
                     </div>
                 </div>
             </tr>

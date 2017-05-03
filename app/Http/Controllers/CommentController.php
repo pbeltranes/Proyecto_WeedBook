@@ -6,13 +6,15 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+
+use App\Strain;
 use App\User;
 use App\Review;
 use App\Comment;
 use App\UsersProfile;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Auth;
-
 class CommentController extends Controller
 {
     /**
@@ -59,10 +61,10 @@ class CommentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)//-->mostrar todas los comentarios de la review
-    {
-        //
-    }
+    // public function show($id)//-->mostrar todas los comentarios de la review
+    // {
+    //     //
+    // }
 
     /**
      * Show the form for editing the specified resource.
@@ -70,16 +72,31 @@ class CommentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Request $request, $review_id, $author_id)
+    public function edit(Request $request, $review_id, $comment_id, $author_id)
     {
-        $data['author'] = $author_id
-        $data['review'] = Review::find($id);
-        $data['comments'] = DB::table('comments')
-        ->where('comments.on_review','=',$review_id)
-        ->select('comments.id','comments.from_user', 'comments.on_review', 'comments.body', 'comments.created_at', 'comments.updated_at')
-        ->get();
 
-          return view('comments/editcomment', $data);
+            // ya recive los parametros para editar, corregir author id para sacar los datos del usuario
+            $data['author'] = UsersProfile::find($author_id);
+            $data['review'] = Review::find($review_id);
+
+
+            $data['strains'] = Strain::where('review_id', $review_id)->get();
+            $data['strain_count'] = $data['strains']->count();
+
+            $data['comments'] = DB::table('comments')
+            ->join('users_profiles', 'comments.from_user', '=',  'users_profiles.user_id')
+            ->select('comments.id','users_profiles.avatar_url', 'comments.from_user', 'comments.on_review', 'comments.body', 'comments.created_at', 'comments.updated_at')
+            ->where('comments.on_review',$review_id)
+            ->get();
+            $data['commentedit'] = $comment_id;
+
+            return view('comments/editonecomment', $data);
+
+            // else {
+            //
+            //   return view('comments/editonecomment', $data);
+            //
+            // }
     }
 
     /**
@@ -89,9 +106,19 @@ class CommentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $review_id, $comment_id)
     {
-        //
+      $id = Auth::user()->id;
+      $body = $request->commentedit;
+      // print_r($request);
+      //print_r($review_id);
+      //print_r($comment_id);
+      // verificar que el usuario es quien es quien debe poder modificar el comentario
+      DB::table('comments')
+            ->where('id', $comment_id)
+            ->update(['body' => $body]);
+
+      return redirect()->route('showreview',[$review_id]);
     }
 
     /**
