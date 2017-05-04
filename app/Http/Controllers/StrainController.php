@@ -139,18 +139,19 @@ class StrainController extends Controller
                $strain_bank = $data[$i]['seedCompany']['name'];
                $banks_exist = ApiBanks::where('bank_name', $strain_bank) ? TRUE:FALSE;
                $strain_exist = ApiStrains::where('strain_name', $strain_name) ? TRUE:FALSE;
-               if($strain_exist && $banks_exist){
-                continue;
-               }else{
-                ApiBanks::create([
-                    'bank_name' => $strain_bank,
-                ]);
-
-               ApiStrains::create([
-                    'strain_name' => $strain_name,
-                ]);
-               }
                
+               if(!$strain_exist){
+                    ApiStrains::create([
+                        'strain_name' => $strain_name,
+                    ]);
+               }
+
+               if(!$banks_exist){
+                    ApiBanks::create([
+                        'bank_name' => $strain_bank,
+                    ]);                
+               }
+
            }
         }
         die();

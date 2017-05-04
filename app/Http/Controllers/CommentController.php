@@ -15,6 +15,8 @@ use App\User;
 use App\Review;
 use App\Comment;
 use App\UsersProfile;
+use App\CommentUpVote;
+
 class CommentController extends Controller
 {
     /**
@@ -132,4 +134,23 @@ class CommentController extends Controller
       $destroy = DB::table('comments')->where('id', $comment_id)->delete();
       return redirect()->route('showreview',[$review_id]);
     }
+
+
+    public function vote($comment_id){
+        $user_id = Auth::user()->id ? 0 : Auth::user()->id;
+
+        $already_vote = CommentUpVote::where([
+                            ['user_id', '=', $user_id],
+                            ['comment_id', '=', $comment_id],
+            ]) ? TRUE : FALSE;
+        if(!$already_vote){
+            CommentUpVote::create([
+
+                ]);
+        }else{
+            //CommentUpVote::destroy()
+        }
+    }
+
+
 }
