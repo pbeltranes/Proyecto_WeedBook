@@ -43,8 +43,7 @@ class CommentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function save(Request $request, $review_id)
-    {
+    public function save(Request $request, $review_id){
       // verificar que el body no venga vacio o se jode todo
       $body= $request->comment;
       $from_user = Auth::user()->id;
@@ -74,10 +73,8 @@ class CommentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Request $request, $review_id, $comment_id, $author_id)
-    {
+    public function edit(Request $request, $review_id, $comment_id, $author_id){
 
-            // ya recive los parametros para editar, corregir author id para sacar los datos del usuario
             $data['author'] = UsersProfile::find($author_id);
             $data['review'] = Review::find($review_id);
 
@@ -93,12 +90,6 @@ class CommentController extends Controller
             $data['commentedit'] = $comment_id;
 
             return view('comments/editonecomment', $data);
-
-            // else {
-            //
-            //   return view('comments/editonecomment', $data);
-            //
-            // }
     }
 
     /**
@@ -108,13 +99,9 @@ class CommentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $review_id, $comment_id)
-    {
+    public function update(Request $request, $review_id, $comment_id){
       $id = Auth::user()->id;
       $body = $request->commentedit;
-      // print_r($request);
-      //print_r($review_id);
-      //print_r($comment_id);
       // verificar que el usuario es quien es quien debe poder modificar el comentario
       $update = DB::table('comments')
             ->where('id', $comment_id)
@@ -129,27 +116,33 @@ class CommentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($comment_id, $review_id)
-    {
+
+    public function destroy($comment_id, $review_id){
+
       $destroy = DB::table('comments')->where('id', $comment_id)->delete();
       return redirect()->route('showreview',[$review_id]);
     }
 
 
-    public function vote($comment_id){
-        $user_id = Auth::user()->id ? 0 : Auth::user()->id;
+    public function vote(Request $request, $comment_id, $review_id){
 
-        $already_vote = CommentUpVote::where([
-                            ['user_id', '=', $user_id],
-                            ['comment_id', '=', $comment_id],
-            ]) ? TRUE : FALSE;
-        if(!$already_vote){
-            CommentUpVote::create([
+        $data ['author'] = DB::table('comments')
+        ->select('comments.from_user')
+        ->where('comments.id', $comment_id)
+        ->get();
 
-                ]);
-        }else{
-            //CommentUpVote::destroy()
+        $user_id = Auth::user()->id;
+
+        if($data['author'] != $user_id){
+
+          $votes = comments_up_votes::create([
+            'comment_id' => $comment_id ,
+            'from_user' => $user_id,
+          ]);
+
+            return redirect()->route('showreview',[$review_id]);
         }
+            return redirect()->route('showreview',[$review_id]);
     }
 
 
