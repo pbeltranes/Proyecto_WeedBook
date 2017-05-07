@@ -71,7 +71,7 @@ class ReviewController extends Controller
         return redirect('reviews/new-review')->withErrors('  Please write the title of your review, bitch!.')->withInput();
       if($duplicate)
       {
-        return redirect('reviews/new-review')->withErrors('   Title already exists.')->withInput();// verificar que no exista el nombre
+        return redirect('home')->withErrors('   Title already exists.')->withInput();// verificar que no exista el nombre
       }
       else{
         $R = Review::create([ // creamos review
@@ -82,7 +82,6 @@ class ReviewController extends Controller
           'active' => 0,
           'background_image_url' => $request->background_image_url,
         ]);
-
         return redirect('review/' . $R->id . '/new-strain')->withMessage('Review created successfully, it wont be shown until you add at least 1 strain to your grow.');
       }
     }
@@ -99,7 +98,7 @@ class ReviewController extends Controller
       if($id == $request->id){ // validar que usuario que entra es el mismo que visitante
       $reviews=DB::table('reviews')
             ->where('reviews.author_id', '=', $request->id)
-            ->select('reviews.id', 'reviews.title', 'reviews.active', 'reviews.state','reviews.created_at','reviews.updated_at')
+            ->select('reviews.id', 'reviews.title', 'reviews.active', 'reviews.state','reviews.created_at','reviews.updated_at', 'background_image_url')
             ->get();
       $title= 'Your Reviews';
         return view('reviews/myreviews',compact('reviews'))->withTitle($title)->withInput($id);
@@ -117,9 +116,9 @@ class ReviewController extends Controller
      */
     public function edit($id)
     {
-      $request = Review::where('id',$id)->first();
+      //$request = Review::where('id',$id)->first();
 
-      return view('editreview',$request);
+      return view('reviews/editreview');
 
     }
 

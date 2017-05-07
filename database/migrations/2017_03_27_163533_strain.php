@@ -19,7 +19,7 @@ class Strain extends Migration
                 ->references('id')->on('reviews')
                 ->onDelete('cascade');
             $table->string('type'); // feminizada , automatica
-            $table->string('bank'); /
+            $table->string('bank');
             $table->string('strain_name');
             $table->string('technique');
             $table->date('germ_start');

@@ -6,7 +6,7 @@
 @section('content')
 <!--agregar condicion de verificacion de campo vacio-->
 
-<form  action= "/new-review" method= "POST" >
+<form method="POST" action="/user/edit/save">
     {!! csrf_field() !!}
 
 <tr>
