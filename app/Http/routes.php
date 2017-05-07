@@ -34,7 +34,7 @@ Route::group(['middleware' => ['auth']], function()
 	Route::get('review/{id_review}/edit', 'ReviewController@edit'); // Usado para editar perfil
   Route::post('update', 'ReviewController@update');
 	Route::get('delete/{id}', 'ReviewController@destroy');
-    Route::get('user/{id}/reviews', 'ReviewController@showUserReviews') ->where('id', '[0-9]+');//*****(*) // ver reviews del usuario {id}
+  Route::get('user/{id}/reviews', 'ReviewController@showUserReviews') ->where('id', '[0-9]+');// ver reviews del usuario {id}
 
                             // Modulo comentarios
 
