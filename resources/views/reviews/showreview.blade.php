@@ -75,42 +75,65 @@
           @foreach($comments as $comment)
 
             <tr class="comment">
-                <a class="pull-left" href="#">
-                    <img class="avatar" src="{{$comment->avatar_url}}" alt="avatar" width="50" height="50">
-                </a>
-                <div class="comment-body">
-                    <!-- <div class="comment-heading">
-                    </div> -->
-                    <div class="commentText">
-                      <h6 class="user">{{$author->user_name}}</h4>
-                        <table>
-                          <tr>
-                            <th><p class="">{{$comment->body}}</p></th>
-                              <th>
-                                @if($comment->from_user == Auth::user()->id)
-                                <!-- envia comment id, el cual no se estaba enviando, pero no estoy seguro de si la url lo recibe bien  -->
-                                <th>                                                                    <!-- route('remindHelper',['event'=>$eventId,'user'=>$userId]); -->
-                                  <form class="form-group " role="form" method="GET"   action="{{ route('edit',['review_id' =>$review->id, 'comment_id'=> $comment->id, 'author_id'=> $comment->from_user]) }}">
-                                    <div class="form-group">
-                                      <button class="btn btn-primary btn-xs" style="float: right" >Edit</button>
-                                    </div>
-                                  </form>
-                                </th>
-                                <th>
-                                  <form class="form-group " role="form" method="GET"   action="/comment/delete/{{$comment->id}}/{{$review->id}}">
-                                    <div class="form-group">
-                                      <button class="btn btn-danger btn-xs" style="float: right" >Delete</button>
-                                    </div>
-                                  </form>
-                                </th>
-                                @endif
-                              </th>
-                        </tr>
-                      </table>
+                    <table>
+                      <tr>
+                        <th><a class="pull-left" href="#">
+                              <img class="avatar" src="{{$comment->avatar_url}}" alt="avatar" width="50" height="50">
+                          </a>
+                        <th>
+                      </tr>
 
-                      <span class="date" style="color:#aaa; font-family:verdana; font-size:11px;">commented on {{$comment->created_at}}</span>
-                    </div>
-                </div>
+                      <tr>
+                        <td><h5 class="user">{{$author->user_name}}</h5></td>
+                        <td><span class="date" style="color:#aaa; font-family:verdana; font-size:10px;">commented on {{$comment->created_at}}</span></td>
+                      </tr>
+
+                      <tr>
+                              <th>
+                                <h6>{{$comment->body}}</h6>
+                              </th>
+                            @if($comment->from_user == Auth::user()->id) <!-- habilita los campos de editar y eliminar -->
+                              <th>                                                                    <!-- route('remindHelper',['event'=>$eventId,'user'=>$userId]); -->
+                                <form class="form-group " role="form" method="GET"   action="{{ route('edit',['review_id' =>$review->id, 'comment_id'=> $comment->id, 'author_id'=> $comment->from_user]) }}">
+                                  <div class="form-group">
+                                    <button class="btn btn-primary btn-xs" style="float: right" >Edit</button>
+                                  </div>
+                                </form>
+                              </th>
+                              <th>
+                                <form class="form-group " role="form" method="GET"   action="/comment/delete/{{$comment->id}}/{{$review->id}}">
+                                  <div class="form-group">
+                                    <button class="btn btn-danger btn-xs" style="float: right" >Delete</button>
+                                  </div>
+                                </form>
+
+                              </th>
+                            @endif
+                            <!-- <form class="form-group " role="form" method="POST"   action="/comment/vote/{{$comment->id}}/{{$review->id}}">
+                              {!! csrf_field() !!}
+                              <div class="form-group">
+
+                                LikeBtn.com BEGIN  verificar que tipo de dato esta mandando vote cuando doy like o dislike
+                                <span class="likebtn-wrapper" data-theme="youtube" data-i18n_like=" " data-identifier="vote"></span>
+                                  <script>
+                                    (function(d,e,s){
+                                      if(d.getElementById("likebtn_wjs"))
+                                        return;a=d.createElement(e);
+
+                                        m=d.getElementsByTagName(e)[0];
+                                        a.async=1;a.id="likebtn_wjs";
+                                        a.src=s;
+                                        m.parentNode.insertBefore(a, m)
+                                      }
+                                    )
+                                    (document,"script","//w.likebtn.com/js/w/widget.js");
+                                  </script>
+                              </div>
+                            </form> -->
+
+                      </tr>
+                    </table>
+
             </tr>
             <br>
           @endforeach
