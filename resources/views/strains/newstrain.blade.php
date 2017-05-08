@@ -84,10 +84,16 @@ Add a new strain to your grow
     <input type="date" name="harvest_date" value="{{ old('harvest_date') }}" class="form-control">
   </div>
 
+	<div class="form-group">
+		Plants of this type
+		<input type="number" name="nro_strains" value="{{old('light_power')}}">
+	</div>
 	<input type="hidden" name="review_id" value="{{$review_id}}">
 
 </div>
-<button type="submit">Create Strain</button>
-</tr>	
+<button type="submit" name="submit" value="Other" >Add Other Strain</button>
+<button type="submit" name="submit" value="Ok" >Create Strain</button>
+</tr>
 </form>
+
 @endsection

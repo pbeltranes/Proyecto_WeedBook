@@ -114,14 +114,24 @@ class ReviewController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($id) // se entregan datos para actualizar
     {
-      //$request = Review::where('id',$id)->first();
-
-      return view('reviews/editreview');
+      $data['id_review']= $id;
+            $data=Review::where('id', $id)->first();
+            $data['id'] = $id;
+            $T = 'Editing Review'; // No se como chucha pasarselo el titulo a editreview
+           return view('reviews/editreview',$data)->withInput($T);
 
     }
 
+    public function save(request $request)
+    {
+      $review=Review::where("id",$request->id)->first();
+      $review->title = $request->title;
+      $review->background_image_url = $request->background_image_url;
+      $review->save();
+      return redirect('review/' . $review->id . '');
+    }
     /**
      * Update the specified resource in storage.
      *
@@ -157,7 +167,6 @@ class ReviewController extends Controller
       $data['rev_count'] = $data['rev_updates']->count();
       $data['strains'] = Strain::where('review_id', $id)->get();
       $data['strain_count'] = $data['strains']->count();
-
       $data['comments'] = DB::table('comments')
        ->join('users_profiles', 'comments.from_user', '=',  'users_profiles.user_id')
        ->select('comments.id','users_profiles.avatar_url', 'comments.from_user', 'comments.on_review', 'comments.body', 'comments.created_at', 'comments.updated_at')

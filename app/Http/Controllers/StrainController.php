@@ -44,6 +44,8 @@ class StrainController extends Controller
      */
     public function store(Request $request)
     {
+      for ($i=0; $i <$request->input('nro_strains') ; $i++) {
+
         $strain = Strain::create([
             'review_id' => $request->input('review_id'),
             'bank' => $request->input('bank'),
@@ -61,7 +63,16 @@ class StrainController extends Controller
 
             ]);
         $strain->save();
-        return redirect('/home')->withMessage('Strain Succesfully added');
+      }
+      if('Other' == $request->input('submit')) // si se agregan mas plantas a la misma reseña
+      {
+        $data = [
+            'review_id' => $request->input('review_id'),
+        ];
+        return view('strains/newstrain', $data);
+      }else{
+        return redirect('review/' . $request->input('review_id') . ''); // se termina exitosamente la operación
+      }
     }
 
     /**
@@ -112,7 +123,7 @@ class StrainController extends Controller
     public function updateApi()
     {
 
-        $client = new Client(); 
+        $client = new Client();
         $meta = $client->get('https://www.cannabisreports.com/api/v1.0/strains', [
             'query' => ['sort' => 'name',
                         'page' => '1',
@@ -121,7 +132,7 @@ class StrainController extends Controller
 
         $meta_json = json_decode($meta->getBody(), true);
         $meta = $meta_json['meta']['pagination'];
-     
+
         $page_number = $meta['total_pages'];
 
         for ($page=1; $page <= $page_number; $page++) {
@@ -130,16 +141,16 @@ class StrainController extends Controller
                 'query' => ['sort' => 'name',
                             'page' => $page,
                             ]
-            ]);               
+            ]);
            $data_json = json_decode($data->getBody(), true);
            $strains_in_page = $data_json['meta']['pagination']['count'];
            $data = $data_json['data'];
-           for ($i=0; $i < $strains_in_page; $i++) { 
+           for ($i=0; $i < $strains_in_page; $i++) {
                $strain_name = $data[$i]['name'];
                $strain_bank = $data[$i]['seedCompany']['name'];
                $banks_exist = ApiBanks::where('bank_name', $strain_bank) ? TRUE:FALSE;
                $strain_exist = ApiStrains::where('strain_name', $strain_name) ? TRUE:FALSE;
-               
+
                if(!$strain_exist){
                     ApiStrains::create([
                         'strain_name' => $strain_name,
@@ -149,7 +160,7 @@ class StrainController extends Controller
                if(!$banks_exist){
                     ApiBanks::create([
                         'bank_name' => $strain_bank,
-                    ]);                
+                    ]);
                }
 
            }

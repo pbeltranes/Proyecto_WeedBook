@@ -22,8 +22,9 @@ There is no reviews till now. Login and write a new post now!!!
                 width: 150px;
                 height: 150px; "  class="w3-hover-opacity">
               </a>
-             <button class="btn" style="float: right"><a href="{{ url( '/review/' .$post->id. '/edit') }}">Edit Profile</a></button>
-          <button class="btn" style="float: right"><a href="{{ route('showreview',['$id' => $post->id]) }}">View Post</a></button>
+             <button class="btn" style="float: right"><a href="{{ url( '/review/' .$post->id. '/edit') }}">Edit Post</a></button>
+             <button class="btn" style="float: right"><a href="{{ url( '/review/' .$post->id. '/edit') }}">Update History</a></button>
+          <button class="btn" style="float: right"><a href="{{ route('showreview',['$id' => $post->id]) }}">View Review</a></button>
       </h3>
   </div>
     <div class="list-group-item">
