@@ -27,17 +27,17 @@ class CommentController extends Controller
 
     public function save(Request $request, $review_id){
 
-          // verificar que el body no venga vacio o se jode todo
-          $body= $request->comment;
-          $from_user = Auth::user()->id;
+            // verificar que el body no venga vacio o se jode todo
+            $body= $request->comment;
+            $from_user = Auth::user()->id;
 
-          $comment = Comment::create([
-            'from_user'=> "$from_user",
-            'on_review'=> $review_id,
-            'body' => "$body",
-          ]);
+            $comment = Comment::create([
+              'from_user'=> $from_user,
+              'on_review'=> $review_id,
+              'body' => $body,
+            ]);
 
-           return redirect()->route('showreview',[$review_id]);
+             return redirect()->route('showreview',[$review_id]);
     }
 
 
@@ -82,15 +82,25 @@ class CommentController extends Controller
 
 
     public function vote(Request $request, $comment_id, $review_id){
-
+            //las votaciones se pueban directamente en la url ya que  necesito aprender el script
+            // para asi diferenciar si es positivo o negativo dependiendo de eso deberia
+            // hacer una insercion positiv ao negativa, deberia modificar la columna de la tabla tambien
+            // y realizar nuevamente migraciones
             $user_id = Auth::user()->id;
 
-            $data ['author'] = DB::table('comments')
+            $data = DB::table('comments')
             ->select('comments.from_user')
             ->where('comments.id', $comment_id)
             ->get();
 
-            if($data['author'] != $user_id){
+            // print_r($user_id);
+            print_r($data['from_user']);
+            die();
+            if($data['from_user'] == $user_id){
+
+                return redirect()->route('showreview',[$review_id]);
+            }
+            else{
 
                 $vote = CommentUpVotes::create([
                   'comment_id' => $comment_id ,
@@ -99,8 +109,6 @@ class CommentController extends Controller
 
                 return redirect()->route('showreview',[$review_id]);
             }
-                return redirect()->route('showreview',[$review_id]);
     }
-
 
 }

@@ -32,18 +32,26 @@ Route::group(['middleware' => ['auth']], function()
 	Route::get('new-review', 'ReviewController@create'); // Usado para crear
 	Route::post('new-review', 'ReviewController@store'); // Usado para mostrar  (?eso no lo entiendo)
 	Route::get('review/{id_review}/edit', 'ReviewController@edit'); // Usado para editar perfil
-  	Route::post('update', 'ReviewController@update');
+	Route::post('update', 'ReviewController@update');
 	Route::get('delete/{id}', 'ReviewController@destroy');
-  	Route::get('user/{id}/reviews', 'ReviewController@showUserReviews') ->where('id', '[0-9]+');//*****(*) // ver reviews del usuario {id}
-  	Route::get('comment/add', 'CommentController@create');
-	Route::post('comment/save/{review_id}', 'CommentController@save');
-	Route::get('comment/delete/{comment_id}/{review_id}', 'CommentController@destroy');
-	Route::post('comment/update/{review_id}/{comment_id}', 'CommentController@update');
+	Route::get('user/{id}/reviews', 'ReviewController@showUserReviews') ->where('id', '[0-9]+');//*****(*) // ver reviews del usuario {id}
+
+                                // Modulo comentarios
+    Route::get('comment/add', 'CommentController@create');
+    Route::post('comment/save/{review_id}', 'CommentController@save');
+    Route::get('comment/delete/{comment_id}/{review_id}', 'CommentController@destroy');
+    Route::post('comment/update/{review_id}/{comment_id}', 'CommentController@update');
     Route::get('comment/edit/{review_id}/{comment_id}/{author_id}', ['uses' => 'CommentController@edit', 'as' => 'edit']);
-	Route::get('user/{id}/edit', 'UserController@edit')->where('id', '[0-9]+');
-	Route::post('user/edit/save', 'UserController@save')->where('id', '[0-9]+');
-	Route::get('user/delete/{id}', 'UserController@destroy');
-	Route::get('review/{review_id}/new-strain', 'StrainController@create');
+    Route::post('comment/vote/{comment_id}/{review_id}', 'CommentController@vote');
+                                // Fin modulo comentarios
+
+                                //Modulo usuario
+    Route::get('user/{id}/edit', 'UserController@edit')->where('id', '[0-9]+');
+  	Route::post('user/edit/save', 'UserController@save')->where('id', '[0-9]+');
+  	Route::get('user/delete/{id}', 'UserController@destroy');
+                                //Fin modulo usuario
+
+  Route::get('review/{review_id}/new-strain', 'StrainController@create');
 	Route::post('review/save-strain', 'StrainController@store');
 	Route::get('review/{review_id}/delete-strain/{id}', 'StrainController@delete');
 	Route::get('review/{review_id}/update-strain/{id}', 'StrainController@update');
@@ -60,4 +68,3 @@ Route::get('review/{id}', ['as'=> 'showreview', 'uses'=>'ReviewController@show']
 Route::get('user/{id}/edit', 'UserController@edit')->where('id', '[0-9]+'); // -where parametros solo de [0-9]
 //Route::get('user/{id}/reviews', 'UserController@user_reviews')->where('id', '[0-9]+');
 // Route::get('/{slug}', ['as' => 'review', 'uses' => 'ReviewController@show'])->where('slug', '[A-Za-z0-9-_]+'); // Parametros solo [A-Z,a-z,0,9]
-

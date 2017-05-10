@@ -92,11 +92,19 @@
                               <th>
                                 <h6>{{$comment->body}}</h6>
                               </th>
+                              <th>
+                                <form class="form-group " role="form" method="POST"   action="/comment/vote/{{$comment->id}}/{{$review->id}}">
+                                  {!! csrf_field() !!}
+                                  <div class="form-group">
+                                    <button class="btn btn-primary btn-xs fa fa-thumbs-o-up" style="float: right"> like</button>
+                                  </div>
+                                </form>
+                              </th>
                             @if($comment->from_user == Auth::user()->id) <!-- habilita los campos de editar y eliminar -->
                               <th>                                                                    <!-- route('remindHelper',['event'=>$eventId,'user'=>$userId]); -->
                                 <form class="form-group " role="form" method="GET"   action="{{ route('edit',['review_id' =>$review->id, 'comment_id'=> $comment->id, 'author_id'=> $comment->from_user]) }}">
                                   <div class="form-group">
-                                    <button class="btn btn-primary btn-xs" style="float: right" >Edit</button>
+                                    <button class="btn btn-success btn-xs" style="float: right" >Edit</button>
                                   </div>
                                 </form>
                               </th>
@@ -106,31 +114,8 @@
                                     <button class="btn btn-danger btn-xs" style="float: right" >Delete</button>
                                   </div>
                                 </form>
-
                               </th>
                             @endif
-                            <!-- <form class="form-group " role="form" method="POST"   action="/comment/vote/{{$comment->id}}/{{$review->id}}">
-                              {!! csrf_field() !!}
-                              <div class="form-group">
-
-                                LikeBtn.com BEGIN  verificar que tipo de dato esta mandando vote cuando doy like o dislike
-                                <span class="likebtn-wrapper" data-theme="youtube" data-i18n_like=" " data-identifier="vote"></span>
-                                  <script>
-                                    (function(d,e,s){
-                                      if(d.getElementById("likebtn_wjs"))
-                                        return;a=d.createElement(e);
-
-                                        m=d.getElementsByTagName(e)[0];
-                                        a.async=1;a.id="likebtn_wjs";
-                                        a.src=s;
-                                        m.parentNode.insertBefore(a, m)
-                                      }
-                                    )
-                                    (document,"script","//w.likebtn.com/js/w/widget.js");
-                                  </script>
-                              </div>
-                            </form> -->
-
                       </tr>
                     </table>
 
