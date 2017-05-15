@@ -96,7 +96,7 @@
                                 <form class="form-group " role="form" method="POST"   action="/comment/vote/{{$comment->id}}/{{$review->id}}">
                                   {!! csrf_field() !!}
                                   <div class="form-group">
-                                    <button class="btn btn-primary btn-xs fa fa-thumbs-o-up" style="float: right"> like</button>
+                                    <button class="btn btn-primary btn-xs fa fa-thumbs-o-up" style="float: right">'' like</button>
                                   </div>
                                 </form>
                               </th>
