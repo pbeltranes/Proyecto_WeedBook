@@ -11,6 +11,9 @@ use GuzzleHttp\Client;
 use App\ApiBanks;
 use App\ApiStrains;
 use App\Strain;
+use App\StrainUpdate;
+use App\ProductOnStrain;
+
 class StrainController extends Controller
 {
     /**
@@ -83,7 +86,11 @@ class StrainController extends Controller
      */
     public function show($id)
     {
-        //
+        $data['strain'] = Strain::find(7);
+        $data['strain_updates'] = StrainUpdate::where('strain_id', $id)->get();
+        $data['strain_products'] = ProductOnStrain::where('strains_id', $id)->get();
+        $data['update_count'] = $data['strain_updates']->count();
+        return view('strains/viewstrain', $data);
     }
 
     /**
@@ -165,7 +172,6 @@ class StrainController extends Controller
 
            }
         }
-        die();
         return back()->withMessage('Api Actualizada con exito');
     }
 }

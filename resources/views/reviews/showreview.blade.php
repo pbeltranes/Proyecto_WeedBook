@@ -55,11 +55,33 @@
                 <td><h4>Strain Number</h4>{{$strain_count}}</td>
                 <td><h4>Setup:</h4></td>
                 @foreach($strains as $strain)
-                @if($strain->light_type == 'Sun')
-                <td>{{$strain->strain_name}} from {{$strain->bank}} with {{$strain->technique}} under {{$strain->light_type}}</td><br>
-                @else
-                <td>{{$strain->strain_name}} from {{$strain->bank}} with {{$strain->technique}} under {{$strain->light_type}} with {{$strain->light_power}} Watts</td><br>
-                @endif
+
+                <td>- {{$strain->strain_name}}</td>
+                <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal{{$strain->id}}">Information</button>
+
+                <!-- Modal -->
+                <div id="myModal{{$strain->id}}" class="modal fade" role="dialog">
+                  <div class="modal-dialog">
+                
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">{{$strain->strain_name}}'s Information</h4>
+                      </div>
+                      <div class="modal-body">
+                        <p><i class="fa fa-lightbulb-o"> Light Type: {{$strain->light_type}}</i></p>
+                        <p><i class="fa fa-bolt"> Watts: {{$strain->light_power}}</i></p>
+                        <p><i class="fa fa-envira"> Bank: {{$strain->bank}}</i></p>
+                        <a href="{{url('review/strain/' . $strain->id)}}">Detailed Info</a>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                      </div>
+                    </div>
+                
+                  </div>
+                </div>
                 @endforeach
                 <td><h4>Date init</h4>{{$review->created_at}}</td>
               </tr>

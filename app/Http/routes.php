@@ -53,6 +53,7 @@ Route::group(['middleware' => ['auth']], function()
 
   Route::get('review/{review_id}/new-strain', 'StrainController@create');
 	Route::post('review/save-strain', 'StrainController@store');
+  route::get('review/strain/{id}', 'StrainController@show');
 	Route::get('review/{review_id}/delete-strain/{id}', 'StrainController@delete');
 	Route::get('review/{review_id}/update-strain/{id}', 'StrainController@update');
 	Route::post('review/edit/save', 'ReviewController@save')->where('id', '[0-9]+'); // /x?/y  function(x==null) estaremos pasando parametros nulos
