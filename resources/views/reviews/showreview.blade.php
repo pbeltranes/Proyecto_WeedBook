@@ -19,7 +19,7 @@
             <!-- http://lorempixel.com/850/280/people/9/ -->
         </div>
 
-        <div class="card-info"> <span class="card-title"><h2>{{$review->title}}</h2></span>
+          <div class="card-info"> <span class="card-title"><h2>{{$review->title}}</h2></span>
 
         </div>
     </div>

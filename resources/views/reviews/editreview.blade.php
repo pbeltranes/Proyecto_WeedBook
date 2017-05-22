@@ -12,7 +12,7 @@
 <tr>
 <div class="form-group">
       Title of your cultive actually is: <b>{{ $title }}</b>
-      <input type="text" name="title" value=" " class="form-control" />
+      <input type="text" name="title" value="" class="form-control" />
   </div>
   <div class="form-group">
     <p> Cover Photo actually is: <img src="{{ $background_image_url }}" alt="Background" style="
@@ -21,10 +21,11 @@
           width: 150px;
           height: 150px; "  class="w3-hover-opacity">
         </p>
-      <input type="text" name="background_image_url" value="" class="form-control"/>
+      <input type="text" name="background_image_url" value="{{ $background_image_url }} " class="form-control"/>
   </div>
       <input type="hidden" name="id" value="{{ $id }}">
-  <button type="submit">Save Changes</button>
+      <button type="submit" name="submit" value="Finish" >Finish</button>
+      <button type="submit" name="submit" value="Edit" >Edit Strain</button>
 </tr>
 </form>
 @endsection

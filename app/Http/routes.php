@@ -29,10 +29,12 @@ Route::post('auth/register', 'Auth\AuthController@postRegister');
 
 Route::group(['middleware' => ['auth']], function()
 {
+  //modulo  review
 	Route::get('new-review', 'ReviewController@create'); // Usado para crear
 	Route::post('new-review', 'ReviewController@store'); // Usado para mostrar  (?eso no lo entiendo)
-	Route::get('review/{id_review}/edit', 'ReviewController@edit'); // Usado para editar perfil
-	Route::post('update', 'ReviewController@update');
+  Route::post('review/edit/save','ReviewController@save');
+  Route::get('review/{id_review}/edit', 'ReviewController@edit'); // Usado para editar perfil
+	Route::post('review/edit/update','ReviewController@update'); // actualizar review editada
 	Route::get('delete/{id}', 'ReviewController@destroy');
 	Route::get('user/{id}/reviews', 'ReviewController@showUserReviews') ->where('id', '[0-9]+');//*****(*) // ver reviews del usuario {id}
 

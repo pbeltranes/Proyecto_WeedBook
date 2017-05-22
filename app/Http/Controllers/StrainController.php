@@ -11,6 +11,7 @@ use GuzzleHttp\Client;
 use App\ApiBanks;
 use App\ApiStrains;
 use App\Strain;
+use App\Review;
 class StrainController extends Controller
 {
     /**
@@ -71,6 +72,12 @@ class StrainController extends Controller
         ];
         return view('strains/newstrain', $data);
       }else{
+        // Mas adelante eliminar Strain_number de tabla review debido a que es un dato dinamico y no necesariamente un dato que deba ser almacenado, dado que se puede contar directamente
+      // se deja para mas adelante cuando se disponga de mas tiempo y se vaya a pulir
+        $nro= Strain::where('review_id', $request->input('review_id'))->count();
+        $review = Review::find($request->input('review_id')); // Lo mismo pero de dos formas $review=Review::where("id",$request->input('review_id'))->first();
+        $review->strain_number = $nro; // hay que ocultar el cultivo
+        $review->save();
         return redirect('review/' . $request->input('review_id') . ''); // se termina exitosamente la operación
       }
     }
