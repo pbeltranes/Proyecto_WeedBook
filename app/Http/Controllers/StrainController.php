@@ -86,7 +86,7 @@ class StrainController extends Controller
      */
     public function show($id)
     {
-        $data['strain'] = Strain::find(7);
+        $data['strain'] = Strain::find($id);
         $data['strain_updates'] = StrainUpdate::where('strain_id', $id)->get();
         $data['strain_products'] = ProductOnStrain::where('strains_id', $id)->get();
         $data['update_count'] = $data['strain_updates']->count();

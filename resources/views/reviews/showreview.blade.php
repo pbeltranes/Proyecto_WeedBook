@@ -57,7 +57,7 @@
                 @foreach($strains as $strain)
 
                 <td>- {{$strain->strain_name}}</td>
-                <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal{{$strain->id}}">Information</button>
+                <button type="button" data-toggle="modal" data-target="#myModal{{$strain->id}}">Information</button>
 
                 <!-- Modal -->
                 <div id="myModal{{$strain->id}}" class="modal fade" role="dialog">
