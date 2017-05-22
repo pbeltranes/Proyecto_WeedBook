@@ -53,6 +53,10 @@ Route::group(['middleware' => ['auth']], function()
   	Route::get('user/delete/{id}', 'UserController@destroy');
                                 //Fin modulo usuario
 
+    //Modulo productos
+    Route::get('strain/{id}/new-product', 'ProductController@create');
+    Route::post('strain/{id}/save-product', 'ProductController@save');
+    //fin modulo producto
   Route::get('review/{review_id}/new-strain', 'StrainController@create');
 	Route::post('review/save-strain', 'StrainController@store');
 	Route::get('review/{review_id}/delete-strain/{id}', 'StrainController@delete');
@@ -61,6 +65,7 @@ Route::group(['middleware' => ['auth']], function()
 	Route::get('admin/update-api', 'StrainController@updateApi');
 }); // Acciones que solo pueden hacer los usuarios logueados
 
+route::get('review/strain/{id}', 'StrainController@show');
 Route::get('user/{id}', 'UserController@profile')->where('id', '[0-9]+');
 Route::get('user/{id}/edit', 'UserController@edit')->where('id', '[0-9]+');
 Route::post('user/edit/save', 'UserController@save')->where('id', '[0-9]+');

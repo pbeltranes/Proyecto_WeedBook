@@ -88,26 +88,27 @@ class CommentController extends Controller
             // y realizar nuevamente migraciones
             $user_id = Auth::user()->id;
 
-            $data = DB::table('comments')
-            ->select('comments.from_user')
-            ->where('comments.id', $comment_id)
-            ->get();
-
-            // print_r($user_id);
-            print_r($data['from_user']);
-            die();
+            $data = Comment::find($comment_id);
+            $vote = DB::table('comment_up_votes')
+                  ->where('user_id',$user_id)
+                  ->get();
+                  // print_r($vote);
+                  // die();
             if($data['from_user'] == $user_id){
-
                 return redirect()->route('showreview',[$review_id]);
             }
             else{
+                if(!$vote){
+                  $vote = CommentUpVotes::create([
+                    'comment_id' => $comment_id ,
+                    'user_id' => $user_id,
+                  ]);
 
-                $vote = CommentUpVotes::create([
-                  'comment_id' => $comment_id ,
-                  'user_id' => $user_id,
-                ]);
-
-                return redirect()->route('showreview',[$review_id]);
+                  return redirect()->route('showreview',[$review_id]);
+                }
+                else{
+                  return redirect()->route('showreview',[$review_id]);
+                }
             }
     }
 
