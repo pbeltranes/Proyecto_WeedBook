@@ -97,11 +97,12 @@
                                   {!! csrf_field() !!}
                                   <div class="form-group">
                                     <button class="btn btn-primary btn-xs fa fa-thumbs-o-up" style="float: right">'' like</button>
+                                    <!-- poner cantidad de voto a cada comentario al lado de like -->
                                   </div>
                                 </form>
                               </th>
                             @if($comment->from_user == Auth::user()->id) <!-- habilita los campos de editar y eliminar -->
-                              <th>                                                                    <!-- route('remindHelper',['event'=>$eventId,'user'=>$userId]); -->
+                              <th>
                                 <form class="form-group " role="form" method="GET"   action="{{ route('edit',['review_id' =>$review->id, 'comment_id'=> $comment->id, 'author_id'=> $comment->from_user]) }}">
                                   <div class="form-group">
                                     <button class="btn btn-success btn-xs" style="float: right" >Edit</button>
@@ -118,7 +119,6 @@
                             @endif
                       </tr>
                     </table>
-
             </tr>
             <br>
           @endforeach
@@ -134,8 +134,6 @@
        </form>
       </div>
     </div>
-
-
 
 
 @endsection

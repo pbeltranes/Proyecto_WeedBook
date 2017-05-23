@@ -173,6 +173,11 @@ class ReviewController extends Controller
        ->where('comments.on_review',$id)
        ->get();
 
+      $data['comments_votes'] = DB::table('comment_up_votes')
+      ->groupBy('comment_up_votes.user_id')
+      ->select()
+      ->get();
+
       //  print_r($data['comments']);
       //  die();
       return view('reviews/showreview', $data);
