@@ -203,15 +203,15 @@ class ReviewController extends Controller
        ->orderBy('comments.id', 'desc')
        ->get();
 
+      $up_votes = array_fill(0,1024,0);
 
       foreach ($data['comments'] as $comment) {
         $up_votes[$comment->id - 1] = CommentUpVotes::where('comment_id', $comment->id)->count();
       }
 
-
-       $data['comments_upvotes'] = $up_votes;
-
-
+      
+      $data['comments_upvotes'] = $up_votes;
+      
       
       return view('reviews/showreview', $data);
 
