@@ -113,6 +113,7 @@
                       <tr>
                               <th>
                                 <h6>{{$comment->body}}</h6>
+                                <h2>{{$comments_upvotes[$comment->id - 1]}}</h2>
                               </th>
                               <th>
                                 <form class="form-group " role="form" method="POST"   action="/comment/vote/{{$comment->id}}/{{$review->id}}">

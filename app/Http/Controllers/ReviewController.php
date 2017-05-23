@@ -16,7 +16,7 @@ use App\ReviewUpdate;
 use App\StrainUpdate;
 use App\UsersProfile;
 use App\Comment;
-
+use App\CommentUpVotes;
 
 class ReviewController extends Controller
 {
@@ -200,10 +200,19 @@ class ReviewController extends Controller
        ->join('users_profiles', 'comments.from_user', '=',  'users_profiles.user_id')
        ->select('comments.id','users_profiles.avatar_url', 'comments.from_user', 'comments.on_review', 'comments.body', 'comments.created_at', 'comments.updated_at')
        ->where('comments.on_review',$id)
+       ->orderBy('comments.id', 'desc')
        ->get();
 
-      //  print_r($data['comments']);
-      //  die();
+
+      foreach ($data['comments'] as $comment) {
+        $up_votes[$comment->id - 1] = CommentUpVotes::where('comment_id', $comment->id)->count();
+      }
+
+
+       $data['comments_upvotes'] = $up_votes;
+
+
+      
       return view('reviews/showreview', $data);
 
     }
