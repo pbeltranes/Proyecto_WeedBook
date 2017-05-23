@@ -62,7 +62,7 @@
                 <!-- Modal -->
                 <div id="myModal{{$strain->id}}" class="modal fade" role="dialog">
                   <div class="modal-dialog">
-                
+
                     <!-- Modal content-->
                     <div class="modal-content">
                       <div class="modal-header">
@@ -79,7 +79,7 @@
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                       </div>
                     </div>
-                
+
                   </div>
                 </div>
                 @endforeach
@@ -96,53 +96,60 @@
         <ul class="comments-list">
           @foreach($comments as $comment)
 
-            <tr class="comment">
-                    <table>
-                      <tr>
-                        <th><a class="pull-left" href="#">
-                              <img class="avatar" src="{{$comment->avatar_url}}" alt="avatar" width="50" height="50">
-                          </a>
-                        <th>
-                      </tr>
+                <tr class="comment">
+                        <table>
+                          <tr>
+                            <th><a class="pull-left" href="#">
+                                  <img class="avatar" src="{{$comment->avatar_url}}" alt="avatar" width="50" height="50">
+                              </a>
+                            <th>
+                          </tr>
 
-                      <tr>
-                        <td><h5 class="user">{{$author->user_name}}</h5></td>
-                        <td><span class="date" style="color:#aaa; font-family:verdana; font-size:10px;">commented on {{$comment->created_at}}</span></td>
-                      </tr>
+                          <tr>
+                            <td><h5 class="user">{{$author->user_name}}</h5></td>
+                            <td><span class="date" style="color:#aaa; font-family:verdana; font-size:10px;">commented on {{$comment->created_at}}</span></td>
+                          </tr>
 
-                      <tr>
-                              <th>
-                                <h6>{{$comment->body}}</h6>
-                              </th>
-                              <th>
-                                <form class="form-group " role="form" method="POST"   action="/comment/vote/{{$comment->id}}/{{$review->id}}">
-                                  {!! csrf_field() !!}
-                                  <div class="form-group">
-                                    <button class="btn btn-primary btn-xs fa fa-thumbs-o-up" style="float: right">'' like</button>
-                                    <!-- poner cantidad de voto a cada comentario al lado de like -->
-                                  </div>
-                                </form>
-                              </th>
-                            @if($comment->from_user == Auth::user()->id) <!-- habilita los campos de editar y eliminar -->
-                              <th>
-                                <form class="form-group " role="form" method="GET"   action="{{ route('edit',['review_id' =>$review->id, 'comment_id'=> $comment->id, 'author_id'=> $comment->from_user]) }}">
-                                  <div class="form-group">
-                                    <button class="btn btn-success btn-xs" style="float: right" >Edit</button>
-                                  </div>
-                                </form>
-                              </th>
-                              <th>
-                                <form class="form-group " role="form" method="GET"   action="/comment/delete/{{$comment->id}}/{{$review->id}}">
-                                  <div class="form-group">
-                                    <button class="btn btn-danger btn-xs" style="float: right" >Delete</button>
-                                  </div>
-                                </form>
-                              </th>
-                            @endif
-                      </tr>
-                    </table>
-            </tr>
-            <br>
+                          <tr>
+                                  <th>
+                                    <h6>{{$comment->body}}</h6>
+                                  </th>
+                                  <th>
+                                    <form class="form-group " role="form" method="POST"   action="/comment/vote/{{$comment->id}}/{{$review->id}}">
+                                      {!! csrf_field() !!}
+                                      <div class="form-group">
+
+                                          @foreach($comments_votes as $comment_votes)
+                                            @if($comment_votes->comment_id == $comment->id)
+                                                <button class="btn btn-primary btn-xs fa fa-thumbs-o-up" style="float: right">{{$comment_votes->votes}}  like</button>
+                                            @endif
+                                          @endforeach
+                                                <button class="btn btn-primary btn-xs fa fa-thumbs-o-up" style="float: right">' ' like</button>
+                                        <!-- el problemas es que si lo encuentra que imprima los votos, de lo contrario que imprima el boton de abajo, pero si lo encuentra igual imprime el boton de abajo -->
+                                          <!-- alguna idea de como resolverlo menos que sea con una consulta enorme  a la base de datos  -->
+                                      </div>
+                                    </form>
+                                  </th>
+                                @if($comment->from_user == Auth::user()->id) <!-- habilita los campos de editar y eliminar -->
+                                  <th>
+                                    <form class="form-group " role="form" method="GET"   action="{{ route('edit',['review_id' =>$review->id, 'comment_id'=> $comment->id, 'author_id'=> $comment->from_user]) }}">
+                                      <div class="form-group">
+                                        <button class="btn btn-success btn-xs" style="float: right" >Edit</button>
+                                      </div>
+                                    </form>
+                                  </th>
+                                  <th>
+                                    <form class="form-group " role="form" method="GET"   action="/comment/delete/{{$comment->id}}/{{$review->id}}">
+                                      <div class="form-group">
+                                        <button class="btn btn-danger btn-xs" style="float: right" >Delete</button>
+                                      </div>
+                                    </form>
+                                  </th>
+                                @endif
+                          </tr>
+                        </table>
+                </tr>
+                <br>
           @endforeach
         </ul>
         <form class="form-group-lg col-xs-6 " role="form" method="POST" action="/comment/save/{{$review->id}}">
