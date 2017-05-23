@@ -126,7 +126,7 @@
                                           @endforeach
                                                 <button class="btn btn-primary btn-xs fa fa-thumbs-o-up" style="float: right">' ' like</button>
                                         <!-- el problemas es que si lo encuentra que imprima los votos, de lo contrario que imprima el boton de abajo, pero si lo encuentra igual imprime el boton de abajo -->
-                                          <!-- alguna idea de como resolverlo menos que sea con una consulta enorme  a la base de datos  -->
+                                        <!-- alguna idea de como resolverlo menos que sea con una consulta enorme  a la base de datos  -->
                                       </div>
                                     </form>
                                   </th>
