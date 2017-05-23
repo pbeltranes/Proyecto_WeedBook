@@ -94,11 +94,12 @@ class CommentController extends Controller
             $user_id = Auth::user()->id;
             $data = Comment::find($comment_id);
             $vote = DB::table('comment_up_votes')
-                  ->where('user_id', $user_id)
+                  ->where('user_id',$user_id)
                   ->where('comment_id', $comment_id)
                   ->get();
                   // print_r($vote);
                   // die();
+
             if($data['from_user'] == $user_id){
                 return redirect()->route('showreview',[$review_id]);
             }
