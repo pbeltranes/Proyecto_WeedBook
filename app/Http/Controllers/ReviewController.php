@@ -29,14 +29,13 @@ class ReviewController extends Controller
     {
         //saca 5 reseñas en orden por rep
 
-        $data['reviews'] = Review::join('review_up_votes', 'reviews.id', '=', 'review_up_votes.review_id')
+        $data['reviews'] = Review::join('review_up_votes', 'reviews.id', '=', 'review_up_votes.review_id') // selecciona reviews con mas likes
+        ->where('active',0)
         ->groupBy('reviews.id')
         ->orderBy(DB::raw('COUNT(reviews.id)'), 'DESC')
         ->paginate(5);
-
-        $data['reviews'] = $data['reviews']->count() > 0 ? $data['reviews'] : Review::take(5)->get();
+        $data['reviews'] = $data['reviews']->count() > 0 ? $data['reviews'] : Review::take(5)->where('active',0) ->get(); //? es sino
         $data['title'] = 'WeedBook Index';
-
         return view('home', $data);
     }
 
@@ -79,7 +78,7 @@ class ReviewController extends Controller
           'strain_number'=> 1, //-->>ingresar id de la review que se esta comentando
           'title' => $request->title,
           'state' => 0,
-          'active' => 0,
+          'active' => 0, // cultivo activo
           'background_image_url' => $request->background_image_url,
         ]);
         return redirect('review/' . $R->id . '/new-strain')->withMessage('Review created successfully, it wont be shown until you add at least 1 strain to your grow.');
@@ -95,17 +94,13 @@ class ReviewController extends Controller
     public function showUserReviews(request $request) // se visualiza solo para el author_id
     {
       $id = Auth::user()->id;
-      if($id == $request->id){ // validar que usuario que entra es el mismo que visitante
       $reviews=DB::table('reviews')
             ->where('reviews.author_id', '=', $request->id)
+            ->where('reviews.active',0) // revisar solo las reviews que se encuentren activas
             ->select('reviews.id', 'reviews.title', 'reviews.active', 'reviews.state','reviews.created_at','reviews.updated_at', 'background_image_url')
             ->get();
       $title= 'Your Reviews';
         return view('reviews/myreviews',compact('reviews'))->withTitle($title)->withInput($id);
-      }
-      else{
-        return back()->withErrors('You can not edit this review');
-      }
     }
 
     /**
@@ -116,22 +111,38 @@ class ReviewController extends Controller
      */
     public function edit($id) // se entregan datos para actualizar
     {
-      $data['id_review']= $id;
+      $data=Review::where('id', $id)->first();
+      // VERIFICAR QUIEN EDITA ES EL DUEÑO DE LA @REVIEW
+      if($data->author_id == Auth::user()->id){ // validar que usuario que entra es el mismo que visitante //
+            $data['id_review']= $id;
             $data=Review::where('id', $id)->first();
             $data['id'] = $id;
             $T = 'Editing Review'; // No se como chucha pasarselo el titulo a editreview
            return view('reviews/editreview',$data)->withInput($T);
-
+         }else{
+               return $this->show($id)->withErrors('You can not edit this review');
+             }
     }
 
-    public function save(request $request)
+    public function save(request $request) // no se donde shit se sacan datos para actualizar
     {
-      $review=Review::where("id",$request->id)->first();
-      $review->title = $request->title;
-      $review->background_image_url = $request->background_image_url;
-      $review->save();
-      return redirect('review/' . $review->id . '');
-    }
+      if($request->title != ''){
+        if( (Review::where('title', $request->input('title'))->count()) ){
+          return back()->withErrors('   Title already exists.');
+        }else{
+          $review=Review::where("id",$request->id)->first();
+          $review->title = $request->input('title');
+          $review->background_image_url = $request->input('background_image_url');
+          $review->save();
+        }
+      }
+      if('Edit' != $request->input('submit')){
+          return redirect('review/' . $request->id . '');
+      }
+        $strains = Strain::where('review_id',$request->id)->get();
+        return view('strains/editstrain',$strains);
+
+      }
     /**
      * Update the specified resource in storage.
      *
@@ -142,9 +153,27 @@ class ReviewController extends Controller
 
 
 
-    public function update(Request $request, $id)
+    public function update(request $request)
     {
+      $duplicate = Review::where('title',$request->title)->first(); // cuidado no permite modificar titulo si exite almacenados pero esta inactivo
+      if($duplicate)
+      {
+        return back()->withErrors('   Title already exists.')->withInput();// verificar que no exista el nombre
+      }
+      else{
+        //  'review_id', 'update_text', 'created_at', 'updated_at'
 
+        $review=Review::where("id",$request->id)->first();
+        $review->title = $request->input('title');
+        $review->background_image_url = $request->input('background_image_url');
+        $review->save();
+      }
+      if('Edit' != $request->input('submit')){
+          return redirect('review/' . $review->id . '');
+      }else{
+        $strain = Strain::where('review_id',$data['id'])->get();
+        return view('strains/editstrain',$strain);
+      }
     }
 
     /**
