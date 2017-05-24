@@ -203,13 +203,17 @@ class ReviewController extends Controller
        ->where('comments.on_review',$id)
        ->orderBy('comments.id', 'desc')
        ->get();
-
+      //  print_r($data['comments']);
+      //  die();
       $up_votes = array_fill(0,1024,0);
-
+      $authors_comments = array_fill(0,1024,0);
       foreach ($data['comments'] as $comment) {
         $up_votes[$comment->id - 1] = CommentUpVotes::where('comment_id', $comment->id)->count();
+        $authors_comments[$comment->id - 1] = UsersProfile::where('user_id', $comment->from_user)->first();
       }
-
+      // print_r($authors_comments);
+      // die();
+      $data['comments_authors'] = $authors_comments;
       $data['comments_upvotes'] = $up_votes;
 
           return view('reviews/showreview', $data);

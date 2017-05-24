@@ -25,39 +25,40 @@
     </div>
     <div class="btn-pref btn-group btn-group-justified btn-group-lg" role="group" aria-label="..." >
         <div class="btn-group" role="group">
-            <button type="button" id="stars" class="btn btn-default " href="#tab1" data-toggle="tab"><span class="fa fa-user-circle" aria-hidden="true"></span>
+            <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#tab1" aria-expanded="false" aria-controls="#collapseExample"><span class="fa fa-user-circle" aria-hidden="true"></span>
                 <div class="hidden-xs">Author info</div>
             </button>
         </div>
         <div class="btn-group" role="group">
-            <button type="button" id="favorites" class="btn btn-primary" href="#tab2" data-toggle="tab"><span class="fa fa-envira" aria-hidden="true"></span>
+            <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#tab2" aria-expanded="false" aria-controls="#collapseExample"><span class="fa fa-envira" aria-hidden="true"></span>
                 <div class="hidden-xs">Grow info</div>
             </button>
         </div>
         <div class="btn-group" role="group">
-            <button type="button" id="following" class="btn btn-default" href="#tab3" data-toggle="tab"><span class="fa fa-file-o" aria-hidden="true"></span>
-                <div class="hidden-xs">Products</div>
+            <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#tab3" aria-expanded="false" aria-controls="#collapseExample"><span class="fa fa-file-o" aria-hidden="true"></span>
+              <div class="hidden-xs">Products</div>
             </button>
         </div>
-    </div>
 
-        <div class="well">
+    </div>
+      <div class="well">
           <div class="tab-content">
-            <div class="tab-pane fade in" id="tab1">
-              <tr>
-                <img class="card-bkimg" alt="" src="{{$author->avatar_url}}" width="50" height="50">
+            <div class="collapse" id="tab1">
+                <h3>Author</h3>
+                <img class="img-circle" alt="" src="{{$author->avatar_url}}" width="100" height="100">
                 <td><h4>Name</h4>{{$author->user_name}}</td>
                 <td><h4>Srowing Since</h4>{{$author->growing_since}}</td>
-              </tr>
+
             </div>
-            <div class="tab-pane fade in active" id="tab2">
+            <div class="collapse" id="tab2">
+                <h3>Strain</h3>
               <tr>
-                <td><h4>Strain Number</h4>{{$strain_count}}</td>
+                <h4>Number of strains: {{$strain_count}}</h4>
                 <td><h4>Setup:</h4></td>
                 @foreach($strains as $strain)
 
-                <td>- {{$strain->strain_name}}</td>
-                <button type="button" data-toggle="modal" data-target="#myModal{{$strain->id}}">Information</button>
+                <h4>-{{$strain->strain_name}}</h4>
+                <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal{{$strain->id}}">Information</button>
 
                 <!-- Modal -->
                 <div id="myModal{{$strain->id}}" class="modal fade" role="dialog">
@@ -86,74 +87,72 @@
                 <td><h4>Date init</h4>{{$review->created_at}}</td>
               </tr>
             </div>
-            <div class="tab-pane fade in" id="tab3">
+            <div class="collapse" id="tab3">
               <h3>Products </h3>
             </div>
           </div>
-        </div>
-      <div >
-        <h3>Comments</h3>
-        <ul class="comments-list">
+      </div>
+    </div>
+
+
+        <h3 class="bg-primary">Comments</h3>
+        <ul class="media-list">
           @foreach($comments as $comment)
+                <div class = "row pull-right">
+                  <div class="col-md-3">
+                    <form class="form-group " role="form" method="POST"   action="/comment/vote/{{$comment->id}}/{{$review->id}}">
+                      {!! csrf_field() !!}
+                      <div class="form-group">
+                        <button class="btn btn-primary btn-xs fa fa-thumbs-o-up" style="float: right">'{{$comments_upvotes[$comment->id - 1]}}' like </button>
+                      </div>
+                    </form>
+                  </div>
+                  @if($comment->from_user == Auth::user()->id) <!-- habilita los campos de editar y eliminar -->
+                  <div class="col-md-3">
+                    <form class="form-group " role="form" method="GET"   action="{{ route('edit',['review_id' =>$review->id, 'comment_id'=> $comment->id, 'author_id'=> $comment->from_user]) }}">
+                      <div class="form-group">
+                        <button class="btn btn-success btn-xs" style="float: right" >Edit</button>
+                      </div>
+                    </form>
+                  </div>
+                  <div class="col-md-3">
+                    <form class="form-group " role="form" method="GET"   action="/comment/delete/{{$comment->id}}/{{$review->id}}">
+                      <div class="form-group">
+                        <button class="btn btn-danger btn-xs" style="float: right" >Delete</button>
+                      </div>
+                    </form>
+                  </div>
+                  @endif
+                </div>
+                <li class="media">
 
-                <tr class="comment">
-                        <table>
-                          <tr>
-                            <th><a class="pull-left" href="#">
-                                  <img class="avatar" src="{{$comment->avatar_url}}" alt="avatar" width="50" height="50">
-                              </a>
-                            <th>
-                          </tr>
+                    <div class="media-left media-middle">
+                      <a>
+                        <img class="img-circle media-object" src="{{$comment->avatar_url}}" alt="avatar" width="65" height="65">
+                      </a>
+                    </div>
+                    <div class="media-body">
 
-                          <tr>
-                            <td><h5 class="user">{{$author->user_name}}</h5></td>
-                            <td><span class="date" style="color:#aaa; font-family:verdana; font-size:10px;">commented on {{$comment->created_at}}</span></td>
-                          </tr>
-                      <tr>
-                          <tr>
-                              <th>
-                                <h6>{{$comment->body}}</h6>
-                              </th>
-                              <th>
-                                <form class="form-group " role="form" method="POST"   action="/comment/vote/{{$comment->id}}/{{$review->id}}">
-                                  {!! csrf_field() !!}
-                                  <div class="form-group">
-                                    <button class="btn btn-primary btn-xs fa fa-thumbs-o-up" style="float: right">'{{$comments_upvotes[$comment->id - 1]}}' like</button>
-                                  </div>
-                                </form>
-                              </th>
+                      <h5 class="media-heading">{{$comments_authors[$comment->id - 1]->user_name}}<h6 class="date" style="color:#aaa; font-family:verdana; font-size:10px;">commented on {{$comment->created_at}}</h6></h5>
+                    </div>
+                    <div class="media-middle">
+                      <h4>{{$comment->body}}</h4>
+                    </div>
 
-                                @if($comment->from_user == Auth::user()->id) <!-- habilita los campos de editar y eliminar -->
-                                  <th>
-                                    <form class="form-group " role="form" method="GET"   action="{{ route('edit',['review_id' =>$review->id, 'comment_id'=> $comment->id, 'author_id'=> $comment->from_user]) }}">
-                                      <div class="form-group">
-                                        <button class="btn btn-success btn-xs" style="float: right" >Edit</button>
-                                      </div>
-                                    </form>
-                                  </th>
-                                  <th>
-                                    <form class="form-group " role="form" method="GET"   action="/comment/delete/{{$comment->id}}/{{$review->id}}">
-                                      <div class="form-group">
-                                        <button class="btn btn-danger btn-xs" style="float: right" >Delete</button>
-                                      </div>
-                                    </form>
-                                  </th>
-                                @endif
-                          </tr>
-                        </table>
-                      </tr>
-                <br>
+                </li>
+            <br>
           @endforeach
-        </ul>
-        <form class="form-group-lg col-xs-6 " role="form" method="POST" action="/comment/save/{{$review->id}}">
+          <br>
+            <form class="form-group-lg col-xs-6 " role="form" method="POST" action="/comment/save/{{$review->id}}">
               {!! csrf_field() !!}
-           <div class="form-group">
-               <textarea class="form-control" rows="3" cols="2" style = "font-size:13px;" name="comment"></textarea>
-           </div>
-           <div class="form-group">
-               <button class="btn btn-success" >Submit</button>
-           </div>
-       </form>
+              <div class="form-group">
+                <textarea class="form-control" rows="3" cols="2" style = "font-size:13px;" name="comment"></textarea>
+              </div>
+              <div class="form-group">
+                <button class="btn btn-success" >Submit</button>
+              </div>
+            </form>
+        </ul>
       </div>
     </div>
 
