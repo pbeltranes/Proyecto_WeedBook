@@ -1,6 +1,6 @@
 @extends('app')
-@section('$T')
-<td><p>New review</p></td>
+@section('title')
+<td><p>Editing Review</p></td>
 @endsection
 
 @section('content')

@@ -75,13 +75,13 @@ class ReviewController extends Controller
       else{
         $R = Review::create([ // creamos review
           'author_id'=> $request->user()->id,
-          'strain_number'=> 1, //-->>ingresar id de la review que se esta comentando
+          'strain_number'=> 0, //-->>ingresar id de la review que se esta comentando
           'title' => $request->title,
           'state' => 0,
           'active' => 0, // cultivo activo
           'background_image_url' => $request->background_image_url,
         ]);
-        return redirect('review/' . $R->id . '/new-strain')->withMessage('Review created successfully, it wont be shown until you add at least 1 strain to your grow.');
+        return redirect('review/' . $R->id . '/new-strain')->withMessage('Review created successfully, it wont be shown until you add at least 1 crop to your grow.');
       }
     }
 
@@ -117,8 +117,8 @@ class ReviewController extends Controller
             $data['id_review']= $id;
             $data=Review::where('id', $id)->first();
             $data['id'] = $id;
-            $T = 'Editing Review'; // No se como chucha pasarselo el titulo a editreview
-           return view('reviews/editreview',$data)->withInput($T);
+            $title = 'Editing Review'; // No se como chucha pasarselo el titulo a editreview
+           return view('reviews/editreview',$data);
          }else{
                return $this->show($id)->withErrors('You can not edit this review');
              }
@@ -137,12 +137,12 @@ class ReviewController extends Controller
         }
       }
       if('Edit' != $request->input('submit')){
-          return redirect('review/' . $request->id . '');
+          return redirect('review/' .$request->id. '');
       }
-        $strains = Strain::where('review_id',$request->id)->get();
-        return view('strains/editstrain',$strains);
+        return redirect('strain/' .$request->id. '/edit');
+      }
 
-      }
+
     /**
      * Update the specified resource in storage.
      *

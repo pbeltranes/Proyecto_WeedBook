@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Client;
 use App\ApiBanks;
@@ -106,9 +107,37 @@ class StrainController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function save(Request $request)
     {
-        //
+
+      if($request->strains_changes == 'All'){
+          $strains = Strain::where('review_id',$request->id)->get();
+
+          foreach ($strains as $strain) {
+            $strain->strain_name = $request->strain_name == '' ? $strain->strain_name: $request->strain_name;
+            $strain->bank = $request->bank == '' ? $strain->bank: $request->bank;
+            $strain->strain_name = $request->strain_name == '' ? $strain->strain_name: $request->strain_name;
+            $strain->technique = $request->technique== '' ? $strain->technique:$request->technique;
+            $strain->seed_type = $request->seed_type== '' ? $strain->seed_type:$request->seed_type;
+            $strain->germ_start = $request->germ_start== '' ? $strain->germ_start:$request->germ_start;
+            $strain->veg_start = $request->veg_start== '' ? $strain->veg_start:$request->veg_start;
+            $strain->flow_start = $request->flow_start== '' ? $strain->flow_start:$request->flow_start;
+            $strain->harvest_date = $request->harvest_date== '' ? $strain->harvest_date:$request->harvest_date;
+            $strain->grow_type = $request->grow_type== '' ? $strain->grow_type:$request->grow_type;
+            $strain->light_type = $request->light_type== '' ? $strain->light_type:$request->light_type;
+            $strain->light_power = $request->light_power== '' ? $strain->light_power:$request->light_power;
+            $strain->save();
+
+          }
+      }else{
+        if($request->input['strains_changes'] == 'Other'){
+          }else {
+            if($request->input['strains_changes'] == 'Any'){
+            }else {
+            }
+          }
+        }
+          return redirect('review/' . $request->id. '');
     }
 
     /**
@@ -118,6 +147,21 @@ class StrainController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
+     public function edit($id){
+       $data['id_review']= $id;
+       $data['strain'] = Strain::where('review_id',$id)->get();
+       $data['review'] = Review::where('id',$id)->get();
+       //$count_strains  =DB::table('reviews')->where('id',$id)->sum('reviews.strain_number');
+       $data['cantidad'] = DB::table('strains')
+                    ->select(DB::raw('count(*) as counter, strains.strain_name'))
+                    ->where('review_id',$id)
+                    ->groupBy('strains.strain_name')
+                    ->get();
+       if (!DB::table('reviews')->where('id',$id)->sum('reviews.strain_number'))
+          return redirect('review/' .$id. '/new-strain')->withMessage('You have the review but it hasn\'t crops');
+       return view('strains/editstrain',$data);
+     }
     public function update(Request $request, $id)
     {
         //

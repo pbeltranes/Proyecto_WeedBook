@@ -53,16 +53,21 @@ Route::group(['middleware' => ['auth']], function()
   	Route::get('user/delete/{id}', 'UserController@destroy');
                                 //Fin modulo usuario
 
+                                //Módulo strain-Crops
+    Route::post('strain/edit/save','StrainController@save');
+    Route::get('strain/{review_id}/edit','StrainController@edit');
+    Route::post('review/save-strain', 'StrainController@store');
+    Route::get('review/{review_id}/new-strain', 'StrainController@create');
+    Route::get('review/{review_id}/delete-strain/{id}', 'StrainController@delete');
+    Route::get('review/{review_id}/update-strain/{id}', 'StrainController@update');
+                                //Fin módulo strain-crops
+
     //Modulo productos
     Route::get('strain/{id}/new-product', 'ProductController@create');
     Route::post('strain/{id}/save-product', 'ProductController@save');
     //fin modulo producto
-  Route::get('review/{review_id}/new-strain', 'StrainController@create');
-	Route::post('review/save-strain', 'StrainController@store');
-	Route::get('review/{review_id}/delete-strain/{id}', 'StrainController@delete');
-	Route::get('review/{review_id}/update-strain/{id}', 'StrainController@update');
-	Route::post('review/edit/save', 'ReviewController@save')->where('id', '[0-9]+'); // /x?/y  function(x==null) estaremos pasando parametros nulos
-	Route::get('admin/update-api', 'StrainController@updateApi');
+
+    Route::get('admin/update-api', 'StrainController@updateApi');
 }); // Acciones que solo pueden hacer los usuarios logueados
 
 route::get('review/strain/{id}', 'StrainController@show');
