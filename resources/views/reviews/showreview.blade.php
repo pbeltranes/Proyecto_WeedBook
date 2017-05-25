@@ -98,6 +98,8 @@
         <h3 class="bg-primary">Comments</h3>
         <ul class="media-list">
           @foreach($comments as $comment)
+            @if(Auth::guest())
+                <h5 class="bg-info">Login! if you want comment or publish a review</h5>
                 <div class = "row pull-right">
                   <div class="col-md-3">
                     <form class="form-group " role="form" method="POST"   action="/comment/vote/{{$comment->id}}/{{$review->id}}">
@@ -107,7 +109,8 @@
                       </div>
                     </form>
                   </div>
-                  @if($comment->from_user == Auth::user()->id) <!-- habilita los campos de editar y eliminar -->
+            @else
+                @if($comment->from_user == Auth::user()->id)
                   <div class="col-md-3">
                     <form class="form-group " role="form" method="GET"   action="{{ route('edit',['review_id' =>$review->id, 'comment_id'=> $comment->id, 'author_id'=> $comment->from_user]) }}">
                       <div class="form-group">
@@ -122,7 +125,8 @@
                       </div>
                     </form>
                   </div>
-                  @endif
+                @endif
+            @endif
                 </div>
                 <li class="media">
 
