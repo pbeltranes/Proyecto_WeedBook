@@ -16,7 +16,7 @@ use App\ReviewUpdate;
 use App\StrainUpdate;
 use App\UsersProfile;
 use App\Comment;
-
+use App\CommentUpVotes;
 
 class ReviewController extends Controller
 {
@@ -196,15 +196,27 @@ class ReviewController extends Controller
       $data['rev_count'] = $data['rev_updates']->count();
       $data['strains'] = Strain::where('review_id', $id)->get();
       $data['strain_count'] = $data['strains']->count();
+
       $data['comments'] = DB::table('comments')
        ->join('users_profiles', 'comments.from_user', '=',  'users_profiles.user_id')
        ->select('comments.id','users_profiles.avatar_url', 'comments.from_user', 'comments.on_review', 'comments.body', 'comments.created_at', 'comments.updated_at')
        ->where('comments.on_review',$id)
+       ->orderBy('comments.id', 'desc')
        ->get();
-
       //  print_r($data['comments']);
       //  die();
-      return view('reviews/showreview', $data);
+      $up_votes = array_fill(0,1024,0);
+      $authors_comments = array_fill(0,1024,0);
+      foreach ($data['comments'] as $comment) {
+        $up_votes[$comment->id - 1] = CommentUpVotes::where('comment_id', $comment->id)->count();
+        $authors_comments[$comment->id - 1] = UsersProfile::where('user_id', $comment->from_user)->first();
+      }
+      // print_r($authors_comments);
+      // die();
+      $data['comments_authors'] = $authors_comments;
+      $data['comments_upvotes'] = $up_votes;
+
+          return view('reviews/showreview', $data);
 
     }
 }
