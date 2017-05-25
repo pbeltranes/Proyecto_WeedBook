@@ -111,9 +111,7 @@ class StrainController extends Controller
     {
       $strains = Strain::where('review_id',$request->id)->get();
         for ($i=0; $i<count($request->strain_name); $i++) {}
-
       if($request[$i]->strains_changes == 'All'){
-
 
           foreach ($strains as $strain) {
             $strain->strain_name = $request->strain_name == '' ? $strain->strain_name: $request->strain_name;
