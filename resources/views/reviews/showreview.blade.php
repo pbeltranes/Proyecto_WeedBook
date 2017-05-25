@@ -77,7 +77,7 @@
             </button>
         </div>
         <div class="btn-group" role="group">
-            <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#tab3" aria-expanded="false" aria-controls="#collapseExample"><span class="fa fa-file-o" aria-hidden="true"></span>
+            <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#tab3" aria-expanded="false" aria-controls="#collapseExample"><span class="fa fa-flask" aria-hidden="true"></span>
               <div class="hidden-xs">Products</div>
             </button>
         </div>
@@ -180,7 +180,6 @@
             @endif
                 </div>
                 <li class="media">
-
                     <div class="media-left media-middle">
                       <a>
                         <img class="img-circle media-object" src="{{$comment->avatar_url}}" alt="avatar" width="65" height="65">
@@ -193,7 +192,6 @@
                     <div class="media-middle">
                       <h4>{{$comment->body}}</h4>
                     </div>
-
                 </li>
             <br>
           @endforeach
