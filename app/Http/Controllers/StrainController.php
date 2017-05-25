@@ -109,8 +109,10 @@ class StrainController extends Controller
      */
     public function save(Request $request)
     {
+      $strains = Strain::where('review_id',$request->id)->get();
+        for ($i=0; $i<count($request->strain_name); $i++) {}
 
-      if($request->strains_changes == 'All'){
+      if($request[$i]->strains_changes == 'All'){
           $strains = Strain::where('review_id',$request->id)->get();
 
           foreach ($strains as $strain) {
