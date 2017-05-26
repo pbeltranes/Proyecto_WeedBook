@@ -59,7 +59,7 @@ class StrainController extends Controller
             'seed_type' => $request->get('seed_type'),
             'germ_start' => $request->input('germ_start'),
             'veg_start' => $request->input('veg_start'),
-            'flow_strat' => $request->input('flow_strat'),
+            'flow_strat' => $request->input('flow_start'),
             'harvest_date' => $request->input('harvest_date'),
             'active' => 1,
             'grow_type' => $request->get('grow_type'),
@@ -109,35 +109,56 @@ class StrainController extends Controller
      */
     public function save(Request $request)
     {
-      $strains = Strain::where('review_id',$request->id)->get();
-        for ($i=0; $i<count($request->strain_name); $i++) {}
-      if($request[$i]->strains_changes == 'All'){
+      for ($i=0; $i<count($request->strain_name); $i++) {
+        $strains = Strain::where('review_id',$request->id)
+                          ->where('strain_name',$request->strain_name_origin_[$i])
+                          ->get();
 
-          foreach ($strains as $strain) {
-            $strain->strain_name = $request->strain_name == '' ? $strain->strain_name: $request->strain_name;
-            $strain->bank = $request->bank == '' ? $strain->bank: $request->bank;
-            $strain->strain_name = $request->strain_name == '' ? $strain->strain_name: $request->strain_name;
-            $strain->technique = $request->technique== '' ? $strain->technique:$request->technique;
-            $strain->seed_type = $request->seed_type== '' ? $strain->seed_type:$request->seed_type;
-            $strain->germ_start = $request->germ_start== '' ? $strain->germ_start:$request->germ_start;
-            $strain->veg_start = $request->veg_start== '' ? $strain->veg_start:$request->veg_start;
-            $strain->flow_start = $request->flow_start== '' ? $strain->flow_start:$request->flow_start;
-            $strain->harvest_date = $request->harvest_date== '' ? $strain->harvest_date:$request->harvest_date;
-            $strain->grow_type = $request->grow_type== '' ? $strain->grow_type:$request->grow_type;
-            $strain->light_type = $request->light_type== '' ? $strain->light_type:$request->light_type;
-            $strain->light_power = $request->light_power== '' ? $strain->light_power:$request->light_power;
-            $strain->save();
+          if($request->quanty_[$i] == 'All'){
 
-          }
-      }else{
-        if($request->input['strains_changes'] == 'Other'){
-          }else {
-            if($request->input['strains_changes'] == 'Any'){
-            }else {
-            }
-          }
+                foreach ($strains as $strain) {
+                    $strain->strain_name = $request->strain_name[$i] == '' ? $strain->strain_name: $request->strain_name[$i];
+                    $strain->bank = $request->bank[$i] == '' ? $strain->bank: $request->bank[$i];
+                    $strain->strain_name = $request->strain_name[$i] == '' ? $strain->strain_name: $request->strain_name[$i];
+                    $strain->technique = $request->technique[$i]== '' ? $strain->technique:$request->technique[$i];
+                    $strain->seed_type = $request->seed_type[$i]== '' ? $strain->seed_type:$request->seed_type[$i];
+                    $strain->germ_start = $request->germ_start[$i]== '' ? $strain->germ_start:$request->germ_start[$i];
+                    $strain->veg_start = $request->veg_start[$i]== '' ? $strain->veg_start:$request->veg_start[$i];
+                    $strain->flow_start = $request->flow_start[$i]== '' ? $strain->flow_start:$request->flow_start[$i];
+                    $strain->harvest_date = $request->harvest_date[$i]== '' ? $strain->harvest_date:$request->harvest_date[$i];
+                    $strain->grow_type = $request->grow_type[$i]== '' ? $strain->grow_type:$request->grow_type[$i];
+                    $strain->light_type = $request->light_type[$i]== '' ? $strain->light_type:$request->light_type[$i];
+                    $strain->light_power = $request->light_power[$i]== '' ? $strain->light_power:$request->light_power[$i];
+                    $strain->save();
+                  }
+              }
+
+          if($request->quanty_[$i]  == 'Other'){
+            $stop = 0;
+            if($request->nro_strains_changes[$i] < 0) break;
+            foreach ($strains as $strain) {
+                $strain->strain_name = $request->strain_name[$i] == '' ? $strain->strain_name: $request->strain_name[$i]; 
+                $strain->bank = $request->bank[$i] == '' ? $strain->bank: $request->bank[$i];
+                $strain->strain_name = $request->strain_name[$i] == '' ? $strain->strain_name: $request->strain_name[$i];
+                $strain->technique = $request->technique[$i]== '' ? $strain->technique:$request->technique[$i];
+                $strain->seed_type = $request->seed_type[$i]== '' ? $strain->seed_type:$request->seed_type[$i];
+                $strain->germ_start = $request->germ_start[$i]== '' ? $strain->germ_start:$request->germ_start[$i];
+                $strain->veg_start = $request->veg_start[$i]== '' ? $strain->veg_start:$request->veg_start[$i];
+                $strain->flow_start = $request->flow_start[$i]== '' ? $strain->flow_start:$request->flow_start[$i];
+                $strain->harvest_date = $request->harvest_date[$i]== '' ? $strain->harvest_date:$request->harvest_date[$i];
+                $strain->grow_type = $request->grow_type[$i]== '' ? $strain->grow_type:$request->grow_type[$i];
+                $strain->light_type = $request->light_type[$i]== '' ? $strain->light_type:$request->light_type[$i];
+                $strain->light_power = $request->light_power[$i]== '' ? $strain->light_power:$request->light_power[$i];
+                $strain->save();
+                if($stop < $request->nro_strains_changes[$i]) break;
+                $stop++;
+
+                }
+              }
         }
-          return redirect('review/' . $request->id. '');
+
+        //return view('');
+        return redirect('review/' . $request->id. '');
     }
 
     /**

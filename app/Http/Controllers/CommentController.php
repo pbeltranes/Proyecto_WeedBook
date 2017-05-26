@@ -20,17 +20,17 @@ use App\CommentUpVotes;
 class CommentController extends Controller
 {
 
-    public function index()
-    {
+    public function index(){
         //
     }
 
     public function save(Request $request, $review_id){
 
-            // verificar que el body no venga vacio o se jode todo
             $body= $request->comment;
             $from_user = Auth::user()->id;
-
+            if($body == '' || $body == ' '){
+              return redirect()->route('showreview',[$review_id]);
+            }
             $comment = Comment::create([
               'from_user'=> $from_user,
               'on_review'=> $review_id,
@@ -73,27 +73,33 @@ class CommentController extends Controller
             return redirect()->route('showreview',[$review_id]);
     }
 
-    public function destroy($comment_id, $review_id){
+    public function destroy(Request $request, $comment_id, $review_id){
 
-            $destroy = DB::table('comments')->where('id', $comment_id)->delete();
+            $user_id = Auth::user()->id;
+            $data = Comment::find($comment_id);
 
-            return redirect()->route('showreview',[$review_id]);
+            if($data['from_user'] == $user_id){
+                $destroy = DB::table('comments')->where('id', $comment_id)->delete();
+                return redirect()->route('showreview',[$review_id]);
+            }
+            else{
+                return redirect()->route('showreview',[$review_id]);
+            }
+
     }
 
 
     public function vote(Request $request, $comment_id, $review_id){
-            //las votaciones se pueban directamente en la url ya que  necesito aprender el script
-            // para asi diferenciar si es positivo o negativo dependiendo de eso deberia
-            // hacer una insercion positiv ao negativa, deberia modificar la columna de la tabla tambien
-            // y realizar nuevamente migraciones
-            $user_id = Auth::user()->id;
 
+            $user_id = Auth::user()->id;
             $data = Comment::find($comment_id);
             $vote = DB::table('comment_up_votes')
                   ->where('user_id',$user_id)
+                  ->where('comment_id', $comment_id)
                   ->get();
                   // print_r($vote);
                   // die();
+
             if($data['from_user'] == $user_id){
                 return redirect()->route('showreview',[$review_id]);
             }
