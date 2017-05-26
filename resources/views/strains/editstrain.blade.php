@@ -107,7 +107,7 @@
       <input type="radio" name="quanty_[{{$cont}}]" value="Other"> Other<br>
     </div>
     <input type="hidden" name="strain_name_origin_[{{$cont}}]" value="{{ $post->strain_name }}">
-      <?php $cont = $cont +1 ?>
+      <?php $cont++ ?>
       @endif
           </tr>
   @endforeach

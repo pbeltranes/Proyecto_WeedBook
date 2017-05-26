@@ -35,7 +35,7 @@ class ReviewController extends Controller
         ->orderBy(DB::raw('COUNT(reviews.id)'), 'DESC')
         ->paginate(5);
         $data['reviews'] = $data['reviews']->count() > 0 ? $data['reviews'] : Review::take(5)->where('active',0) ->get(); //? es sino
-        $data['title'] = 'WeedBook Index';
+        $data['title'] = 'WeedBook World';
         return view('home', $data);
     }
 
@@ -203,6 +203,12 @@ class ReviewController extends Controller
        ->where('comments.on_review',$id)
        ->orderBy('comments.id', 'desc')
        ->get();
+       // cantidad de cada strains en la review
+       $data['cantidad'] = DB::table('strains')
+                    ->select(DB::raw('count(*) as counter, strains.strain_name'))
+                    ->where('review_id',$id)
+                    ->groupBy('strains.strain_name')
+                    ->get();
       //  print_r($data['comments']);
       //  die();
       $up_votes = array_fill(0,1024,0);

@@ -95,15 +95,17 @@
 
             </div>
             <div class="collapse" id="tab2">
-                <h3>Strain</h3>
+                <h3>Crops</h3>
               <tr>
-                <h4>Number of strains: {{$strain_count}}</h4>
+                <h4>Total of Crops: {{$strain_count}}</h4>
                 <td><h4>Setup:</h4></td>
+                <?php $actually = ''; $cont = -1;?>
                 @foreach($strains as $strain)
-
+                  @if( $strain->strain_name != $actually)
+                  <?php $actually = $strain->strain_name;  $cont++;?>
                 <h4>-{{$strain->strain_name}}</h4>
                 <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal{{$strain->id}}">Information</button>
-
+                @endif
                 <!-- Modal -->
                 <div id="myModal{{$strain->id}}" class="modal fade" role="dialog">
                   <div class="modal-dialog">
@@ -115,6 +117,7 @@
                         <h4 class="modal-title">{{$strain->strain_name}}'s Information</h4>
                       </div>
                       <div class="modal-body">
+                        <p><i class="fa fa fa-leaf"> Crops of this type: {{ $cantidad[$cont]->counter}}</i></p>
                         <p><i class="fa fa-lightbulb-o"> Light Type: {{$strain->light_type}}</i></p>
                         <p><i class="fa fa-bolt"> Watts: {{$strain->light_power}}</i></p>
                         <p><i class="fa fa-envira"> Bank: {{$strain->bank}}</i></p>
@@ -186,7 +189,7 @@
 
                     <div class="media-left media-middle">
                       <a>
-                        <img class="img-circle media-object" src="{{$comment->avatar_url}}" alt="avatar" width="65" height="65">
+                        <img class=" media-object" src="{{$comment->avatar_url}}" alt="avatar" width="65" height="65">
                       </a>
                     </div>
                     <div class="media-body">
