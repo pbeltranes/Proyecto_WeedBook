@@ -28,7 +28,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('prodcuts/newproduct.blade.php');
+        return view('products/newproduct');
     }
 
     /**
@@ -46,21 +46,24 @@ class ProductController extends Controller
             ]);
 
         $prod->save();
+        return redirect('/');
     }
 
     public function addProdToStrain($id){
         $data['strain_id'] = $id;
+        $data['products'] = Product::all();
         return view('products/addproduct', $data);
     }
 
     public function saveProdToStrain(Request $request){
         $prod = ProductOnStrain::create([
-            'products_id' => $request->input('prod_id');
-            'strains_id' => $request->input('strain_id');
-            'date_start' => $request->input('date_start');
-            'date_end' => $request->input('date_end');
+            'products_id' => $request->input('prod_id'),
+            'strains_id' => $request->input('strain_id'),
+            'date_start' => $request->input('date_start'),
+            'date_end' => $request->input('date_end'),
             ]);
         $prod->save();
+        return redirect('review/strain/' . $request->id);
     }
     /**
      * Display the specified resource.
