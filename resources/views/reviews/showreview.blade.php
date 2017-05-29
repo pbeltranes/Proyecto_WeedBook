@@ -121,7 +121,7 @@
                         <p><i class="fa fa-lightbulb-o"> Light Type: {{$strain->light_type}}</i></p>
                         <p><i class="fa fa-bolt"> Watts: {{$strain->light_power}}</i></p>
                         <p><i class="fa fa-envira"> Bank: {{$strain->bank}}</i></p>
-                        <a href="{{url('review/strain/' . $strain->id)}}">Detailed Info</a>
+                        <a href="{{url('strain/' . $strain->id)}}">Detailed Info</a>
                       </div>
                       <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -136,6 +136,16 @@
             </div>
             <div class="collapse" id="tab3">
               <h3>Products </h3>
+              @foreach($strains as $strain)
+                <h4>{{$strain->strain_name}} <a href="{{url('strain/' . $strain->id . '/add-product')}}"><button type="button" class="btn btn-default"> Add Product</button></a>:</h4>
+                @foreach($products_on_strain as $products)
+                  @if($products[$strain->id - 1] === 0)
+                    <h5>None</h5>
+                  @else
+                    <h5>{{$products[$strain->id - 1]->name}}</h5>
+                  @endif
+                @endforeach
+              @endforeach
             </div>
           </div>
       </div>

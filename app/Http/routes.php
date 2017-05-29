@@ -63,14 +63,16 @@ Route::group(['middleware' => ['auth']], function()
                                 //Fin módulo strain-crops
 
     //Modulo productos
-    Route::get('strain/{id}/new-product', 'ProductController@create');
-    Route::post('strain/{id}/save-product', 'ProductController@save');
+    // Route::get('strain/{id}/new-product', 'ProductController@create');
+    // Route::post('strain/{id}/save-product', 'ProductController@save');
+    Route::get('strain/{id}/add-product', 'ProductController@addProdToStrain');
+    Route::post('strain/{id}/save-product', 'ProductController@saveProdToStrain');
     //fin modulo producto
 
     Route::get('admin/update-api', 'StrainController@updateApi');
 }); // Acciones que solo pueden hacer los usuarios logueados
 
-route::get('review/strain/{id}', 'StrainController@show');
+route::get('strain/{id}', 'StrainController@show');
 Route::get('user/{id}', 'UserController@profile')->where('id', '[0-9]+');
 Route::get('user/{id}/edit', 'UserController@edit')->where('id', '[0-9]+');
 Route::post('user/edit/save', 'UserController@save')->where('id', '[0-9]+');
