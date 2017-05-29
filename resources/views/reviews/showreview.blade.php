@@ -142,7 +142,7 @@
                   @if($products[$strain->id - 1] === 0)
                     <h5>None</h5>
                   @else
-                    <h5>{{$products[$strain->id - 1]->name}}</h5>
+                    <h5>{{$products_name[$products[$strain->id - 1]->id - 1]}}</h5>
                   @endif
                 @endforeach
               @endforeach

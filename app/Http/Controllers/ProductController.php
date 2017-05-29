@@ -28,7 +28,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('prodcuts/newproduct.blade.php');
+        return view('products/newproduct');
     }
 
     /**
@@ -46,11 +46,12 @@ class ProductController extends Controller
             ]);
 
         $prod->save();
+        return redirect('/');
     }
 
     public function addProdToStrain($id){
         $data['strain_id'] = $id;
-        $data['products'] = Product::select('id')->get();
+        $data['products'] = Product::all();
         return view('products/addproduct', $data);
     }
 
