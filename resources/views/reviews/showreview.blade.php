@@ -89,7 +89,7 @@
           <div class="tab-content">
             <div class="collapse" id="tab1">
                 <h3>Author</h3>
-                <img class="img-circle" alt="" src="{{$author->avatar_url}}" width="100" height="100">
+                <img class="img-circle" src="{{$author->avatar_url}}"  width="100" height="100">
                 <td><h4>Name</h4>{{$author->user_name}}</td>
                 <td><h4>Srowing Since</h4>{{$author->growing_since}}</td>
 
@@ -142,7 +142,8 @@
                   @if($products[$strain->id - 1] === 0)
                     <h5>None</h5>
                   @else
-                    <h5>{{$products_name[$products[$strain->id - 1]->id - 1]}}</h5>
+                    <!-- revisar -->
+                    <!-- <h5>{{$products_name[$products[$strain->id - 1]->id - 1]}}</h5> -->
                   @endif
                 @endforeach
               @endforeach
@@ -152,9 +153,11 @@
     </div>
 
 
-        <h3 class="bg-primary">Comments</h3>
+        <h3 class="box-content bottom">Comments</h3>
         <ul class="media-list">
           @foreach($comments as $comment)
+
+          <hr></hr>
             @if(Auth::guest())
                 <h5 class="bg-info">Login! if you want comment or publish a review</h5>
                 <div class = "row pull-right">
@@ -169,7 +172,7 @@
             @elseif(Auth::user())
             <div class = "row pull-right">
                 <div class="col-md-3">
-                  <form class="form-group " role="form" method="POST"   action="/comment/vote/{{$comment->id}}/{{$review->id}}">
+                  <form class="form-group" role="form" method="POST"   action="/comment/vote/{{$comment->id}}/{{$review->id}}">
                     {!! csrf_field() !!}
                     <div class="form-group">
                       <button class="btn btn-primary btn-xs fa fa-thumbs-o-up" style="float: right">'{{$comments_upvotes[$comment->id - 1]}}' like </button>
@@ -177,20 +180,45 @@
                   </form>
                 </div>
                 @if($comment->from_user == Auth::user()->id)
-                  <div class="col-md-3">
-                    <form class="form-group " role="form" method="GET"   action="{{ route('edit',['review_id' =>$review->id, 'comment_id'=> $comment->id, 'author_id'=> $comment->from_user]) }}">
-                      <div class="form-group">
-                        <button class="btn btn-success btn-xs" style="float: right" >Edit</button>
-                      </div>
-                    </form>
+                <div class="col-md-3 ">
+                  <div class="center-block pull-right" style="margin-top: 0px; padding-top: 14px;">
+                    <button type="button" class="btn btn-success btn-xs"  data-toggle="modal" data-target="#Modal{{$comment->id}}">Edit</button>
                   </div>
-                  <div class="col-md-3">
-                    <form class="form-group " role="form" method="GET"   action="/comment/delete/{{$comment->id}}/{{$review->id}}">
-                      <div class="form-group">
-                        <button class="btn btn-danger btn-xs" style="float: right" >Delete</button>
+                </div>
+                <div class="col-md-3">
+                  <form class="form-group"  role="form"  method="GET" action="/comment/delete/{{$comment->id}}/{{$review->id}}">
+                    <div class="form-group" style=" margin-top: 14px;">
+                      <button class="btn btn-danger btn-xs" style="float: right " >Delete</button>
+                    </div>
+                  </form>
+                </div>
+
+                <!--inicio Modal editar -->
+                <div id="Modal{{$comment->id}}" class="modal fade" role="dialog">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <!-- Modal content-->
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Edit Comment</h4>
                       </div>
-                    </form>
+                      <div class="modal-body">
+                        <div class="container">
+                          <form class="form-group-lg col-xs-6 " role="form" method="POST" action="/comment/update/{{$review->id}}/{{$comment->id}}">
+                            {!! csrf_field() !!}
+                            <div class="form-group">
+                              <textarea class="form-control" rows="4" cols="12" style ="font-size:13px;" name ="commentedit">{{$comment->body}}</textarea>
+                            </div>
+                            <button class="btn btn-success" >Save</button>
+                          </form>
+                        </div>
+                      </div>
+                      <div class="modal-footer">
+                      </div>
+                    </div>
                   </div>
+                </div>
+                <!-- fin Modal editar -->
                 @endif
             @endif
                 </div>
@@ -199,7 +227,7 @@
 
                     <div class="media-left media-middle">
                       <a>
-                        <img class=" media-object" src="{{$comment->avatar_url}}" alt="avatar" width="65" height="65">
+                        <img class=" img-circle" src="{{$comment->avatar_url}}" alt="avatar" width="65" height="65">
                       </a>
                     </div>
                     <div class="media-body">

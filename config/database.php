@@ -57,7 +57,7 @@ return [
             'host'      => env('DB_HOST', 'localhost'),
             'database'  => env('DB_DATABASE', 'weedbook'),
             'username'  => env('DB_USERNAME', 'root'),
-            'password'  => env('DB_PASSWORD', 'root'),
+            'password'  => env('DB_PASSWORD', 'vnb41ups'),
             'charset'   => 'utf8',
             'collation' => 'utf8_unicode_ci',
             'prefix'    => '',

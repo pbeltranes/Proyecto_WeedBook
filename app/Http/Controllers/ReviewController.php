@@ -217,10 +217,11 @@ class ReviewController extends Controller
 
       $max_comment_id = Comment::where('id', DB::raw("(select max(`id`) from comments)"))->first();
       $max_strain_id = Strain::where('id', DB::raw("(select max(`id`) from strains)"))->first();
-    
+
       $up_votes = array_fill(0,$max_comment_id['id'],0);
       $products_on_strain = array_fill(0,$max_strain_id['id'],0);
       $product_name = array_fill(0, 100, 0);
+      $authors_comments = array_fill(0, $max_comment_id['id'], 0);
 
       foreach ($data['comments'] as $comment) {
         $up_votes[$comment->id - 1] = CommentUpVotes::where('comment_id', $comment->id)->count();
@@ -231,16 +232,16 @@ class ReviewController extends Controller
         $products_on_strain[$strain->id - 1] = ProductOnStrain::where('strains_id', $strain->id) ? ProductOnStrain::where('strains_id', $strain->id)->get() : 0;
         foreach ($products_on_strain[$strain->id - 1] as $product) {
         $product_name[$product->id - 1] = Product::where('id', $product->id)->select('name')->get();
-        
+
         }
       }
 
-      
+
       $data['products_name'] = $product_name;
       $data['products_on_strain'] = $products_on_strain;
       $data['comments_upvotes'] = $up_votes;
       $data['comments_authors'] = $authors_comments;
-      
+
 
       return view('reviews/showreview', $data);
     }
