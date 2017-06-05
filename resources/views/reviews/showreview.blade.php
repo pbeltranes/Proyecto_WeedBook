@@ -46,7 +46,7 @@
             </div>
 
             <div class="item bg-inverse">
-              <img src="{{$review->background_image_url}}" class="center-block" alt="...">>
+              <img src="{{$review->background_image_url}}" class="center-block" alt="...">
               <div class="carousel-caption">
                 <h5>{{$review->updated_at->format('Y-m-d')}}</h5>
               </div>
@@ -63,8 +63,63 @@
             <span class="sr-only">Next</span>
           </a>
       </div>
-          <div class="card-info"> <span class="card-title"><h2>{{$review->title}}</h2></span></div>
     </div>
+
+    <div class="card-info"> <span class="card-title"><h2>{{$review->title}}
+
+  @if(TRUE)
+  <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#modalUpdate{{$review->id}}">Update Review</button>
+  <!-- Modal UPDATE -->
+  <div id="modalUpdate{{$review->id}}" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">{{$review->title}}'s Update</h4>
+        </div>
+        <div class="modal-body">
+          <h2>What it's news </h2>
+          <p>  <input type="text" name="title" value="{{ old('title') }}" class="form-control" /></p>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Finish</button>
+          <a data-dismiss="modal" data-toggle="modal" href="#modalUpdateStrain{{$review->id}}">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Next Step</button>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div id="modalUpdateStrain{{$review->id}}" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">{{$review->title}}'s Update</h4>
+        </div>
+        <div class="modal-body">
+          <h2>What it's news </h2>
+          <p>  <input type="text" name="title" value="{{ old('title') }}" class="form-control" /></p>
+
+        </div>
+        <div class="modal-footer">
+          <a data-dismiss="modal" data-toggle="modal" href="#modalUpdate2{{$review->id}}">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Next Step</button>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+    @endif
+    </h2></span></div>
     <div class="btn-pref btn-group btn-group-justified btn-group-lg" role="group" aria-label="..." >
         <div class="btn-group" role="group">
             <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#tab1" aria-expanded="false" aria-controls="#collapseExample"><span class="fa fa-user-circle" aria-hidden="true"></span>
@@ -91,7 +146,7 @@
                 <h3>Author</h3>
                 <img class="img-circle" alt="" src="{{$author->avatar_url}}" width="100" height="100">
                 <td><h4>Name</h4>{{$author->user_name}}</td>
-                <td><h4>Srowing Since</h4>{{$author->growing_since}}</td>
+                <td><h4>Growing Since</h4>{{$author->growing_since}}</td>
 
             </div>
             <div class="collapse" id="tab2">
@@ -139,8 +194,8 @@
               @foreach($strains as $strain)
                 <h4>{{$strain->strain_name}} <a href="{{url('strain/' . $strain->id . '/add-product')}}"><button type="button" class="btn btn-default"> Add Product</button></a>:</h4>
                 @foreach($products_on_strain as $products)
-                  @if($products[$strain->id - 1] === 0)
-                    <h5>None</h5>
+                  @if(TRUE)
+
                   @else
                     <h5>{{$products_name[$products[$strain->id - 1]->id - 1]}}</h5>
                   @endif

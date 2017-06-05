@@ -34,9 +34,15 @@ class ReviewController extends Controller
         $data['reviews'] = Review::join('review_up_votes', 'reviews.id', '=', 'review_up_votes.review_id') // selecciona reviews con mas likes
         ->where('active',0)
         ->groupBy('reviews.id')
+        ->join('users_profiles', 'reviews.author_id', '=', 'users_profiles.user_id')
         ->orderBy(DB::raw('COUNT(reviews.id)'), 'DESC')
         ->paginate(5);
-        $data['reviews'] = $data['reviews']->count() > 0 ? $data['reviews'] : Review::take(5)->where('active',0) ->get(); //? es sino
+
+        $data['reviews'] = $data['reviews']->count() > 0 ? $data['reviews'] : Review::take(5)
+          ->where('active',0)
+          ->join('users_profiles', 'reviews.author_id', '=', 'users_profiles.user_id')
+          ->get();
+
         $data['title'] = 'WeedBook World';
         return view('home', $data);
     }
@@ -192,7 +198,7 @@ class ReviewController extends Controller
     public function show($id){
 
       $data['review'] = Review::find($id);
-      $data['author'] = UsersProfile::where('user_id', $data['review']->author_id)->first();
+      $data['author'] = UsersProfile::where('user_id', $data['review']->author_id )->first();
       $data['rev_updates'] = ReviewUpdate::join('reviews', 'reviews.id', '=', 'review_updates.review_id')
                             ->where('review_id', $id);
       $data['rev_count'] = $data['rev_updates']->count();

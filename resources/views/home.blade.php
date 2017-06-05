@@ -1,6 +1,8 @@
 @extends('app')
 @section('title')
-{{$title}}
+<center>
+  {{$title}}
+</center>
 @endsection
 @section('content')
 @if ( !$reviews->count() )
@@ -16,14 +18,19 @@ There is no reviews till now. Login and write a new post now!!!
   @foreach( $reviews as $review )
   <?php $back = $review->background_image_url ? $review->background_image_url : 'http://www.acnur.org/fileadmin/Images/ACNUR/noticias/2016/Octubre_2016/5809ae163.jpg';  ?>
     <div class="w3-third w3-container w3-margin-bottom">
-    <a href='{{url("/review/".$review->id)}}'>  <img src="{{$back}}" alt="Norway" style="border-radius: 50%;
-        overflow: hidden;
-        width: 150px;
-        height: 150px;" class="w3-hover-opacity"> </a>
+
+      <center>
+        <a href='{{url("/review/".$review->review_id )}}'> ->review_id mal debido a un a problema del index() join  <img src="{{$back}}" alt="Norway" style="border-radius: 50%;
+            overflow: hidden;
+            width: 150px;
+            height: 150px;" class="w3-hover-opacity"> </a>
+      </center>
       <div class="w3-container w3-white">
         <p>  </p>
         <p><b>{{$review->title}}</b></p>
-        <p>Praesent tincidunt sed tellus ut rutrum. Sed vitae justo condimentum, porta lectus vitae, ultricies congue gravida diam non fringilla.</p>
+        <p>Cropper <b><a href="{{ url('user/' . $review->author_id . '')}}">
+         {{$review->user_name }}</a></b></p>
+        <p align="justify" >News: Praesent tincidunt sed tellus ut rutrum. Sed vitae justo condimentum, porta lectus vitae, ultricies congue gravida diam non fringilla.</p>
       </div>
     </div>
 

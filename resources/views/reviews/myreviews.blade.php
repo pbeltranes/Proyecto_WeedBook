@@ -25,16 +25,23 @@ There is no reviews till now. Login and write a new post now!!!
           <div class="w3-container w3-white">
             <p>  </p>
             <p><b>{{$review->title}}</b></p>
+
             <div class="w3-row-padding">
           <div class="w3-third w3-container w3-margin-bottom">
-              <button class="btn" style="float: right"><a href="{{ url( '/review/' .$review->id. '/edit') }}">Edit Post</a></button>
+
+               <button class="btn" style="float: right"><a href="{{ url( '/review/' .$review->id. '/edit') }}">Edit Post</a></button>
             </div>
-            <div class="w3-third w3-container w3-margin-bottom">
-              <button class="btn" style="float: right"><a href="{{ url( '/review/' .$review->id. '/edit') }}">Update History</a></button>
-            </div>
+            
+              <div class="w3-third w3-container w3-margin-bottom">
+                <button class="btn" style="float: right"><a href="{{ url( '/review/' .$review->id. '/edit') }}">Update History</a></button>
+              </div>
+
+
             <div class="w3-third w3-container w3-margin-bottom">
               <button class="btn" style="float: right"><a href="{{ route('showreview',['$id' => $review->id]) }}">View Review</a></button>
-            </div>
+
+
+              </div>
           </div>
         Edit:  {!! str_limit($review->updated_at, $limit = 1500, $end = '....... <a href='.url("/".$review->title).'>Read More</a>') !!}
       </div>
