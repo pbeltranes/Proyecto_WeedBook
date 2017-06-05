@@ -31,7 +31,7 @@ There is no reviews till now. Login and write a new post now!!!
 
                <button class="btn" style="float: right"><a href="{{ url( '/review/' .$review->id. '/edit') }}">Edit Post</a></button>
             </div>
-            
+
               <div class="w3-third w3-container w3-margin-bottom">
                 <button class="btn" style="float: right"><a href="{{ url( '/review/' .$review->id. '/edit') }}">Update History</a></button>
               </div>

@@ -227,7 +227,8 @@ class ReviewController extends Controller
       $up_votes = array_fill(0,$max_comment_id['id'],0);
       $products_on_strain = array_fill(0,$max_strain_id['id'],0);
       $product_name = array_fill(0, 100, 0);
-        $authors_comments = '';
+      $authors_comments = array_fill(0, $max_comment_id['id'], 0);
+
       foreach ($data['comments'] as $comment) {
         $up_votes[$comment->id - 1] = CommentUpVotes::where('comment_id', $comment->id)->count();
         $authors_comments[$comment->id - 1] = UsersProfile::where('user_id', $comment->from_user)->first();
