@@ -17,6 +17,8 @@
     <![endif]-->
   </head>
   <body>
+    @include('auth/loginmodal')
+    @include('auth/registermodal')
     <nav class="navbar navbar-default">
       <div class="container-fluid">
         <div class="navbar-header">
@@ -37,10 +39,10 @@
           <ul class="nav navbar-nav navbar-right">
             @if (Auth::guest())
             <li>
-              <a href="{{ url('/auth/login') }}">Login</a>
+              <a href="#" data-toggle="modal" data-target="#loginModal">Login</a>
             </li>
             <li>
-              <a href="{{ url('/auth/register') }}">Register</a>
+              <a href="#" data-toggle="modal" data-target="#registerModal">Register</a>
             </li>
             @else
             <li class="dropdown">

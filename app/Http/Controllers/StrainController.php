@@ -199,6 +199,22 @@ class StrainController extends Controller
         //
     }
 
+    public function updateStrain($id, Request $request){
+        $update = StrainUpdate::create([
+                        'strain_id' => $id,
+                        'height' => $request->input('height'),
+                        'darkness_time' => $request->input('darkness_time'),
+                        'light_time' => $request->input('light_time'),
+                        'stage' => $request->input('stage'),
+                        'veg_prod_quantity' => $request->input('veg_prod_quantity'),
+                        'flow_prod_quantity' => $request->input('flow_prod_quantity'),
+                        'other_prod_quantity' => $request->input('other_prod_quantity'),
+                        'update_image_url' => $request->input('update_image_url'),
+                    ]);
+        $update->save();
+        return back();
+    }
+
     public function updateApi()
     {
 
@@ -231,15 +247,17 @@ class StrainController extends Controller
                $strain_exist = ApiStrains::where('strain_name', $strain_name) ? TRUE:FALSE;
 
                if(!$strain_exist){
-                    ApiStrains::create([
+                    $new_strain =ApiStrains::create([
                         'strain_name' => $strain_name,
                     ]);
+                    $new_strain->save();
                }
 
                if(!$banks_exist){
-                    ApiBanks::create([
+                    $new_bank = ApiBanks::create([
                         'bank_name' => $strain_bank,
                     ]);
+                    $new_bank->save();
                }
 
            }

@@ -64,6 +64,13 @@
           </a>
       </div>
           <div class="card-info"> <span class="card-title"><h2>{{$review->title}}</h2></span></div>
+          @if($owns_review)
+          @include('update/update', array([
+                                      'strains' => $strains,
+                                      'review' => $review,
+                                    ]))
+          <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#updateModal">Update</button>
+          @endif
     </div>
     <div class="btn-pref btn-group btn-group-justified btn-group-lg" role="group" aria-label="..." >
         <div class="btn-group" role="group">
@@ -96,40 +103,25 @@
             </div>
             <div class="collapse" id="tab2">
                 <h3>Crops</h3>
-              <tr>
+                @if($owns_review)
+                <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#addStrainModal">Add new Crop</button>
+                @endif
+                @include('strains/addstrainmodal', array('review_id' => $review->id))
+                <tr>
                 <h4>Total of Crops: {{$strain_count}}</h4>
                 <td><h4>Setup:</h4></td>
-                <?php $actually = ''; $cont = -1;?>
+                <?php $actually = ''; $cont = -1; $s = 0; $u = 0?>
                 @foreach($strains as $strain)
                   @if( $strain->strain_name != $actually)
                   <?php $actually = $strain->strain_name;  $cont++;?>
                 <h4>-{{$strain->strain_name}}</h4>
+                
                 <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal{{$strain->id}}">Information</button>
+                @include('strains/viewstrain', array(['strain' => $strain,
+                                                      'updates' => $strain_updates,
+                                                      ]))
+  
                 @endif
-                <!-- Modal -->
-                <div id="myModal{{$strain->id}}" class="modal fade" role="dialog">
-                  <div class="modal-dialog">
-
-                    <!-- Modal content-->
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">{{$strain->strain_name}}'s Information</h4>
-                      </div>
-                      <div class="modal-body">
-                        <p><i class="fa fa fa-leaf"> Crops of this type: {{ $cantidad[$cont]->counter}}</i></p>
-                        <p><i class="fa fa-lightbulb-o"> Light Type: {{$strain->light_type}}</i></p>
-                        <p><i class="fa fa-bolt"> Watts: {{$strain->light_power}}</i></p>
-                        <p><i class="fa fa-envira"> Bank: {{$strain->bank}}</i></p>
-                        <a href="{{url('strain/' . $strain->id)}}">Detailed Info</a>
-                      </div>
-                      <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                      </div>
-                    </div>
-
-                  </div>
-                </div>
                 @endforeach
                 <td><h4>Date init</h4>{{$review->created_at}}</td>
               </tr>
@@ -138,11 +130,9 @@
               <h3>Products </h3>
               @foreach($strains as $strain)
                 <h4>{{$strain->strain_name}} <a href="{{url('strain/' . $strain->id . '/add-product')}}"><button type="button" class="btn btn-default"> Add Product</button></a>:</h4>
-                @foreach($products_on_strain as $products)
-                  @if($products[$strain->id - 1] === 0)
-                    <h5>None</h5>
-                  @else
-                    <h5>{{$products_name[$products[$strain->id - 1]->id - 1]}}</h5>
+                @foreach($products_on_strain as $prod)
+                  @if($prod->id == $strain->id)
+                <h5>{{$prod->name}}</h5>
                   @endif
                 @endforeach
               @endforeach
@@ -162,7 +152,7 @@
                     <form class="form-group " role="form" method="POST"   action="/comment/vote/{{$comment->id}}/{{$review->id}}">
                       {!! csrf_field() !!}
                       <div class="form-group">
-                        <button class="btn btn-primary btn-xs fa fa-thumbs-o-up" style="float: right">'{{$comments_upvotes[$comment->id - 1]}}' like </button>
+                        <button class="btn btn-primary btn-xs fa fa-thumbs-o-up" style="float: right">{{$comment->upvotes}}like </button>
                       </div>
                     </form>
                   </div>
@@ -172,7 +162,7 @@
                   <form class="form-group " role="form" method="POST"   action="/comment/vote/{{$comment->id}}/{{$review->id}}">
                     {!! csrf_field() !!}
                     <div class="form-group">
-                      <button class="btn btn-primary btn-xs fa fa-thumbs-o-up" style="float: right">'{{$comments_upvotes[$comment->id - 1]}}' like </button>
+                      <button class="btn btn-primary btn-xs fa fa-thumbs-o-up" style="float: right">'{{$comment->upvotes}}' like </button>
                     </div>
                   </form>
                 </div>
@@ -205,7 +195,7 @@
                     <div class="media-body">
 
 
-                      <h5 class="media-heading">{{$comments_authors[$comment->id - 1]->user_name}}<h6 class="date" style="color:#aaa; font-family:verdana; font-size:10px;">commented on {{$comment->created_at}}</h6></h5>
+                      <h5 class="media-heading">{{$comment->user_name}}<h6 class="date" style="color:#aaa; font-family:verdana; font-size:10px;">commented on {{$comment->created_at}}</h6></h5>
                     </div>
                     <div class="media-middle">
                       <h4>{{$comment->body}}</h4>

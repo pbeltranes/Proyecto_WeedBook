@@ -69,6 +69,12 @@ Route::group(['middleware' => ['auth']], function()
     Route::post('strain/{id}/save-product', 'ProductController@saveProdToStrain');
     //fin modulo producto
 
+    //Modulo update
+    Route::post('review/{id}/add-update', 'ReviewController@updateReview');
+    Route::post('strain/{id}/add-update', 'StrainController@updateStrain');
+    //fin modulo update
+
+
     
 }); // Acciones que solo pueden hacer los usuarios logueados
 

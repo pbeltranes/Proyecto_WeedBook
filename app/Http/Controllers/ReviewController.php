@@ -105,6 +105,35 @@ class ReviewController extends Controller
         return view('reviews/myreviews',compact('reviews'))->withTitle($title)->withInput($id);
     }
 
+    public function updateReview($id, Request $request){
+      $review_update = ReviewUpdate::create([
+                  'review_id' => $id,
+                  'update_text' => $request->input('update_text'),
+                ]);
+      $review_update->save();
+
+      $strains_id = Strain::where('review_id', $id)->selectRaw('strains.id as id')->get();
+
+      foreach ($strains_id as $id) {
+
+           $strain_update = StrainUpdate::create([
+                  'strain_id' => $id->id,
+                  'height' => $request->input('height' . $id->id),
+                  'darkness_time' => $request->input('darkness_time' . $id->id),
+                  'light_time' => $request->input('light_time' . $id->id),
+                  'stage' => $request->input('stage' . $id->id),
+                  'veg_prod_quantity' => $request->input('veg_prod_quantity' . $id->id),
+                  'flow_prod_quantity' => $request->input('flow_prod_quantity' . $id->id),
+                  'other_prod_quantity' => $request->input('other_prod_quantity' . $id->id),
+                  'update_image_url' => $request->input('update_image_url' . $id->id),
+                  ]);
+
+          $strain_update->save();        
+      }
+
+      return back();
+    }
+
     /**
      * Show the form for editing the specified resource.
      *
@@ -193,53 +222,52 @@ class ReviewController extends Controller
 
       $data['review'] = Review::find($id);
       $data['author'] = UsersProfile::where('user_id', $data['review']->author_id)->first();
+
       $data['rev_updates'] = ReviewUpdate::join('reviews', 'reviews.id', '=', 'review_updates.review_id')
                             ->where('review_id', $id);
+
       $data['rev_count'] = $data['rev_updates']->count();
-      $data['strains'] = Strain::where('review_id', $id)->get();
+
+      $data['strains'] = Strain::where('review_id', $id)
+                          ->leftJoin('strain_updates', 'strain_updates.strain_id', '=', 'strains.id')
+                          ->selectRaw('strains.id, strains.strain_name, strains.bank, strains.technique, strains.grow_type, strains.light_type, strains.light_power, strains.seed_type')
+                          ->groupBy('strains.id')
+                          ->get();
+
+
+      $data['strain_updates'] = Strain::where('review_id', $id)
+                                ->join('strain_updates', 'strain_updates.strain_id', '=', 'strains.id')
+                                ->selectRaw('strains.id as id, strain_updates.height, strain_updates.darkness_time, strain_updates.light_time, strain_updates.stage, strain_updates.veg_prod_quantity, strain_updates.flow_prod_quantity, strain_updates.other_prod_quantity, strain_updates.created_at, strain_updates.updated_at')
+                                ->orderBy('strain_updates.created_at')
+                                ->get();
+
       $data['strain_count'] = $data['strains']->count();
 
-      $data['comments'] = DB::table('comments')
-       ->join('users_profiles', 'comments.from_user', '=',  'users_profiles.user_id')
-       ->select('comments.id','users_profiles.avatar_url', 'comments.from_user', 'comments.on_review', 'comments.body', 'comments.created_at', 'comments.updated_at')
-       ->where('comments.on_review',$id)
-       ->orderBy('comments.id', 'desc')
-       ->get();
+      $data['products_on_strain'] = ProductOnStrain::join('strains', 'strains.id', '=', 'product_on_strains.strains_id')
+                                    ->where('strains.review_id', $id)
+                                    ->join('products', 'products.id', '=', 'product_on_strains.products_id')
+                                    ->select('strains.id', 'products.name')
+                                    ->get();
+
+       $data['comments'] = Comment::where('on_review', $id)
+                            ->join('users_profiles', 'comments.from_user', '=', 'users_profiles.user_id')
+                            ->leftJoin('comment_up_votes', 'comment_up_votes.comment_id', '=', 'comments.id')
+                            ->groupBy('comments.id')
+                            ->selectRaw('count(comment_up_votes.id) as upvotes, comments.id, users_profiles.avatar_url, comments.from_user, comments.on_review, comments.body, comments.created_at, comments.updated_at, users_profiles.user_name')
+                            ->orderBy('comments.id', 'desc')
+                            ->get();
+
        // cantidad de cada strains en la review
        $data['cantidad'] = DB::table('strains')
                     ->select(DB::raw('count(*) as counter, strains.strain_name'))
                     ->where('review_id',$id)
                     ->groupBy('strains.strain_name')
                     ->get();
-      //  print_r($data['comments']);
-      //  die();
-
-
-      $max_comment_id = Comment::where('id', DB::raw("(select max(`id`) from comments)"))->first();
-      $max_strain_id = Strain::where('id', DB::raw("(select max(`id`) from strains)"))->first();
-    
-      $up_votes = array_fill(0,$max_comment_id['id'],0);
-      $products_on_strain = array_fill(0,$max_strain_id['id'],0);
-      $product_name = array_fill(0, 100, 0);
-
-      foreach ($data['comments'] as $comment) {
-        $up_votes[$comment->id - 1] = CommentUpVotes::where('comment_id', $comment->id)->count();
-        $authors_comments[$comment->id - 1] = UsersProfile::where('user_id', $comment->from_user)->first();
-      }
-
-      foreach ($data['strains'] as $strain) {
-        $products_on_strain[$strain->id - 1] = ProductOnStrain::where('strains_id', $strain->id) ? ProductOnStrain::where('strains_id', $strain->id)->get() : 0;
-        foreach ($products_on_strain[$strain->id - 1] as $product) {
-        $product_name[$product->id - 1] = Product::where('id', $product->id)->select('name')->get();
-        
-        }
-      }
 
       
-      $data['products_name'] = $product_name;
-      $data['products_on_strain'] = $products_on_strain;
-      $data['comments_upvotes'] = $up_votes;
-      $data['comments_authors'] = $authors_comments;
+      $data['owns_review'] = FALSE;
+      if(isset(Auth::user()->id))
+        $data['owns_review'] = Auth::user()->id == $data['review']->author_id ? TRUE : FALSE;
       
 
       return view('reviews/showreview', $data);

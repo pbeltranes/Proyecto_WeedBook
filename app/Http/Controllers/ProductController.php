@@ -63,7 +63,7 @@ class ProductController extends Controller
             'date_end' => $request->input('date_end'),
             ]);
         $prod->save();
-        return redirect('review/strain/' . $request->id);
+        return redirect('strain/' . $request->id);
     }
     /**
      * Display the specified resource.
