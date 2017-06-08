@@ -17,7 +17,7 @@
   </div>
   <div class="form-group">
       Cover Photo
-      <input type="text" name="background_image_url" value="{{ old('background_image_url') }}" class="form-control"/>
+  <input type="text" name="background_image_url" value="{{ old('background_image_url') }}" class="form-control"/>
   </div>
   <button type="submit">Save Changes</button>
 </tr>
