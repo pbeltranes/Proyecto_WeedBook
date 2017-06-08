@@ -31,17 +31,14 @@ class ReviewController extends Controller
     {
         //saca 5 reseñas en orden por rep
 
-        $data['reviews'] = Review::join('review_up_votes', 'reviews.id', '=', 'review_up_votes.review_id') // selecciona reviews con mas likes
-        ->where('active',0)
-        ->groupBy('reviews.id')
-        ->join('users_profiles', 'reviews.author_id', '=', 'users_profiles.user_id')
-        ->orderBy(DB::raw('COUNT(reviews.id)'), 'DESC')
-        ->paginate(5);
 
-        $data['reviews'] = $data['reviews']->count() > 0 ? $data['reviews'] : Review::take(5)
-          ->where('active',0)
-          ->join('users_profiles', 'reviews.author_id', '=', 'users_profiles.user_id')
-          ->get();
+
+        $data['reviews'] = Review::where('active',0)
+        ->join('users_profiles', 'reviews.author_id', '=', 'users_profiles.user_id')
+        ->selectRaw('reviews.id, reviews.active, reviews.background_image_url, reviews.title, users_profiles.user_name, users_profiles.user_id, (SELECT COUNT(review_up_votes.id) from review_up_votes WHERE review_up_votes.review_id = reviews.id ) as C')
+        ->groupBy('reviews.id')
+        ->orderBy('C', 'DESC')
+        ->paginate(5);
 
         $data['title'] = 'WeedBook World';
         return view('home', $data);
@@ -278,8 +275,6 @@ class ReviewController extends Controller
 
       //  print_r($data['comments']);
       //  die();
-
-
 
       return view('reviews/showreview', $data);
     }
