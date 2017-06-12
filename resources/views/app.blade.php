@@ -19,6 +19,7 @@
   <body>
     @include('auth/loginmodal')
     @include('auth/registermodal')
+    @include('reviews/newreviewmodal')
     <nav class="navbar navbar-default">
       <div class="container-fluid">
         <div class="navbar-header">
@@ -35,6 +36,11 @@
             <li>
               <a href="{{ url('/') }}">Home</a>
             </li>
+            @if (!Auth::guest())
+            <li>
+              <a href="#" data-toggle="modal" data-target="#newReviewModal">Add new Review</a>
+            </li>
+            @endif
           </ul>
           <ul class="nav navbar-nav navbar-right">
             @if (Auth::guest())
@@ -49,9 +55,6 @@
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><?php echo '@' ?>{{ Auth::user()->name }}<span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">
                 @if (!Auth::guest())
-                <li>
-                  <a href="{{ url('/new-review') }}">Add new review</a>
-                </li>
                 <li>
                   <a href="{{ url('/user/'.Auth::id().'/reviews') }}">My Reviews</a>
                 </li>
@@ -110,5 +113,6 @@
     <!-- Scripts -->
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/js/bootstrap.min.js"></script>
+    <script src="{{ URL::to('/') }}/js/main.js"></script>
   </body>
 </html>

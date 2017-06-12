@@ -54,7 +54,7 @@ Add a new strain to your grow
 
     <div class="form-group">
       Light Setup
-    <select name="light_type" class="form-control">
+    <select name="light_type" class="form-control" id="lightSetup">
       <option disabled selected>-- Select an Option --</option>
       <option value="LED">LED Pannel</option>
       <option value="HPS/HM">HPS/HM Lamps</option>
@@ -62,27 +62,11 @@ Add a new strain to your grow
     </select>
   </div>
 
-    <div class="form-group">
-      Light Power in Watts (0 for sunlight)
+    <div class="form-group" id="lightPower">
+      Light Power in Watts
       <input type="number" name="light_power" value="{{old('light_power')}}">
   </div>
 
-  <div class="form-group">
-    Germination date
-    <input type="date" name="germ_start" value="{{ old('germ_start') }}" class="form-control">
-  </div>
-  <div class="form-group">
-    Vegetation date
-    <input type="date" name="veg_start" value="{{ old('veg_start') }}" class="form-control">
-  </div>
-  <div class="form-group">
-    Floration date
-    <input type="date" name="flow_start" value="{{ old('flow_start') }}" class="form-control">
-  </div>
-  <div class="form-group">
-    Harvest date
-    <input type="date" name="harvest_date" value="{{ old('harvest_date') }}" class="form-control">
-  </div>
 
 	<div class="form-group">
 		Plants of this type

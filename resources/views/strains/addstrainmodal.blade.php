@@ -60,7 +60,7 @@
                           
                               <div class="form-group">
                                 Light Setup
-                              <select name="light_type" class="form-control">
+                              <select name="light_type" class="form-control" id="lightSetup">
                                 <option disabled selected>-- Select an Option --</option>
                                 <option value="LED">LED Pannel</option>
                                 <option value="HPS/HM">HPS/HM Lamps</option>
@@ -68,8 +68,8 @@
                               </select>
                             </div>
 
-                            <div class="form-group">
-                                Light Power in Watts (0 for sunlight)
+                            <div class="form-group" id="lightPower">
+                                Light Power in Watts
                                 <input type="number" name="light_power" value="{{old('light_power')}}">
                             </div>
                           

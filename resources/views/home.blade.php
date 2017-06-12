@@ -30,7 +30,7 @@ There is no reviews till now. Login and write a new post now!!!
         <p><b>{{$review->title}}</b></p>
         <p>Grower <b><a href="{{ url('user/' . $review->user_id . '')}}">
          {{$review->user_name }}</a></b></p>
-         <p>Reputation: {{$review->C}}</p>
+         <p>Reputation: {{$review->C ? $review->C : 0}}</p>
         <p align="justify" >News: Praesent tincidunt sed tellus ut rutrum. Sed vitae justo condimentum, porta lectus vitae, ultricies congue gravida diam non fringilla.</p>
       </div>
     </div>

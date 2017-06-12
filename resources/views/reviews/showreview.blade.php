@@ -69,7 +69,9 @@
                                       'strains' => $strains,
                                       'review' => $review,
                                     ]))
-          <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#updateModal">Update Review</button>
+            @if($strain_count > 0)
+              <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#updateModal">Update Review</button>
+            @endif
           @endif
     </div>
 
@@ -131,10 +133,14 @@
             <div class="collapse" id="tab3">
               <h3>Products </h3>
               @foreach($strains as $strain)
-                <h4>{{$strain->strain_name}} <a href="{{url('strain/' . $strain->id . '/add-product')}}"><button type="button" class="btn btn-default"> Add Product</button></a>:</h4>
+                <h4>{{$strain->strain_name}} 
+                @if($owns_review)
+                <a href="{{url('strain/' . $strain->id . '/add-product')}}"><button type="button" class="btn btn-default"> Add Product</button></a>:
+                </h4>
+                @endif
                 @foreach($products_on_strain as $prod)
                   @if($prod->id == $strain->id)
-                <h5>{{$prod->name}}</h5>
+                <h5>- {{$prod->name}}</h5>
                   @endif
                 @endforeach
               @endforeach

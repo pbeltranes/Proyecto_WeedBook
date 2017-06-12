@@ -29,16 +29,14 @@ class ReviewController extends Controller
      */
     public function index()
     {
-        //saca 5 reseñas en orden por rep
-
-
+        //saca 6 reseñas en orden por rep
 
         $data['reviews'] = Review::where('active',0)
         ->join('users_profiles', 'reviews.author_id', '=', 'users_profiles.user_id')
-        ->selectRaw('reviews.id, reviews.active, reviews.background_image_url, reviews.title, users_profiles.user_name, users_profiles.user_id, (SELECT COUNT(review_up_votes.id) from review_up_votes WHERE review_up_votes.review_id = reviews.id ) as C')
+        ->selectRaw('reviews.id, reviews.active, reviews.background_image_url, reviews.title, users_profiles.user_name, users_profiles.user_id, (SELECT COUNT(review_up_votes.id) from review_up_votes WHERE review_up_votes.review_id = reviews.id GROUP BY review_up_votes.review_id) as C')
         ->groupBy('reviews.id')
         ->orderBy('C', 'DESC')
-        ->paginate(5);
+        ->paginate(6);
 
         $data['title'] = 'WeedBook World';
         return view('home', $data);
