@@ -37,8 +37,8 @@
                           
                             <div class="form-group">
                               Grow type
-                                <select name="grow_type" class="form-control">
-                                <option disabled selected>-- Select an Option --</option>
+                                <select name="grow_type" class="form-control" id="growSetup">
+                                <option value="0" disabled selected>-- Select an Option --</option>
                                   <option value="Hidroponic">Hidroponic</option>
                                   <option value="Indoor">Indoor</option>
                                   <option value="Outdoor">Outdoor</option>
@@ -58,7 +58,7 @@
                               </select>
                             </div>
                           
-                              <div class="form-group">
+                              <div class="form-group" id="lightSetupClass">
                                 Light Setup
                               <select name="light_type" class="form-control" id="lightSetup">
                                 <option disabled selected>-- Select an Option --</option>

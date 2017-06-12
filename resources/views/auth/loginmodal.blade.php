@@ -11,28 +11,34 @@
                       <div class="modal-body">
                         <form method="POST" action="/auth/login">
                           {!! csrf_field() !!}
-                            <div>
-                                Email
-                                <input type="email" name="email" value="{{ old('email') }}">
+                          <div class="form-group">
+                            <div class="input-group">
+                              <span class="input-group-addon">
+                                <i class="glyphicon glyphicon-user"></i>
+                              </span> 
+                              <input class="form-control" placeholder="Email" type="email" name="email" value="{{ old('email') }}" autofocus>
                             </div>
-                        
-                            <div>
-                                Password
-                                <input type="password" name="password" id="password">
+                          </div>
+
+                          <div class="form-group">
+                            <div class="input-group">
+                              <span class="input-group-addon">
+                                <i class="glyphicon glyphicon-lock"></i>
+                              </span>
+                                <input class="form-control" placeholder="Password" name="password" type="password" value="" id="password">
                             </div>
-                        
+                          </div>
                             <div>
                                 <input type="checkbox" name="remember"> Remember Me
                             </div>
                         
-                            <div>
-                                <button type="submit">Login</button>
-                            </div>
+                          <div class="form-group">
+                            <input type="submit" class="btn btn-lg btn-primary btn-block" value="Login">
+                          </div>
                         </form>
                       
                       </div>
                       <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                       </div>
                     </div>
 
