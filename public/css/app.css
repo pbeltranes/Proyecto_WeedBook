@@ -5431,15 +5431,15 @@ button.close {
   top: 0;
   right: 0;
   left: 0;
-  background-color: #eed597;
+  background-color: #584922;
 }
 .modal-backdrop.fade {
   opacity: 0;
-  filter: alpha(opacity=1);
+  filter: alpha(opacity=0);
 }
 .modal-backdrop.in {
   opacity: 0.5;
-  filter: alpha(opacity=70);
+  filter: alpha(opacity=50);
 }
 .modal-header {
   padding: 15px;

@@ -4,9 +4,9 @@
 
     <!-- Modal content-->
     <section class="gallery modal" id="gallerymodal" role="dialog">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-body">
+          <!-- <div class="modal-dialog"> -->
+            <!-- <div class="modal-content">
+              <div class="modal-body"> -->
                 <div class="modal-header">
                   <button type="button" class="close" data-dismiss="modal">&times;</button>
                   <h2 class="modal-title text-danger">Gallery</h2>
@@ -63,8 +63,8 @@
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="close" data-dismiss="modal">Exit</button>
-                </div>
-              </div>
-            </div>
+                <!-- </div>
+              </div> -->
+            <!-- </div> -->
         </div>
   </section>
