@@ -21,3 +21,6 @@ $('#lightSetup').on('change', function(){
     	$('input[name=light_power]').val('');
     }
 })
+
+
+$("#chosen").chosen();

@@ -110,7 +110,10 @@
                 @if($owns_review)
                 <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#addStrainModal">Add new Crop</button>
                 @endif
-                @include('strains/addstrainmodal', array('review_id' => $review->id))
+                @include('strains/addstrainmodal', array('review_id' => $review->id, 
+                                                          'api_banks' => $api_banks,
+                                                          'api_strains' => $api_strains,
+                                                          ))
                 <tr>
                 <h4>Total of Crops: {{$strain_count}}</h4>
                 <td><h4>Setup:</h4></td>

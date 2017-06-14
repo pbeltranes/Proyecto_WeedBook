@@ -1,4 +1,5 @@
-
+                
+                <link href="{{ URL::to('/') }}/css/showstrain.css" rel="stylesheet">
                 <!-- Modal -->
                 <div id="myModal{{$strain->id}}" class="modal fade" role="dialog">
                   <div class="modal-dialog">
@@ -38,15 +39,69 @@
                                 @if($update->id == $strain->id)
                                 <div id="{{$update->id}}week{{$week_count}}" class="tab-pane fade">
                                 <p>This week {{$strain->strain_name}}'s had</p>
-                                  <i class="fa fa-moon-o" aria-hidden="true">Darkness time: {{$update->darkness_time}} hrs</i><br>
-                                  <i class="fa fa-sun-o" aria-hidden="true">Light time: {{$update->light_time}} hrs</i><br>
-                                  <i class="fa fa-arrows-v" aria-hidden="true">Height: {{$update->height}} m</i><br>
-                                  <i class="fa fa-hourglass-end" aria-hidden="true">Stage: {{$update->stage}}</i><br>
-                                  <i class="fa fa-flask" aria-hidden="true">Vegetation stage product: {{$update->veg_prod_quantity}} ml/L</i><br>
-                                  <i class="fa fa-flask" aria-hidden="true">Flowering stage product: {{$update->flow_prod_quantity}} ml/L</i><br>
-                                  <i class="fa fa-flask" aria-hidden="true">Other product: {{$update->other_prod_quantity}} ml/L</i><br>
+<!-- 
+                                  <button type="button" class="btn btn-default btn-circle btn-xl"><i class="fa fa-moon-o"><br>{{$update->darkness_time}} hrs</i></button>
+                                  <button type="button" class="btn btn-primary btn-circle btn-xl"><i class="fa fa-sun-o"></i><br>{{$update->light_time}} hrs</button>
+                                  <button type="button" class="btn btn-success btn-circle btn-xl"><i class="fa fa-arrows-v"></i><br>{{$update->height}} m</button>
+                                  <button type="button" class="btn btn-info btn-circle btn-xl"><i class="fa fa-hourglass-end"></i><br>{{$update->stage}}</button>
+                                  <button type="button" class="btn btn-warning btn-circle btn-xl"><i class="fa fa-flask"></i><br>{{$update->veg_prod_quantity}} ml/L</button>
+                                  <button type="button" class="btn btn-danger btn-circle btn-xl"><i class="fa fa-flask"></i><br>{{$update->flow_prod_quantity}} ml/L</button>
+                                  <button type="button" class="btn btn-danger btn-circle btn-xl"><i class="fa fa-flask"></i><br>{{$update->other_prod_quantity}} ml/L</button>
+                                   -->
+                                  <div class="container">
+                                    <div class="row">    
+                                      <div class="col-md-12">
+                                        <div class="update-nag">
+                                          <div class="update-split"><i class="fa fa-moon-o"></i></div>
+                                          <div class="update-text">{{$update->darkness_time}} Hours of darkness</div>
+                                        </div>
+                                      </div>
+                                      
+                                      <div class="col-md-12">
+                                        <div class="update-nag">
+                                          <div class="update-split"><i class="fa fa-sun-o"></i></div>
+                                          <div class="update-text">{{$update->light_time}} Hours of light</div>
+                                        </div>
+                                      </div>
+                                      
+                                      <div class="col-md-12">
+                                        <div class="update-nag">
+                                          <div class="update-split"><i class="fa fa-arrows-v"></i></div>
+                                          <div class="update-text">{{$update->height}} m long</div>
+                                        </div>
+                                      </div>
+
+                                      <div class="col-md-12">
+                                        <div class="update-nag">
+                                          <div class="update-split"><i class="fa fa-hourglass-end"></i></div>
+                                          <div class="update-text">{{$update->stage}} period</div>
+                                        </div>
+                                      </div>
+
+                                      <div class="col-md-12">
+                                        <div class="update-nag">
+                                          <div class="update-split"><i class="fa fa-flask"></i></div>
+                                          <div class="update-text">{{$update->veg_prod_quantity}} ml/L of vegetation product</div>
+                                        </div>
+                                      </div>
+
+                                      <div class="col-md-12">
+                                        <div class="update-nag">
+                                          <div class="update-split"><i class="fa fa-flask"></i></div>
+                                          <div class="update-text">{{$update->flow_prod_quantity}} ml/L of flowering product</div>
+                                        </div>
+                                      </div>
+
+                                      <div class="col-md-12">
+                                        <div class="update-nag">
+                                          <div class="update-split"><i class="fa fa-flask"></i></div>
+                                          <div class="update-text">{{$update->other_prod_quantity}} ml/L of other products</div>
+                                        </div>
+                                      </div>
 
 
+                                    </div>
+                                  </div>
                                 </div>
                                 <?php $week_count++; ?>
                                 @endif
