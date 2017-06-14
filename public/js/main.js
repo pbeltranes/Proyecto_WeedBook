@@ -12,7 +12,7 @@ $('#growSetup').on('change', function(){
 })
 
 //esconde la opcion de wataje si elijio que sera el sol su fuente principal de luz
-$('#lightSetup').on('change', function(){       
+$('#lightSetup').on('change', function(){
     if ($(this).val() == 'Sun' ) {
         $('#lightPower').addClass('hide');
         $('input[name=light_power]').val('0');
