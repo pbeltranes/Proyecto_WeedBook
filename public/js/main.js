@@ -21,8 +21,6 @@ $('#lightSetup').on('change', function(){
     	$('input[name=light_power]').val('');
     }
 })
-<<<<<<< HEAD
-
 
 $(document).ready(function () {
   var navListItems = $('div.setup-panel div a'),
@@ -67,6 +65,3 @@ $(document).ready(function () {
   $('div.setup-panel div a.btn-primary').trigger('click');
 });
 
-
-=======
->>>>>>> db2279628facb07bdd674f6b367f997ba5725a42
