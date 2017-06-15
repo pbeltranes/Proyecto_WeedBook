@@ -3,66 +3,17 @@
 @section('title')
 @endsection
 @section('content')
+@include('reviews/reviewgallery')
 
 <div>
     <div class="card hovercard">
-      <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-          <ol class="carousel-indicators">
-            <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-            <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-            <li data-target="#carousel-example-generic" data-slide-to="2"></li>
-            <li data-target="#carousel-example-generic" data-slide-to="3"></li>
-            <li data-target="#carousel-example-generic" data-slide-to="4"></li>
-          </ol>
-
-          <!-- Wrapper for slides -->
-          <div class="carousel-inner" role="listbox">
-            <div class="item active">
-              <img src="https://static.pexels.com/photos/27714/pexels-photo-27714.jpg" class="center-block" alt="...">
-              <div class="carousel-caption">
-                  <h5>Primer mes</h5>
-              </div>
-            </div>
-
-            <div class="item">
-              <img src="https://s-media-cache-ak0.pinimg.com/originals/d3/cf/13/d3cf133e1c5a4dc6b6e5bed8ce318cdc.jpg" class="center-block" alt="...">
-              <div class="carousel-caption">
-                <h5>segundo mes</h5>
-              </div>
-            </div>
-
-            <div class="item">
-              <img src="http://www.mrwallpaper.com/wallpapers/little-purple-flowers.jpg" class="center-block" alt="...">
-              <div class="carousel-caption">
-                <h5>tercer mes</h5>
-              </div>
-            </div>
-
-            <div class="item">
-              <img src="http://images5.aplus.com/uc-up/72406b0e-9ba9-40ab-9a76-7c700929f98d/72406b0e-9ba9-40ab-9a76-7c700929f98d.inline_yes" class="center-block" alt="...">
-              <div class="carousel-caption">
-                <h5>cuarto mes</h5>
-              </div>
-            </div>
-
-            <div class="item bg-inverse">
-              <img src="{{$review->background_image_url}}" class="center-block" alt="...">
-              <div class="carousel-caption">
-                <h5>{{$review->updated_at->format('Y-m-d')}}</h5>
-              </div>
-            </div>
-          </div>
-
-          <!-- Controls -->
-          <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
-            <span class="fa fa-angle-left" aria-hidden="true"></span>
-            <span class="sr-only">Previous</span>
+      <div class="container-fluid">
+          <a class="row"  data-toggle="modal" data-target="#gallerymodal" href="#">
+            <img class="img-responsive thumbnail center-block" src="{{$review->background_image_url}}"  alt="{{$review->updated_at->format('Y-m-d')}}" width="700" height="500">
           </a>
-          <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
-            <span class="fa fa-angle-right" aria-hidden="true"></span>
-            <span class="sr-only">Next</span>
-          </a>
+        <hr>
       </div>
+
           <div class="card-info"> <span class="card-title"><h2>{{$review->title}}</h2></span></div>
           @if($owns_review)
           @include('update/update', array([
@@ -75,7 +26,7 @@
           @endif
     </div>
 
-    </h2></span></div>
+</div>
     <div class="btn-pref btn-group btn-group-justified btn-group-lg" role="group" aria-label="..." >
         <div class="btn-group" role="group">
             <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#tab1" aria-expanded="false" aria-controls="#collapseExample"><span class="fa fa-user-circle" aria-hidden="true"></span>
@@ -96,14 +47,14 @@
         </div>
 
     </div>
-      <div class="well">
-          <div class="tab-content">
-            <div class="collapse" id="tab1">
-                <h3>Author</h3>
-                <img class="img-circle" src="{{$author->avatar_url}}"  width="100" height="100">
-                <td><h4>Name</h4>{{$author->user_name}}</td>
-                <td><h4>Growing Since</h4>{{$author->growing_since}}</td>
-
+          <div class="well">
+              <div class="tab-content">
+                <div class="collapse" id="tab1">
+                    <h3>Author</h3>
+                    <img class="img-circle" src="{{$author->avatar_url}}"  width="100" height="100">
+                    <td><h4>Name</h4>{{$author->user_name}}</td>
+                    <td><h4>Growing Since</h4>{{$author->growing_since}}</td>
+                    
             </div>
             <div class="collapse" id="tab2">
                 <h3>Crops</h3>
@@ -151,8 +102,6 @@
           </div>
       </div>
     
-
-
         <h3 class="box-content bottom">Comments</h3>
         <ul class="media-list">
           @foreach($comments as $comment)
@@ -223,15 +172,12 @@
             @endif
                 </div>
                 <li class="media">
-
-
                     <div class="media-left media-middle">
                       <a>
                         <img class=" img-circle" src="{{$comment->avatar_url}}" alt="avatar" width="65" height="65">
                       </a>
                     </div>
                     <div class="media-body">
-
 
                       <h5 class="media-heading">{{$comment->user_name}}<h6 class="date" style="color:#aaa; font-family:verdana; font-size:10px;">commented on {{$comment->created_at}}</h6></h5>
                     </div>

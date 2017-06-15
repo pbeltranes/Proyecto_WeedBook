@@ -12,7 +12,7 @@ $('#growSetup').on('change', function(){
 })
 
 //esconde la opcion de wataje si elijio que sera el sol su fuente principal de luz
-$('#lightSetup').on('change', function(){       
+$('#lightSetup').on('change', function(){
     if ($(this).val() == 'Sun' ) {
         $('#lightPower').addClass('hide');
         $('input[name=light_power]').val('0');
@@ -21,6 +21,7 @@ $('#lightSetup').on('change', function(){
     	$('input[name=light_power]').val('');
     }
 })
+<<<<<<< HEAD
 
 
 $(document).ready(function () {
@@ -67,3 +68,5 @@ $(document).ready(function () {
 });
 
 
+=======
+>>>>>>> db2279628facb07bdd674f6b367f997ba5725a42
