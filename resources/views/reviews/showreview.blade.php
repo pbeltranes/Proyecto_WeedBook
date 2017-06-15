@@ -150,7 +150,7 @@
             </div>
           </div>
       </div>
-    </div>
+    
 
 
         <h3 class="box-content bottom">Comments</h3>

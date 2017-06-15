@@ -241,7 +241,7 @@ class ReviewController extends Controller
 
       $data['strain_updates'] = Strain::where('review_id', $id)
                                 ->join('strain_updates', 'strain_updates.strain_id', '=', 'strains.id')
-                                ->selectRaw('strains.id as id, strain_updates.height, strain_updates.darkness_time, strain_updates.light_time, strain_updates.stage, strain_updates.veg_prod_quantity, strain_updates.flow_prod_quantity, strain_updates.other_prod_quantity, strain_updates.created_at, strain_updates.updated_at')
+                                ->selectRaw('strains.id as id, strain_updates.height, strain_updates.darkness_time, strain_updates.light_time, strain_updates.stage, strain_updates.veg_prod_quantity, strain_updates.flow_prod_quantity, strain_updates.other_prod_quantity, strain_updates.created_at, strain_updates.updated_at, strain_updates.update_image_url')
                                 ->orderBy('strain_updates.created_at')
                                 ->get();
 
