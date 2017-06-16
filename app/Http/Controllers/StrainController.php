@@ -215,7 +215,7 @@ class StrainController extends Controller
         return back();
     }
 
-    public function updateApi()
+    public function updateApi($startPage, $endPage)
     {
 
         $client = new Client();
@@ -230,7 +230,7 @@ class StrainController extends Controller
 
         $page_number = $meta['total_pages'];
 
-        for ($page=1; $page <= $page_number; $page++) {
+        for ($page= $startPage; $page <= $endPage; $page++) {
 
            $data = $client->get('https://www.cannabisreports.com/api/v1.0/strains', [
                 'query' => ['sort' => 'name',
@@ -243,8 +243,8 @@ class StrainController extends Controller
            for ($i=0; $i < $strains_in_page; $i++) {
                $strain_name = $data[$i]['name'];
                $strain_bank = $data[$i]['seedCompany']['name'];
-               $banks_exist = ApiBanks::where('bank_name', $strain_bank) ? TRUE:FALSE;
-               $strain_exist = ApiStrains::where('strain_name', $strain_name) ? TRUE:FALSE;
+               $banks_exist = ApiBanks::where('bank_name', $strain_bank)->count() > 0 ? TRUE:FALSE;
+               $strain_exist = ApiStrains::where('strain_name', $strain_name)->count() > 0 ? TRUE:FALSE;
 
                if(!$strain_exist){
                     $new_strain =ApiStrains::create([
@@ -259,9 +259,9 @@ class StrainController extends Controller
                     ]);
                     $new_bank->save();
                }
-
            }
         }
+        die();
         return back()->withMessage('Api Actualizada con exito');
     }
 }

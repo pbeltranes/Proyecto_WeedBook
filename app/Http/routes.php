@@ -79,7 +79,7 @@ Route::group(['middleware' => ['auth']], function()
 }); // Acciones que solo pueden hacer los usuarios logueados
 
 //admin
-Route::get('admin/update-api', 'StrainController@updateApi');
+Route::get('admin/update-api-{startPage}-{endPage}', 'StrainController@updateApi');
 Route::get('admin/add-product', 'ProductController@create');
 Route::post('admin/save-product', 'ProductController@store');
 //fin admin

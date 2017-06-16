@@ -19,6 +19,8 @@ use App\Comment;
 use App\CommentUpVotes;
 use App\ProductOnStrain;
 use App\Product;
+use App\apiBanks;
+use App\apiStrains;
 
 class ReviewController extends Controller
 {
@@ -239,7 +241,7 @@ class ReviewController extends Controller
 
       $data['strain_updates'] = Strain::where('review_id', $id)
                                 ->join('strain_updates', 'strain_updates.strain_id', '=', 'strains.id')
-                                ->selectRaw('strains.id as id, strain_updates.height, strain_updates.darkness_time, strain_updates.light_time, strain_updates.stage, strain_updates.veg_prod_quantity, strain_updates.flow_prod_quantity, strain_updates.other_prod_quantity, strain_updates.created_at, strain_updates.updated_at')
+                                ->selectRaw('strains.id as id, strain_updates.height, strain_updates.darkness_time, strain_updates.light_time, strain_updates.stage, strain_updates.veg_prod_quantity, strain_updates.flow_prod_quantity, strain_updates.other_prod_quantity, strain_updates.created_at, strain_updates.updated_at, strain_updates.update_image_url')
                                 ->orderBy('strain_updates.created_at')
                                 ->get();
 
@@ -270,6 +272,9 @@ class ReviewController extends Controller
       $data['owns_review'] = FALSE;
       if(isset(Auth::user()->id))
         $data['owns_review'] = Auth::user()->id == $data['review']->author_id ? TRUE : FALSE;
+
+      $data['api_banks'] = apiBanks::selectRaw('bank_name as name')->get();
+      $data['api_strains'] = apiStrains::selectRaw('strain_name as name')->get();
 
       //  print_r($data['comments']);
       //  die();

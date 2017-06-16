@@ -3,15 +3,65 @@
 @section('title')
 @endsection
 @section('content')
-@include('reviews/reviewgallery')
 
 <div>
     <div class="card hovercard">
-      <div class="container-fluid">
-          <a class="row"  data-toggle="modal" data-target="#gallerymodal" href="#">
-            <img class="img-responsive thumbnail center-block" src="{{$review->background_image_url}}"  alt="{{$review->updated_at->format('Y-m-d')}}" width="700" height="500">
+      <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+          <ol class="carousel-indicators">
+            <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+            <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+            <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+            <li data-target="#carousel-example-generic" data-slide-to="3"></li>
+            <li data-target="#carousel-example-generic" data-slide-to="4"></li>
+          </ol>
+
+          <!-- Wrapper for slides -->
+          <div class="carousel-inner" role="listbox">
+            <div class="item active">
+              <img src="https://static.pexels.com/photos/27714/pexels-photo-27714.jpg" class="center-block" alt="...">
+              <div class="carousel-caption">
+                  <h5>Primer mes</h5>
+              </div>
+            </div>
+
+            <div class="item">
+              <img src="https://s-media-cache-ak0.pinimg.com/originals/d3/cf/13/d3cf133e1c5a4dc6b6e5bed8ce318cdc.jpg" class="center-block" alt="...">
+              <div class="carousel-caption">
+                <h5>segundo mes</h5>
+              </div>
+            </div>
+
+            <div class="item">
+              <img src="http://www.mrwallpaper.com/wallpapers/little-purple-flowers.jpg" class="center-block" alt="...">
+              <div class="carousel-caption">
+                <h5>tercer mes</h5>
+              </div>
+            </div>
+
+            <div class="item">
+              <img src="http://images5.aplus.com/uc-up/72406b0e-9ba9-40ab-9a76-7c700929f98d/72406b0e-9ba9-40ab-9a76-7c700929f98d.inline_yes" class="center-block" alt="...">
+              <div class="carousel-caption">
+                <h5>cuarto mes</h5>
+              </div>
+            </div>
+
+            <div class="item bg-inverse">
+              <img src="{{$review->background_image_url}}" class="center-block" alt="...">
+              <div class="carousel-caption">
+                <h5>{{$review->updated_at->format('Y-m-d')}}</h5>
+              </div>
+            </div>
+          </div>
+
+          <!-- Controls -->
+          <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+            <span class="fa fa-angle-left" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
           </a>
-        <hr>
+          <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+            <span class="fa fa-angle-right" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+          </a>
       </div>
 
           <div class="card-info">
@@ -28,7 +78,7 @@
           @endif
     </div>
 
-</div>
+    </h2></span></div>
     <div class="btn-pref btn-group btn-group-justified btn-group-lg" role="group" aria-label="..." >
         <div class="btn-group" role="group">
             <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#tab1" aria-expanded="false" aria-controls="#collapseExample"><span class="fa fa-user-circle" aria-hidden="true"></span>
@@ -49,57 +99,62 @@
         </div>
 
     </div>
-          <div class="well">
-              <div class="tab-content">
-                <div class="collapse" id="tab1">
-                    <h3>Author</h3>
-                    <img class="img-circle" src="{{$author->avatar_url}}"  width="100" height="100">
-                    <td><h4>Name</h4>{{$author->user_name}}</td>
-                    <td><h4>Growing Since</h4>{{$author->growing_since}}</td>
+      <div class="well">
+          <div class="tab-content">
+            <div class="collapse" id="tab1">
+                <h3>Author</h3>
+                <img class="img-circle" src="{{$author->avatar_url}}"  width="100" height="100">
+                <td><h4>Name</h4>{{$author->user_name}}</td>
+                <td><h4>Growing Since</h4>{{$author->growing_since}}</td>
 
-                </div>
-                <div class="collapse" id="tab2">
-                    <h3>Crops</h3>
-                    @if($owns_review)
-                    <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#addStrainModal">Add new Crop</button>
-                    @endif
-                    @include('strains/addstrainmodal', array('review_id' => $review->id))
-                    <tr>
-                    <h4>Total of Crops: {{$strain_count}}</h4>
-                    <td><h4>Setup:</h4></td>
-                    <?php $actually = ''; $cont = -1; $s = 0; $u = 0?>
-                    @foreach($strains as $strain)
-                      @if( $strain->strain_name != $actually)
-                      <?php $actually = $strain->strain_name;  $cont++;?>
-                    <h4>-{{$strain->strain_name}}</h4>
+            </div>
+            <div class="collapse" id="tab2">
+                <h3>Crops</h3>
+                @if($owns_review)
+                <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#addStrainModal">Add new Crop</button>
+                @endif
+                @include('strains/addstrainmodal', array('review_id' => $review->id,
+                                                          'api_banks' => $api_banks,
+                                                          'api_strains' => $api_strains,
+                                                          ))
+                <tr>
+                <h4>Total of Crops: {{$strain_count}}</h4>
+                <td><h4>Setup:</h4></td>
+                <?php $actually = ''; $cont = -1; $s = 0; $u = 0?>
+                @foreach($strains as $strain)
+                  @if( $strain->strain_name != $actually)
+                  <?php $actually = $strain->strain_name;  $cont++;?>
+                <h4>-{{$strain->strain_name}}</h4>
 
-                    <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal{{$strain->id}}">Information</button>
-                    @include('strains/viewstrain', array(['strain' => $strain,
-                                                          'updates' => $strain_updates,
-                                                          ]))
+                <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal{{$strain->id}}">Information</button>
+                @include('strains/viewstrain', array(['strain' => $strain,
+                                                      'updates' => $strain_updates,
+                                                      ]))
 
-                    @endif
-                    @endforeach
-                    <td><h4>Date init</h4>{{$review->created_at}}</td>
-                  </tr>
-                </div>
-                <div class="collapse" id="tab3">
-                  <h3>Products </h3>
-                  @foreach($strains as $strain)
-                    <h4>{{$strain->strain_name}}
-                    @if($owns_review)
-                    <a href="{{url('strain/' . $strain->id . '/add-product')}}"><button type="button" class="btn btn-default"> Add Product</button></a>:
-                    </h4>
-                    @endif
-                    @foreach($products_on_strain as $prod)
-                      @if($prod->id == $strain->id)
-                    <h5>- {{$prod->name}}</h5>
-                      @endif
-                    @endforeach
-                  @endforeach
-                </div>
-              </div>
+                @endif
+                @endforeach
+                <td><h4>Date init</h4>{{$review->created_at}}</td>
+              </tr>
+            </div>
+            <div class="collapse" id="tab3">
+              <h3>Products </h3>
+              @foreach($strains as $strain)
+                <h4>{{$strain->strain_name}}
+                @if($owns_review)
+                <a href="{{url('strain/' . $strain->id . '/add-product')}}"><button type="button" class="btn btn-default"> Add Product</button></a>:
+                </h4>
+                @endif
+                @foreach($products_on_strain as $prod)
+                  @if($prod->id == $strain->id)
+                <h5>- {{$prod->name}}</h5>
+                  @endif
+                @endforeach
+              @endforeach
+            </div>
           </div>
+      </div>
+
+
 
         <h3 class="box-content bottom">Comments</h3>
         <ul class="media-list">
@@ -173,6 +228,7 @@
                 @endif
             @endif
                 </div>
+<<<<<<< HEAD
 
             <div class="row">
               <div class="col-sm-1">
@@ -190,6 +246,23 @@
                     {{$comment->body}}
                     <div class="footer">
                       Aqui deberia ir los botones
+=======
+                <li class="media">
+
+
+                    <div class="media-left media-middle">
+                      <a>
+                        <img class=" img-circle" src="{{$comment->avatar_url}}" alt="avatar" width="65" height="65">
+                      </a>
+                    </div>
+                    <div class="media-body">
+
+
+                      <h5 class="media-heading">{{$comment->user_name}}<h6 class="date" style="color:#aaa; font-family:verdana; font-size:10px;">commented on {{$comment->created_at}}</h6></h5>
+                    </div>
+                    <div class="media-middle">
+                      <h4>{{$comment->body}}</h4>
+>>>>>>> 7355b4fe42304bb612d4852d521e73caac09fc83
                     </div>
                   </div><!-- /panel-body -->
                 </div><!-- /panel panel-default -->

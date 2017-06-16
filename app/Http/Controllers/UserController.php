@@ -146,7 +146,7 @@ class UserController extends Controller
         $totalUserComments = $totalUserComments > 0 ? $totalUserComments : 1;
         $data['prom_comments_rep'] = $totalCommentRep / $totalUserComments;
 
-        $data['user_reviews'] = Review::where('author_id', $id);
+        $data['user_reviews'] = Review::where('author_id', $id)->get();
 
 
 

@@ -36,6 +36,8 @@ class RedirectIfAuthenticated
     {
         if ($this->auth->check()) {
             return redirect('/');
+            //return redirect($request);
+           //return redirect('/review/2');
         }
 
         return $next($request);
