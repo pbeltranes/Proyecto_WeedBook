@@ -14,7 +14,9 @@
         <hr>
       </div>
 
-          <div class="card-info"> <span class="card-title"><h2>{{$review->title}}</h2></span></div>
+          <div class="card-info">
+            <span class="card-title"><h2>{{$review->title}}</h2></span>
+          </div>
           @if($owns_review)
           @include('update/update', array([
                                       'strains' => $strains,
@@ -101,12 +103,14 @@
 
         <h3 class="box-content bottom">Comments</h3>
         <ul class="media-list">
-          @foreach($comments as $comment)
+          @if(Auth::guest())
+          <h5 class="bg-info">Login! if you want comment or publish a review</h5>
+          @endif
 
-          <hr></hr>
+          @foreach($comments as $comment)
+            <hr></hr>
+            <div class = "row pull-left">
             @if(Auth::guest())
-                <h5 class="bg-info">Login! if you want comment or publish a review</h5>
-                <div class = "row pull-right">
                   <div class="col-md-3">
                     <form class="form-group " role="form" method="POST"   action="/comment/vote/{{$comment->id}}/{{$review->id}}">
                       {!! csrf_field() !!}
@@ -116,7 +120,7 @@
                     </form>
                   </div>
             @elseif(Auth::user())
-            <div class = "row pull-right">
+            <div class = "row pull-left">
                 <div class="col-md-3">
                   <form class="form-group" role="form" method="POST"   action="/comment/vote/{{$comment->id}}/{{$review->id}}">
                     {!! csrf_field() !!}
@@ -165,23 +169,34 @@
                   </div>
                 </div>
                 <!-- fin Modal editar -->
+
                 @endif
             @endif
                 </div>
-                <li class="media">
-                    <div class="media-left media-middle">
-                      <a>
-                        <img class=" img-circle" src="{{$comment->avatar_url}}" alt="avatar" width="65" height="65">
-                      </a>
-                    </div>
-                    <div class="media-body">
 
-                      <h5 class="media-heading">{{$comment->user_name}}<h6 class="date" style="color:#aaa; font-family:verdana; font-size:10px;">commented on {{$comment->created_at}}</h6></h5>
+            <div class="row">
+              <div class="col-sm-1">
+                <a>
+                  <img class=" img-circle" src="{{$comment->avatar_url}}" width="70" height="70">
+                </a><!-- /thumbnail -->
+              </div><!-- /col-sm-1 -->
+
+              <div class="col-sm-5">
+                <div class="panel panel-default">
+                  <div class="panel-heading">
+                      <strong>{{$comment->user_name}}</strong> <span class="text-muted"><small> commented {{$comment->created_at->format('Y-m-d')}}</small></span>
+                  </div>
+                  <div class="panel-body">
+                    {{$comment->body}}
+                    <div class="footer">
+                      Aqui deberia ir los botones
                     </div>
-                    <div class="media-middle">
-                      <h4>{{$comment->body}}</h4>
-                    </div>
-                </li>
+                  </div><!-- /panel-body -->
+                </div><!-- /panel panel-default -->
+              </div><!-- /col-sm-5 -->
+            </div>
+
+                <!-- fin comentario prueba -->
             <br>
           @endforeach
           <br>
