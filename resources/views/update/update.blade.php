@@ -53,7 +53,7 @@
                                   <label class="control-label">Light Time</label>
                                   <input name="light_time{{$strain->id}}" maxlength="100" type="number" required="required" class="form-control" placeholder="in hours"  />
                                 </div>
-                      
+
                                 <div class="form-group">
                                   <label class="control-label">Stage</label>
                                   <select name="stage{{$strain->id}}" class="form-control">
@@ -78,7 +78,7 @@
                                 </div>
                                 <div class="form-group">
                                   <label class="control-label">Update Image</label>
-                                  <input name="update_image_url{{$strain->id}}" maxlength="100" type="number" required="required" class="form-control" placeholder="URL"  />
+                                  <input name="update_image_url{{$strain->id}}" maxlength="200" type="text" required="required" class="form-control" placeholder="URL"  />
                                 </div>
                                 <button class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Next</button>
                               </div>
@@ -100,7 +100,7 @@
                                   <label class="control-label">Light Time</label>
                                   <input name="light_time{{$strain->id}}" maxlength="100" type="number" required="required" class="form-control" placeholder="in hours"  />
                                 </div>
-                      
+
                                 <div class="form-group">
                                   <label class="control-label">Stage</label>
                                   <select name="stage{{$strain->id}}" class="form-control">
@@ -125,13 +125,13 @@
                                 </div>
                                 <div class="form-group">
                                   <label class="control-label">Update Image</label>
-                                  <input name="update_image_url{{$strain->id}}" maxlength="100" type="number" required="required" class="form-control" placeholder="URL"  />
+                                  <input name="update_image_url{{$strain->id}}" maxlength="200" type="text" required="required" class="form-control" placeholder="URL"  />
                                 </div>
                                 <button class="btn btn-primary nextBtn btn-lg pull-right" type="submit">Update</button>
                               </div>
                             </div>
                           </div>
-                          </form>   
+                          </form>
                           @endif
                           @endforeach
                       </div>
@@ -142,4 +142,3 @@
 
                   </div>
                 </div>
-    

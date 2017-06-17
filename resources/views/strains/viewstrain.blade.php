@@ -1,4 +1,4 @@
-                
+
                 <link href="{{ URL::to('/') }}/css/showstrain.css" rel="stylesheet">
                 <!-- Modal -->
                 <div id="myModal{{$strain->id}}" class="modal fade" role="dialog">
@@ -21,11 +21,11 @@
                         <p><i class="fa fa-envira"> Bank: {{$strain->bank}}</i></p> -->
                         <script>
                           $(document).ready(function(){
-                            $('[data-toggle="popover"]').popover();   
+                            $('[data-toggle="popover"]').popover();
                           });
                         </script>
                         <a data-toggle="collapse" data-parent="#accordion" href="#collapse{{$strain->id}}">Detailed Info</a>
-                        
+
                         <div id="collapse{{$strain->id}}" class="panel-collapse collapse">
                           <div class="panel-body">
                             <div class="btn-pref btn-group btn-group-justified btn-group-lg" role="group" aria-label="..." >
@@ -47,9 +47,10 @@
                                 @foreach($strain_updates as $update)
                                 @if($update->id == $strain->id)
                                 <div id="{{$update->id}}week{{$week_count}}" class="tab-pane fade">
-                                  <div class="col-md-8  col-xs-12 update-strain-img">
-                                    <img src="{{$update->update_image_url}}" class="img-thumbnail picture hidden-xs" />
-                                  </div>
+                                    <div class="row">
+                                     <div class="col-md-8  col-xs-12 update-strain-img">
+                                       <img src="{{$update->update_image_url}}" class="img-responsive img-thumbnail" />
+                                     </div>
                                      <div class="col-md-8 update-amb">
                                           <!-- <h1>Lorem Ipsum</h1> -->
                                           <h4>Crop Variables</h4>
@@ -67,7 +68,7 @@
                                           <span><i class="fa fa-flask" aria-hidden="true">-{{$update->flow_prod_quantity}}</i>ml/L of flowering product</span><br>
                                           <span><i class="fa fa-flask" aria-hidden="true">-{{$update->other_prod_quantity}}</i>ml/L of other product</span>
                                      </div>
-                                  
+                                  </div>
                                 </div>
                                 <?php $week_count++; ?>
                                 @endif
