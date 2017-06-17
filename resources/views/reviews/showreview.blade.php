@@ -4,25 +4,25 @@
 @endsection
 @section('content')
 
-  <div>
-    <div class="card hovercard">
-          <div class="container-fluid ">
-              <img src="{{$review->background_image_url}}" class="img-responsive thumbnail center-block" style="height:auto; display:block;" alt="{{$review->updated_at->format('Y-m-d')}}">
-          </div>
-          <div class="card-info">
-            <span class="card-title"><h2>{{$review->title}}</h2></span>
-          </div>
-          @if($owns_review)
-          @include('update/update', array([
-                                      'strains' => $strains,
-                                      'review' => $review,
-                                    ]))
-            @if($strain_count > 0)
-              <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#updateModal">Update Review</button>
+    <div>
+      <div class="card hovercard">
+            <div class="container-fluid ">
+                <img src="{{$review->background_image_url}}" class="img-responsive thumbnail center-block" style="height:auto; display:block;" alt="{{$review->updated_at->format('Y-m-d')}}">
+            </div>
+            <div class="card-info">
+              <span class="card-title"><h2>{{$review->title}}</h2></span>
+            </div>
+            @if($owns_review)
+            @include('update/update', array([
+                                        'strains' => $strains,
+                                        'review' => $review,
+                                      ]))
+              @if($strain_count > 0)
+                <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#updateModal">Update Review</button>
+              @endif
             @endif
-          @endif
+      </div>
     </div>
-  </div>
     <div class="btn-pref btn-group btn-group-justified btn-group-lg" role="group" aria-label="..." >
         <div class="btn-group" role="group">
             <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#tab1" aria-expanded="false" aria-controls="#collapseExample"><span class="fa fa-user-circle" aria-hidden="true"></span>
@@ -41,7 +41,6 @@
               <div class="hidden-xs">Products</div>
             </button>
         </div>
-
     </div>
       <div class="well">
           <div class="tab-content">
@@ -162,7 +161,6 @@
 
           @foreach($comments as $comment)
             <hr></hr>
-            <div class = "contianer-fluid">
             <div class="row">
               <div class="col-sm-1">
                 <a>
@@ -265,16 +263,18 @@
             <br>
           @endforeach
           <br>
-            <form class="form-group-lg col-md-9 " role="form" method="POST" action="/comment/save/{{$review->id}}">
-              {!! csrf_field() !!}
-              <div class="form-group">
-                <textarea class="form-control" rows="3" cols="2" style = "font-size:13px;" name="comment"></textarea>
-              </div>
-              <div class="form-group">
-                <button class="btn btn-success" >Submit</button>
-              </div>
-            </form>
+          <div class="row">
+            <div class="container-fluid">
+              <form class="form-group-lg col-md-9 " role="form" method="POST" action="/comment/save/{{$review->id}}">
+                {!! csrf_field() !!}
+                <div class="form-group">
+                  <textarea class="form-control" rows="3" cols="2" style = "font-size:13px;" name="comment"></textarea>
+                </div>
+                <div class="form-group">
+                  <button class="btn btn-success" >Submit</button>
+                </div>
+              </form>
+            </div>
+          </div>
         </ul>
-
-
 @endsection
