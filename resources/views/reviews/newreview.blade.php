@@ -6,7 +6,7 @@
 @section('content')
 <!--agregar condicion de verificacion de campo vacio-->
 
-<form  action= "/new-review" method= "POST" >
+<form  action= "/new-review" method= "POST"  enctype="multipart/form-data">
     {!! csrf_field() !!}
 
 <tr>
@@ -17,7 +17,7 @@
   </div>
   <div class="form-group">
       Cover Photo
-  <input type="text" name="background_image_url" value="{{ old('background_image_url') }}" class="form-control"/>
+  <input type="file" name="background_image_url" value="{{ old('background_image_url') }}" class="form-control"/>
   </div>
   <button type="submit">Save Changes</button>
 </tr>

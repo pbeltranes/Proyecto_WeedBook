@@ -39,6 +39,7 @@ class ReviewController extends Controller
         ->paginate(6);
 
         $data['title'] = 'WeedBook World';
+        $data['url'] = '/images/';
         return view('home', $data);
     }
 
@@ -82,7 +83,7 @@ class ReviewController extends Controller
           'title' => $request->title,
           'state' => 0,
           'active' => 0, // cultivo activo
-          'background_image_url' => $request->background_image_url,
+          'background_image_url' => $this->uploading_image($request->file('background_image_url')),
         ]);
         return redirect('review/' . $R->id . '/new-strain')->withMessage('Review created successfully, it wont be shown until you add at least 1 crop to your grow.');
       }
@@ -116,7 +117,7 @@ class ReviewController extends Controller
       $strains_id = Strain::where('review_id', $id)->selectRaw('strains.id as id')->get();
 
       foreach ($strains_id as $id) {
-
+      $img  = $this->uploading_image($request->input('update_image_url' . $id->id));
            $strain_update = StrainUpdate::create([
                   'strain_id' => $id->id,
                   'height' => $request->input('height' . $id->id),
@@ -126,10 +127,10 @@ class ReviewController extends Controller
                   'veg_prod_quantity' => $request->input('veg_prod_quantity' . $id->id),
                   'flow_prod_quantity' => $request->input('flow_prod_quantity' . $id->id),
                   'other_prod_quantity' => $request->input('other_prod_quantity' . $id->id),
-                  'update_image_url' => $request->input('update_image_url' . $id->id),
+                  'update_image_url' => $img,
                   ]);
 
-          $strain_update->save();        
+          $strain_update->save();
       }
 
       return back();
@@ -141,6 +142,21 @@ class ReviewController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
+     public function uploading_image($file){
+        if($file != NULL)
+       $ext = $file->getClientOriginalExtension();
+       else
+       return 'DEFAULT_REVIEW_URL.png';
+        if($ext =! 'jpg' & $ext != 'jpeg' & $ext != 'bmp' & $ext != 'gif' & $ext != 'png')
+             return 'DEFAULT_REVIEW_URL.png';
+           else{
+             $nombre = $file->getClientOriginalName();
+             $hash_name = md5($nombre. time()).'.'. $file->getClientOriginalExtension();
+             \Storage::disk('local')->put($hash_name,  \File::get($file));
+               return $hash_name;
+             }
+           }
     public function edit($id) // se entregan datos para actualizar
     {
       $data=Review::where('id', $id)->first();
@@ -164,7 +180,7 @@ class ReviewController extends Controller
         }else{
           $review=Review::where("id",$request->id)->first();
           $review->title = $request->input('title');
-          $review->background_image_url = $request->input('background_image_url');
+          $review->background_image_url = $this->uploading_image($request->input('background_image_url'));
           $review->save();
         }
       }
@@ -185,6 +201,7 @@ class ReviewController extends Controller
 
 
 
+
     public function update(request $request)
     {
       $duplicate = Review::where('title',$request->title)->first(); // cuidado no permite modificar titulo si exite almacenados pero esta inactivo
@@ -197,7 +214,7 @@ class ReviewController extends Controller
 
         $review=Review::where("id",$request->id)->first();
         $review->title = $request->input('title');
-        $review->background_image_url = $request->input('background_image_url');
+        $review->background_image_url = $this->uploading_image($request->input('background_image_url'));
         $review->save();
       }
       if('Edit' != $request->input('submit')){
@@ -266,7 +283,7 @@ class ReviewController extends Controller
                     ->groupBy('strains.strain_name')
                     ->get();
 
-      
+
       $data['owns_review'] = FALSE;
       if(isset(Auth::user()->id))
         $data['owns_review'] = Auth::user()->id == $data['review']->author_id ? TRUE : FALSE;

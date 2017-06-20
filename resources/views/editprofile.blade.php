@@ -5,28 +5,28 @@ Edit Profile
 @endsection
 @section('content')
 
-<form method="POST" action="/user/edit/save">
+<form method="POST" action="/user/edit/save" enctype="multipart/form-data" >
     {!! csrf_field() !!}
 
     Bio
-    <div>
+    <div class="form-group">
         <textarea type="text" name="bio">{{ $bio }}</textarea>
     </div>
 
     Birthdate
-    <div>
+    <div class="form-group">
         <input type="date" name="birthdate" value="{{ $birthdate }}">
     </div>
 
     Avatar
-    <div>
-        <input type="text" name="avatar_url" value="{{ $avatar_url }}">
+    <div class="form-group">
+        <input type="file" name="avatar_url">
     </div>
 
     <input type="hidden" name="id" value="{{ $user_id }}">
 
-    <div>
-        <button type="submit">Save Changes</button>
+    <div class="form-group">
+        <button class="btn btn-primary" type="submit">Save Changes</button>
     </div>
 </form>
 @endsection

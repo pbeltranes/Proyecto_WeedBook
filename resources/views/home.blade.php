@@ -16,11 +16,15 @@ There is no reviews till now. Login and write a new post now!!!
 
 <div class="w3-row-padding">
   @foreach( $reviews as $review )
-  <?php $back = $review->background_image_url ? $review->background_image_url : 'http://www.acnur.org/fileadmin/Images/ACNUR/noticias/2016/Octubre_2016/5809ae163.jpg';  ?>
+  <?php
+  $back = $url.$review->background_image_url;
+
+  ?>
     <div class="w3-third w3-container w3-margin-bottom">
 
       <center>
-        <a href='{{url("/review/".$review->id )}}'><img src="{{$back}}" alt="Norway" style="border-radius: 50%;
+        <a href='{{url("/review/".$review->id )}}'>
+          <img src="{{ $back }}" alt="" style="border-radius: 50%;
             overflow: hidden;
             width: 150px;
             height: 150px;" class="w3-hover-opacity"> </a>

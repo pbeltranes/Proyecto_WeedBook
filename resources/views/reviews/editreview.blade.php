@@ -6,7 +6,7 @@
 @section('content')
 <!--agregar condicion de verificacion de campo vacio-->
 
-<form method="POST" action="/review/edit/save">
+<form method="POST" action="/review/edit/save" class="form-control" >
     {!! csrf_field() !!}
 
 <tr>
@@ -21,7 +21,7 @@
           width: 150px;
           height: 150px; "  class="w3-hover-opacity">
         </p>
-      <input type="text" name="background_image_url" value="{{ $background_image_url }} " class="form-control"/>
+      <input type="input" name="background_image_url" value="{{ $background_image_url }} " class="form-control"/>
   </div>
       <input type="hidden" name="id" value="{{ $id }}">
       <button type="submit" name="submit" value="Finish" >Finish</button>

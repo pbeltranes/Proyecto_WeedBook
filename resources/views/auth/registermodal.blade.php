@@ -9,7 +9,7 @@
                         <h4 class="modal-title">Register now for free =D</h4>
                       </div>
                       <div class="modal-body">
-                        <form method="POST" action="/auth/register">
+                        <form method="POST" action="/auth/register" enctype="multipart/form-data">
                         {!! csrf_field() !!}
 
                             User Name
@@ -28,14 +28,19 @@
                            </div>
                            You're Growing Since?
                            <div>
-                               <input type="date" name="growing_since" value="{{ old ('growing_since') }}">    
+                               <input type="date" name="growing_since" value="{{ old ('growing_since') }}">
                            </div>
 
                             Birthday
                            <div>
-                               <input type="date" name="birthdate" value="{{ old ('birthdate') }}">    
+                               <input type="date" name="birthdate" value="{{ old ('birthdate') }}">
+                           </div>
+                           Photo profile
+                           <div >
+                             <input type="file"  name="avatar_url"  >
                            </div>
                            Password
+
                            <div>
                                <input type="password" name="password">
                            </div>
@@ -45,22 +50,15 @@
                            </div>
 
 
-                            <div>
-                               <button type="submit">Register</button>
-                           </div>
-                        </form>
+
                       </div>
                       <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <div>
+                           <button type="submit" class="btn btn-primary" >Register</button>
+                       </div>
+                    </form>
                       </div>
                     </div>
 
                   </div>
                 </div>
-
-
-
-
-
-
-

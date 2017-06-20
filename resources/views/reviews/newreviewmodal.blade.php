@@ -9,23 +9,23 @@
                         <h4 class="modal-title">Add a new Review</h4>
                       </div>
                       <div class="modal-body">
-                        <form  action= "/new-review" method= "POST" >
+                        <form  action= "/new-review" method= "POST"  enctype="multipart/form-data">
                         {!! csrf_field() !!}
                           <tr>
                             <div class="form-group">
                               Title of your cultive
-                              <input type="text" name="title" value="{{ old('title') }}" class="form-control"/>
+                              <input type="text" name="title" value="{{ old('title') }}" class="form-control">
                             </div>
                             <div class="form-group">
                               Cover Photo
-                              <input type="text" name="background_image_url" value="{{ old('background_image_url') }}" class="form-control"/>
+                              <input type="file" name="background_image_url" >
                             </div>
-                          <button type="submit">Save Changes</button>
                           </tr>
-                        </form>
+
                       </div>
                       <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                          <button class="btn btn-primary" type="submit">Create</button>
+                          </form>
                       </div>
                        </div>
                       </div>

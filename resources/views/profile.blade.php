@@ -8,7 +8,7 @@
     <a href="#" onclick="w3_close()" class="w3-hide-large w3-right w3-jumbo w3-padding w3-hover-grey" title="close menu">
       <i class="fa fa-remove"></i>
     </a>
-    <img src="{{$user_profile->avatar_url}}" style="width:45%;" class="w3-round"><br><br>
+    <img src="{{$url.$user_profile->avatar_url}}" style="width:45%;" class="w3-round"><br><br>
     <h4><b>About</b></h4>
     <p class="w3-text-grey">{{$user_profile->bio}}</p>
   </div>
@@ -45,8 +45,13 @@
        </tr>
       </table>
       @if($profile_options)
-      <a href="{{url('/user/'.Auth::id().'/edit')}}">Edit Profile</a><br>
-      <a href="{{url('/user/delete/'.Auth::id().'')}}">DELETE PROFILE!</a>
+
+      <hr />
+      <tr>
+        <a href="{{url('/user/'.Auth::id().'/edit')}}"> <button class="btn btn-primary" >Edit Profile </button></a>
+
+      </tr>
+      <a href="{{url('/user/delete/'.Auth::id().'')}}"><button class="btn btn-primary" > Delete profile </button></a>
       @endif
     </li>
   </ul>
@@ -61,7 +66,7 @@
       @if($reviews_count == 0)
       This user has no reviews yet :(
       @else
-      
+
       @endif
     </li>
   </ul>

@@ -23,12 +23,16 @@
     </div>
     You're Growing Since?
     <div>
-        <input type="date" name="growing_since" value="{{ old ('growing_since') }}">    
+        <input type="date" name="growing_since" value="{{ old ('growing_since') }}">
     </div>
 
     Birthday
     <div>
-        <input type="date" name="birthdate" value="{{ old ('birthdate') }}">    
+        <input type="date" name="birthdate" value="{{ old ('birthdate') }}">
+    </div>
+         Photo profile
+    <div >
+      <input type="file"name="avatar_url" >
     </div>
     Password
     <div>
