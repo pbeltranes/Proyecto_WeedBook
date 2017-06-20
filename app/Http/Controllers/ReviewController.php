@@ -73,10 +73,10 @@ class ReviewController extends Controller
     {
       $duplicate = Review::where('title',$request->title)->first();
       if($request->title == '') // verificar que el nombre no este pelado
-        return redirect('reviews/new-review')->withErrors('  Please write the title of your review, bitch!.')->withInput();
+        return back()->withErrors('     Please write the title of your review, bitch!.')->withInput();
       if($duplicate)
       {
-        return redirect('home')->withErrors('   Title already exists.')->withInput();// verificar que no exista el nombre
+        return back()->withErrors('       Title already exists.')->withInput();// verificar que no exista el nombre
       }
       else{
         $R = Review::create([ // creamos review
@@ -99,14 +99,15 @@ class ReviewController extends Controller
      */
     public function showUserReviews(request $request) // se visualiza solo para el author_id
     {
-      $id = Auth::user()->id;
-      $reviews=DB::table('reviews')
+      $data['id'] = Auth::user()->id;
+      $data['reviews']=DB::table('reviews')
             ->where('reviews.author_id', '=', $request->id)
             ->where('reviews.active',0) // revisar solo las reviews que se encuentren activas
             ->select('reviews.id', 'reviews.title', 'reviews.active', 'reviews.state','reviews.created_at','reviews.updated_at', 'background_image_url')
             ->get();
-      $title= 'Your Reviews';
-        return view('reviews/myreviews',compact('reviews'))->withTitle($title)->withInput($id);
+      $data['title'] = 'Your Reviews';
+      $data['url'] = '/images/';
+        return view('reviews/myreviews',$data);
     }
 
     public function updateReview($id, Request $request){
@@ -241,7 +242,7 @@ class ReviewController extends Controller
     public function show($id){
 
       $data['review'] = Review::find($id);
-
+      $data['url'] = '/images/';
       $data['author'] = UsersProfile::where('user_id', $data['review']->author_id)->first();
 
       $data['rev_updates'] = ReviewUpdate::join('reviews', 'reviews.id', '=', 'review_updates.review_id')

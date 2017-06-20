@@ -21,11 +21,7 @@ There is no reviews till now. Login and write a new post now!!!
         <div class="row-lg-4">
           <div class="container-fluid">
             <a href='{{url("/review/".$review->id)}}'>
-               <img src="{{$back}}" alt="Norway" style="border-radius: 50%;
-              overflow: hidden;
-              width: 130px;
-              height: 130px;
-              display:block;" class="img-thumbnail center-block">
+               <img src="{{$url.$back}}"class="img-circle img-responsive img-thumbnail center-block w3-hover-opacity">
             </a>
           </div>
         </div>

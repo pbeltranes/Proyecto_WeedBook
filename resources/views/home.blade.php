@@ -24,10 +24,7 @@ There is no reviews till now. Login and write a new post now!!!
 
       <center>
         <a href='{{url("/review/".$review->id )}}'>
-          <img src="{{ $back }}" alt="" style="border-radius: 50%;
-            overflow: hidden;
-            width: 150px;
-            height: 150px;" class="w3-hover-opacity"> </a>
+          <img src="{{ $back }}" class="img-circle img-thumbnail center-block w3-hover-opacity" > </a>
       </center>
       <div class="w3-container w3-white">
         <p>  </p>

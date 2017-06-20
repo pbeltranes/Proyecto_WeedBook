@@ -7,7 +7,7 @@
     <div>
       <div class="card hovercard">
             <div class="container-fluid ">
-                <img src="{{$review->background_image_url}}" class="img-responsive thumbnail center-block" style="height:auto; display:block;" alt="{{$review->updated_at->format('Y-m-d')}}">
+                <img src="{{$url.$review->background_image_url}}"  class="img-responsive thumbnail center-circle" style="height:auto; display:block;" alt="{{$review->updated_at->format('Y-m-d')}}">
             </div>
             <div class="card-info">
               <span class="card-title"><h2>{{$review->title}}</h2></span>
@@ -53,7 +53,7 @@
                     </div>
                     <div class="col-sm-4">
                       <div class="container-fluid">
-                        <img class="img-circle img-responsive center-block img-thumbnail" width="120" src="{{$author->avatar_url}}">
+                        <img class="img-circle img-responsive center-block img-thumbnail" width="120" src="{{$url.$author->avatar_url}}">
                       </div>
                     </div>
                     <div class="col-sm-4">

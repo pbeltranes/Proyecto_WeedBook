@@ -34,7 +34,7 @@
                                 @endforeach
                               </select>
                             </div>
-                          
+
                             <div class="form-group">
                               Seed type
                                 <select name="seed_type" class="form-control">
@@ -45,8 +45,8 @@
                                 </select>
                                 <script type="text/javascript">$(".chosen").chosen({width: "inherit"});</script>
                             </div>
-                          
-                          
+
+
                             <div class="form-group">
                               Grow type
                                 <select name="grow_type" class="form-control" id="growSetup">
@@ -69,7 +69,7 @@
                                 <option value="None">Neither</option>
                               </select>
                             </div>
-                          
+
                               <div class="form-group" id="lightSetupClass">
                                 Light Setup
                               <select name="light_type" class="form-control" id="lightSetup">
@@ -84,16 +84,16 @@
                                 Light Power in Watts
                                 <input type="number" name="light_power" value="{{old('light_power')}}">
                             </div>
-                          
+
                             <div class="form-group">
                               Plants of this type
                               <input type="number" name="nro_strains" value="{{old('light_power')}}">
                             </div>
                             <input type="hidden" name="review_id" value="{{$review_id}}">
-                          
+
                           </div>
-                          <button type="submit" name="submit" value="Other" >Add Other Strain</button>
-                          <button type="submit" name="submit" value="Ok" >Create Strain</button>
+                          <button type="submit" name="submit" value="Other" class = "btn btn-info btn-sm" >Add Other Strain</button>
+                          <button type="submit" name="submit" value="Ok"  class = "btn btn-info btn-sm">Create Strain</button>
                           </tr>
                           </form>
                       </div>

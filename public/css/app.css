@@ -938,6 +938,18 @@ img {
 }
 .img-circle {
   border-radius: 50%;
+  overflow: hidden;
+  width: 130px;
+  height: 130px;
+  display:block;
+}
+
+.img-review {
+  border-radius: 5%;
+  overflow: hidden;
+  width: 200px;
+  height: 250px;
+  display:block;
 }
 hr {
   margin-top: 20px;
