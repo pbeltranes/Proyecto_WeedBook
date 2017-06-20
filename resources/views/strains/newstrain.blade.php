@@ -11,8 +11,10 @@ Add a new strain to your grow
   <div class="form-group">
     Strain name
     <input type="text" name="strain_name" value="{{ old('strain_name') }}" class="form-control"/>
-  </div>
 
+    
+
+  </div>
   <div class="form-group">
     Bank
       <input type="text" name="bank" value="{{ old('bank') }}" class="form-control" />
