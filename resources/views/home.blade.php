@@ -32,6 +32,12 @@ There is no reviews till now. Login and write a new post now!!!
         <p>Grower <b><a href="{{ url('user/' . $review->user_id . '')}}">
          {{$review->user_name }}</a></b></p>
          <p>Reputation: {{$review->C ? $review->C : 0}}</p>
+          <form class="form-group" role="form" method="POST" action="/review/vote/{{$review->id}}">
+          {!! csrf_field() !!}
+            <button class="btn btn-primary btn-xs fa fa-thumbs-o-up" >
+              Like
+            </button>
+         </form>
         <p align="justify" >News: Praesent tincidunt sed tellus ut rutrum. Sed vitae justo condimentum, porta lectus vitae, ultricies congue gravida diam non fringilla.</p>
       </div>
     </div>
