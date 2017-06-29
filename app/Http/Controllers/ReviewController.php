@@ -136,6 +136,8 @@ class ReviewController extends Controller
                   'veg_prod_quantity' => $request->input('veg_prod_quantity' . $id->id),
                   'flow_prod_quantity' => $request->input('flow_prod_quantity' . $id->id),
                   'other_prod_quantity' => $request->input('other_prod_quantity' . $id->id),
+                  'humidity' => $request->input('humidity' . $id->id),
+                  'temp' => $request->input('temp' . $id->id),
                   'update_image_url' => $img,
                   ]);
 

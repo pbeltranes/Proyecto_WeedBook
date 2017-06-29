@@ -46,6 +46,15 @@
                                   <input name="height{{$strain->id}}" maxlength="100" type="number" required="required" class="form-control" placeholder="in centimeters"  />
                                 </div>
                                 <div class="form-group">
+                                  <label class="control-label">Humidity</label>
+                                  <input name="humidity{{$strain->id}}" maxlength="100" type="number" required="required" class="form-control" placeholder="in %"  />
+                                </div>
+                                <div class="form-group">
+                                  <label class="control-label">Temperature</label>
+                                  <input name="temp{{$strain->id}}" maxlength="100" type="number" required="required" class="form-control" placeholder="in ºC"  />
+                                </div>
+
+                                <div class="form-group">
                                   <label class="control-label">Darkness Time</label>
                                   <input name="darkness_time{{$strain->id}}" maxlength="100" type="number" required="required" class="form-control" placeholder="in hours"/>
                                 </div>
@@ -90,7 +99,15 @@
                               <div class="col-md-6">
                                 <div class="form-group">
                                   <label class="control-label">Height</label>
-                                  <input name="height{{$strain->id}}" maxlength="100" type="number" required="required" class="form-control" placeholder="in meters"  />
+                                  <input name="height{{$strain->id}}" maxlength="100" type="number" required="required" class="form-control" placeholder="in centimeters"  />
+                                </div>
+                                <div class="form-group">
+                                  <label class="control-label">Humidity</label>
+                                  <input name="humidity{{$strain->id}}" maxlength="100" type="number" required="required" class="form-control" placeholder="in %"  />
+                                </div>
+                                <div class="form-group">
+                                  <label class="control-label">Temperature</label>
+                                  <input name="temp{{$strain->id}}" maxlength="100" type="number" required="required" class="form-control" placeholder="in ºC"  />
                                 </div>
                                 <div class="form-group">
                                   <label class="control-label">Darkness Time</label>

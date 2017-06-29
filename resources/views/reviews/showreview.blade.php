@@ -153,11 +153,6 @@
                   @endforeach
                 </div>
               </div>
-              <hr></hr>
-            </div>
-          </div>
-      </div>
-
         <h3 class="box-content bottom">Comments</h3>
         <ul class="media-list">
           @if(Auth::guest())

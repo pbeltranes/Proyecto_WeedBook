@@ -141,7 +141,7 @@ return [
         /*
          * Application Service Providers...
          */
-        Krlove\EloquentModelGenerator\Provider\GeneratorServiceProvider::class,
+        
         App\Providers\AppServiceProvider::class,
         App\Providers\AuthServiceProvider::class,
         App\Providers\EventServiceProvider::class,

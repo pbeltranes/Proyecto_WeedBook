@@ -54,10 +54,10 @@
                                      <div class="col-md-8 update-amb">
                                           <!-- <h1>Lorem Ipsum</h1> -->
                                           <h4>Crop Variables</h4>
-                                          <span><i class="fa fa-arrows-v" aria-hidden="true">-{{$update->height}}</i>m of height</span><br>
+                                          <span><i class="fa fa-arrows-v" aria-hidden="true">-{{$update->height}}</i>cm of height</span><br>
                                           <span><i class="fa fa-hourglass-end" aria-hidden="true">-{{$update->stage}}</i> Stage</span><br>
-                                          <span><i class="fa fa-thermometer-half" aria-hidden="true">-20</i>ºC</span><br>
-                                          <span><i class="fa fa-tint" aria-hidden="true">-55</i>% Air humidity</span>
+                                          <span><i class="fa fa-thermometer-half" aria-hidden="true">-{{$update->temp}}</i>ºC</span><br>
+                                          <span><i class="fa fa-tint" aria-hidden="true">-{{$update->humidity}}</i>% Air humidity</span>
                                      </div>
                                      <div class="col-md-8 update-schedule">
                                           <!-- <h1>Lorem Ipsum</h1> -->

@@ -23,7 +23,7 @@ class StrainUpdate extends Model
     /**
      * @var array
      */
-    protected $fillable = ['strain_id', 'height', 'darkness_time', 'light_time', 'stage', 'veg_prod_quantity', 'flow_prod_quantity', 'other_prod_quantity', 'created_at', 'updated_at'];
+    protected $fillable = ['strain_id', 'height', 'darkness_time', 'light_time', 'stage', 'veg_prod_quantity', 'flow_prod_quantity', 'other_prod_quantity', 'humidity', 'temp', 'created_at', 'updated_at'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
