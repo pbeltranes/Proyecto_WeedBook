@@ -10,6 +10,7 @@
         "doctrine/dbal": "2.5.*",
         "guzzlehttp/guzzle": "^6.2",
         "symfony/psr-http-message-bridge": "0.2"
+        "krlove/eloquent-model-generator": "^1.2"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

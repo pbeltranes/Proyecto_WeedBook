@@ -26,7 +26,7 @@
                             @endforeach
                           </div>
                         </div>
-                          <form role="form" action="/review/{{$review->id}}/add-update" method="POST">
+                          <form role="form" action="/review/{{$review->id}}/add-update" method="POST" enctype="multipart/form-data">
                           {!! csrf_field() !!}
                           <div class="row setup-content" id="wtsnew">
                             <div class="col-md-12">

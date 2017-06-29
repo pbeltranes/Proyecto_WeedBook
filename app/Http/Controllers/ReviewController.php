@@ -23,8 +23,26 @@ use App\apiBanks;
 use App\apiStrains;
 use App\ReviewUpVotes;
 
+
+
+
 class ReviewController extends Controller
 {
+
+  public function uploading_image($file){
+        if($file != NULL)
+       $ext = $file->getClientOriginalExtension();
+       else
+       return 'DEFAULT_REVIEW_URL.png';
+        if($ext =! 'jpg' & $ext != 'jpeg' & $ext != 'bmp' & $ext != 'gif' & $ext != 'png')
+             return 'DEFAULT_REVIEW_URL.png';
+           else{
+             $nombre = $file->getClientOriginalName();
+             $hash_name = md5($nombre. time()).'.'. $file->getClientOriginalExtension();
+             \Storage::disk('local')->put($hash_name,  \File::get($file));
+               return $hash_name;
+             }
+           }
     /**
      * Display a listing of the resource.
      *
@@ -154,20 +172,7 @@ class ReviewController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-     public function uploading_image($file){
-        if($file != NULL)
-       $ext = $file->getClientOriginalExtension();
-       else
-       return 'DEFAULT_REVIEW_URL.png';
-        if($ext =! 'jpg' & $ext != 'jpeg' & $ext != 'bmp' & $ext != 'gif' & $ext != 'png')
-             return 'DEFAULT_REVIEW_URL.png';
-           else{
-             $nombre = $file->getClientOriginalName();
-             $hash_name = md5($nombre. time()).'.'. $file->getClientOriginalExtension();
-             \Storage::disk('local')->put($hash_name,  \File::get($file));
-               return $hash_name;
-             }
-           }
+     
     public function edit($id) // se entregan datos para actualizar
     {
       $data=Review::where('id', $id)->first();
@@ -267,7 +272,7 @@ class ReviewController extends Controller
 
       $data['strain_updates'] = Strain::where('review_id', $id)
                                 ->join('strain_updates', 'strain_updates.strain_id', '=', 'strains.id')
-                                ->selectRaw('strains.id as id, strain_updates.height, strain_updates.darkness_time, strain_updates.light_time, strain_updates.stage, strain_updates.veg_prod_quantity, strain_updates.flow_prod_quantity, strain_updates.other_prod_quantity, strain_updates.created_at, strain_updates.updated_at, strain_updates.update_image_url')
+                                ->selectRaw('strains.id as id, strain_updates.height, strain_updates.darkness_time, strain_updates.light_time, strain_updates.stage, strain_updates.veg_prod_quantity, strain_updates.flow_prod_quantity, strain_updates.other_prod_quantity, strain_updates.created_at, strain_updates.updated_at, strain_updates.temp, strain_updates.humidity, strain_updates.update_image_url')
                                 ->orderBy('strain_updates.created_at')
                                 ->get();
 
