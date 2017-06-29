@@ -38,7 +38,7 @@ There is no reviews till now. Login and write a new post now!!!
               Like
             </button>
          </form>
-        <p align="justify" >News: Praesent tincidunt sed tellus ut rutrum. Sed vitae justo condimentum, porta lectus vitae, ultricies congue gravida diam non fringilla.</p>
+        <p align="justify" >{{$review->update_text ? 'News: ' . $review->update_text : 'Not Updated Yet :(' }}.</p>
       </div>
     </div>
 

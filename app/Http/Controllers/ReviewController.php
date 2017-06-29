@@ -36,10 +36,14 @@ class ReviewController extends Controller
 
         $data['reviews'] = Review::where('active',0)
         ->join('users_profiles', 'reviews.author_id', '=', 'users_profiles.user_id')
-        ->selectRaw('reviews.id, reviews.active, reviews.background_image_url, reviews.title, users_profiles.user_name, users_profiles.user_id, count(review_up_votes.id) as C')
         ->leftJoin('review_up_votes', 'review_up_votes.review_id', '=', 'reviews.id')
+        ->leftJoin('review_updates as r', function($join){
+            $join->on('r.review_id', '=', 'reviews.id')
+                  ->on('r.updated_at', '=', DB::raw('(select updated_at from review_updates where review_id = r.review_id order by id desc limit 1)'));
+        })
         ->groupBy('reviews.id')
         ->orderBy('C', 'DESC')
+        ->selectRaw('reviews.id, reviews.active, reviews.background_image_url, reviews.title, users_profiles.user_name, users_profiles.user_id, count(review_up_votes.id) as C, r.update_text')
         ->paginate(6);
 
         $data['title'] = 'WeedBook World';
