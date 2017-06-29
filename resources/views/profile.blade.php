@@ -13,7 +13,7 @@
     <p class="w3-text-grey">{{$user_profile->bio}}</p>
   </div>
 </nav>
-<div>
+<div class="font-white">
   <ul class="list-group">
     <li class="list-group-item">
       Joined on {{$user->created_at->format('M d,Y \a\t h:i a') }} <br>

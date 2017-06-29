@@ -38,17 +38,17 @@ There is no reviews till now. Login and write a new post now!!!
                 <div class="row">
                   <div class="btn-group btn-group-justified">
                     <div class="btn-group" role="group">
-                      <a class="btn btn-xs btn-info pull-left" role="button" href="{{ url( '/review/' .$review->id. '/edit') }}">
+                      <a class="btn btn-xs btn-info pull-left btn-default" role="button" href="{{ url( '/review/' .$review->id. '/edit') }}">
                         Edit Post
                       </a>
                     </div>
                     <div class="btn-group" role="group">
-                      <a  class="btn btn-xs btn-info pull-left" role="button" href="{{ url( '/review/' .$review->id. '/edit') }}">
+                      <a  class="btn btn-xs btn-info pull-left btn-default" role="button" href="{{ url( '/review/' .$review->id. '/edit') }}">
                         Update History
                       </a>
                     </div>
                     <div class="btn-group" role="group">
-                      <a  class="btn btn-xs btn-info pull-left" role="button" href="{{ route('showreview',['$id' => $review->id]) }}">
+                      <a  class="btn btn-xs btn-info pull-left btn-default" role="button" href="{{ route('showreview',['$id' => $review->id]) }}">
                         View Review
                       </a>
                     </div>

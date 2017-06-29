@@ -15,7 +15,7 @@
                             <div class="input-group">
                               <span class="input-group-addon">
                                 <i class="glyphicon glyphicon-user"></i>
-                              </span> 
+                              </span>
                               <input class="form-control" placeholder="Email" type="email" name="email" value="{{ old('email') }}" autofocus>
                             </div>
                           </div>
@@ -31,12 +31,12 @@
                             <div>
                                 <input type="checkbox" name="remember"> Remember Me
                             </div>
-                        
+
                           <div class="form-group">
-                            <input type="submit" class="btn btn-lg btn-primary btn-block" value="Login">
+                            <input type="submit" class="btn btn-lg btn-default btn-block " value="Login">
                           </div>
                         </form>
-                      
+
                       </div>
                       <div class="modal-footer">
                       </div>
@@ -44,6 +44,3 @@
 
                   </div>
                 </div>
-
-
-

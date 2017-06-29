@@ -24,7 +24,7 @@
 
                       </div>
                       <div class="modal-footer">
-                          <button class="btn btn-primary" type="submit">Create</button>
+                          <button class="btn btn-lg btn-default btn-block" type="submit">Create</button>
                           </form>
                       </div>
                        </div>

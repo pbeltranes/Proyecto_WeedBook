@@ -23,20 +23,20 @@
             @endif
       </div>
     </div>
-    <div class="btn-pref btn-group btn-group-justified btn-group-lg" role="group" aria-label="..." >
+    <div class="btn-pref btn-group btn-group-justified btn-group-lg soft-greenb" role="group" aria-label="..." >
         <div class="btn-group" role="group">
-            <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#tab1" aria-expanded="false" aria-controls="#collapseExample"><span class="fa fa-user-circle" aria-hidden="true"></span>
+            <button type="button" class="btn btn-default soft-greenb" data-toggle="collapse" data-target="#tab1" aria-expanded="false" aria-controls="#collapseExample"><span class="fa fa-user-circle" aria-hidden="true"></span>
                 <div class="hidden-xs">Author info</div>
             </button>
         </div>
-        <div class="btn-group" role="group">
-            <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#tab2" aria-expanded="false" aria-controls="#collapseExample"><span class="fa fa-envira" aria-hidden="true"></span>
+        <div class="btn-group " role="group">
+            <button type="button" class="btn btn-default soft-greenb" data-toggle="collapse" data-target="#tab2" aria-expanded="false" aria-controls="#collapseExample"><span class="fa fa-envira" aria-hidden="true"></span>
                 <div class="hidden-xs">Grow info</div>
             </button>
         </div>
         <div class="btn-group" role="group">
 
-            <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#tab3" aria-expanded="false" aria-controls="#collapseExample"><span class="fa fa-flask" aria-hidden="true"></span>
+            <button type="button" class="btn btn-default soft-greenb" data-toggle="collapse" data-target="#tab3" aria-expanded="false" aria-controls="#collapseExample"><span class="fa fa-flask" aria-hidden="true"></span>
 
               <div class="hidden-xs">Products</div>
             </button>
@@ -79,7 +79,7 @@
                       </div>
                       <div class="col-xs-3">
                         @if($owns_review)
-                        <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#addStrainModal">Add new Crop</button>
+                        <button type="button" class="btn  btn-sm btn-default" data-toggle="modal" data-target="#addStrainModal">Add new Crop</button>
                         @endif
                         @include('strains/addstrainmodal', array('review_id' => $review->id,
                         'api_banks' => $api_banks,
@@ -185,8 +185,8 @@
                            <div class="col-xs-3 col-lg-2 pull-right">
                              <form class="form-group " role="form" method="POST"   action="/comment/vote/{{$comment->id}}/{{$review->id}}">
                                {!! csrf_field() !!}
-                               <div class="form-group">
-                                 <button class="btn btn-primary btn-xs fa fa-thumbs-o-up">
+                               <div class="form-group ">
+                                 <button class=" btn btn-primary btn-xs fa fa-thumbs-o-up">
                                    <span>{{$comment->upvotes}}like</span>
                                  </button>
                                </div>
@@ -271,7 +271,7 @@
                   <textarea class="form-control" rows="3" cols="2" style = "font-size:13px;" name="comment"></textarea>
                 </div>
                 <div class="form-group">
-                  <button class="btn btn-success" >Submit</button>
+                  <button class="btn btn-success btn-default btn-block" >Submit</button>
                 </div>
               </form>
             </div>

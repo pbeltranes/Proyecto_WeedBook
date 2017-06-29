@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>WeedBook. Knowledge to grow.</title>
+    <link href="{{ asset('/css/color.css') }}" rel="stylesheet">
     <link href="{{ asset('/css/app.css') }}" rel="stylesheet">
     <!-- Fonts -->
     <link href='//fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'>
@@ -25,38 +26,39 @@
     @include('auth/registermodal')
     @include('reviews/newreviewmodal')
     <nav class="navbar navbar-default">
-      <div class="container-fluid">
-        <div class="navbar-header">
+      <div class="container-fluid soft-greenb">
+        <div class="navbar-header ">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
             <span class="sr-only">Toggle Navigation</span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="{{url('/')}}">WeedBook</a>
+            <a class="navbar-brand " href="{{url('/')}}"><div class="font-white">WeedBook</div></a>
+
         </div>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav">
-            <li>
-              <a href="{{ url('/') }}">Home</a>
+            <li >
+              <a href="{{ url('/') }}"><div class="font-white">Home</div></a>
             </li>
             @if (!Auth::guest())
             <li>
-              <a href="#" data-toggle="modal" data-target="#newReviewModal">Add new Review</a>
+              <a href="#" data-toggle="modal" data-target="#newReviewModal"><div class="font-white">Add new Review </div></a>
             </li>
             @endif
           </ul>
           <ul class="nav navbar-nav navbar-right">
             @if (Auth::guest())
             <li>
-              <a href="#" data-toggle="modal" data-target="#loginModal">Login</a>
+              <a href="#" data-toggle="modal" data-target="#loginModal"><div class="font-white">Login</div></a>
             </li>
             <li>
-              <a href="#" data-toggle="modal" data-target="#registerModal">Register</a>
+              <a href="#" data-toggle="modal" data-target="#registerModal"><div class="font-white">Register</div></a>
             </li>
             @else
             <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><?php echo '@' ?>{{ Auth::user()->name }}<span class="caret"></span></a>
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><div class="font-white"><?php echo '@' ?>{{ Auth::user()->name }} <span class="caret"></span></div></a>
               <ul class="dropdown-menu" role="menu">
                 @if (!Auth::guest())
                 <li>
@@ -79,13 +81,13 @@
     <div class="container">
       @if (Session::has('message'))
       <div class="flash alert-info">
-        <p class="panel-body">
+        <p class="panel-body ">
           {{ Session::get('message') }}
         </p>
       </div>
       @endif
       @if ($errors->any())
-      <div class='flash alert-danger'>
+      <div class='flash alert-danger '>
         <ul class="panel-body">
           @foreach ( $errors->all() as $error )
           <li>
@@ -96,11 +98,13 @@
       </div>
       @endif
       <div class="row">
-        <div class="col-md-10 col-md-offset-1">
+        <div class="col-md-10 col-md-offset-1 ">
           <div class="panel panel-default">
-            <div class="panel-heading">
-              <h2>@yield('title')</h2>
-              @yield('title-meta')
+            <div class="soft-greenb">
+              <div class="panel-heading">
+                <h2 class = "font-white">@yield('title')</h2>
+                @yield('title-meta')
+              </div>
             </div>
             <div class="panel-body">
               @yield('content')

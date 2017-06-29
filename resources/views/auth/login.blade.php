@@ -7,22 +7,22 @@
 <form method="POST" action="/auth/login">
     {!! csrf_field() !!}
 
-    <div>
+    <div class = "form-group">
         Email
-        <input type="email" name="email" value="{{ old('email') }}">
+        <input class = "form-control" type="email" name="email" value="{{ old('email') }}">
     </div>
 
-    <div>
+    <div class="form-group">
         Password
-        <input type="password" name="password" id="password">
+        <input class="form-control" type="password" name="password" id="password">
     </div>
 
-    <div>
+    <div class = "form-group">
         <input type="checkbox" name="remember"> Remember Me
     </div>
 
     <div>
-        <button type="submit">Login</button>
+        <button type="submit" class="btn btn-lg btn-default btn-block">Login</button>
     </div>
 </form>
 @endsection
