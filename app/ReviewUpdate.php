@@ -26,4 +26,6 @@ class ReviewUpdate extends Model
     {
         return $this->belongsTo('App\Review');
     }
+
+    
 }
