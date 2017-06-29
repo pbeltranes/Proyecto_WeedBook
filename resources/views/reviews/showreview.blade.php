@@ -4,10 +4,9 @@
 @endsection
 @section('content')
 
-    <div>
       <div class="card hovercard">
             <div class="container-fluid ">
-                <img src="{{$url.$review->background_image_url}}"  class="img-responsive thumbnail center-circle" style="height:auto; display:block;" alt="{{$review->updated_at->format('Y-m-d')}}">
+                <img src="{{$url.$review->background_image_url}}"  class="img-responsive img-thumbnail center-block" style="height:auto; display:block;" alt="{{$review->updated_at->format('Y-m-d')}}">
             </div>
             <div class="card-info">
               <span class="card-title"><h2>{{$review->title}}</h2></span>
@@ -22,7 +21,6 @@
               @endif
             @endif
       </div>
-    </div>
     <div class="btn-pref btn-group btn-group-justified btn-group-lg soft-greenb" role="group" aria-label="..." >
         <div class="btn-group" role="group">
             <button type="button" class="btn btn-default soft-greenb" data-toggle="collapse" data-target="#tab1" aria-expanded="false" aria-controls="#collapseExample"><span class="fa fa-user-circle" aria-hidden="true"></span>
@@ -46,19 +44,14 @@
           <div class="tab-content">
             <div class="collapse" id="tab1">
                 <div class="row">
-                    <div class="row-xs-1">
+                    <div class="col-sm-4">
                       <div class="container-fluid">
-                        <h3>Author</h3>
+                        <img class="img-circle img-responsive center-block img-thumbnail" style="width:120px;height120px;" src="{{$url.$author->avatar_url}}">
                       </div>
                     </div>
                     <div class="col-sm-4">
                       <div class="container-fluid">
-                        <img class="img-circle img-responsive center-block img-thumbnail" width="120" src="{{$url.$author->avatar_url}}">
-                      </div>
-                    </div>
-                    <div class="col-sm-4">
-                      <div class="container-fluid">
-                        <td><h4>Name</h4>{{$author->user_name}}</td>
+                        <td><h3>{{$author->user_name}}</h3></td>
                       </div>
                       <div class="container-fluid">
                         <td><h4>Growing Since</h4>{{$author->growing_since}}</td>
@@ -102,13 +95,13 @@
                     <h3>Setup:</h3>
                   </div>
                   <div class="container-fluid">
-                    
+
                       <?php $actually = ''; $cont = -1; $s = 0; $u = 0?>
                       @foreach($strains as $strain)
                       <div class="row">
                       <?php $cont++;?>
                       <div class="col-xs-5">
-                        
+
                           <h4>- {{$strain->strain_name}}</h4>
                       </div>
                         <div class="col-xs-3">
@@ -119,7 +112,7 @@
                         </div>
                       </div>
                     </div>
-                  
+
                           @endforeach
                   </div>
               </div>
@@ -164,7 +157,7 @@
             <div class="row">
               <div class="col-sm-1">
                 <a>
-                  <img class=" img-circle" src="{{$comment->avatar_url}}" width="75" height="75">
+                  <img class=" img-circle" src="{{$url.$comment->avatar_url}}" width="75" height="75">
                 </a>
               </div><!-- /col-sm-1 -->
 

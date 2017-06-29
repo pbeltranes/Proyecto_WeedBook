@@ -87,7 +87,10 @@
                                 </div>
                                 <div class="form-group">
                                   <label class="control-label">Update Image</label>
-                                  <input name="update_image_url{{$strain->id}}" type="file" class="form-control"  />
+                                  <!-- <input name="update_image_url{{$strain->id}}" type="file" class="form-control"  /> -->
+                                  <input type="file" id="selectedFile" style="display: none;" class="form-control" name="update_image_url{{$strain->id}}"/>
+                                  <input type="button" class="btn btn-default" value="Browse..." onclick="document.getElementById('selectedFile').click();" />
+
                                 </div>
                                 <button class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Next</button>
                               </div>
@@ -142,7 +145,10 @@
                                 </div>
                                 <div class="form-group">
                                   <label class="control-label">Update Image</label>
-                                  <input name="update_image_url{{$strain->id}}" type="file" class="form-control" />
+                                  <!-- <input name="update_image_url{{$strain->id}}" type="file" class="form-control" /> -->
+                                  <input type="file" id="selectedFile" style="display: none;" class="form-control" name="update_image_url{{$strain->id}}"/>
+                                  <input type="button" class="btn btn-default" value="Browse..." onclick="document.getElementById('selectedFile').click();" />
+
                                 </div>
                                 <button class="btn btn-primary nextBtn btn-lg pull-right" type="submit">Update</button>
                               </div>

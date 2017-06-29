@@ -144,7 +144,7 @@ class ReviewController extends Controller
       $strains_id = Strain::where('review_id', $id)->selectRaw('strains.id as id')->get();
 
       foreach ($strains_id as $id) {
-      $img  = $this->uploading_image($request->input('update_image_url' . $id->id));
+      $img  = $this->uploading_image($request->file('update_image_url' . $id->id));
            $strain_update = StrainUpdate::create([
                   'strain_id' => $id->id,
                   'height' => $request->input('height' . $id->id),
@@ -156,7 +156,7 @@ class ReviewController extends Controller
                   'other_prod_quantity' => $request->input('other_prod_quantity' . $id->id),
                   'humidity' => $request->input('humidity' . $id->id),
                   'temp' => $request->input('temp' . $id->id),
-                  'update_image_url' => $img,
+                  'update_image_url' => $this->uploading_image($request->file('update_image_url' . $id->id)),
                   ]);
 
           $strain_update->save();
@@ -172,7 +172,7 @@ class ReviewController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-     
+
     public function edit($id) // se entregan datos para actualizar
     {
       $data=Review::where('id', $id)->first();
