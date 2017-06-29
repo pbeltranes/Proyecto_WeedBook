@@ -2925,8 +2925,8 @@ fieldset[disabled] .btn-success.active {
 .btn-info.active,
 .open > .dropdown-toggle.btn-info {
   color: #ffffff;
-  background-color: #31afd5;
-  border-color: #269abc;
+  background-color: rgba(141,238,0,.84);
+  border: 1px solid rgba(58,98,0,.84);
 }
 .btn-info:active,
 .btn-info.active,
@@ -2951,8 +2951,8 @@ fieldset[disabled] .btn-info:active,
 .btn-info.disabled.active,
 .btn-info[disabled].active,
 fieldset[disabled] .btn-info.active {
-  background-color: #5bc0de;
-  border-color: #46b8da;
+  background-color: rgba(141,238,0,.84);
+  border: 1px solid rgba(58,98,0,.84);
 }
 .btn-info .badge {
   color: #5bc0de;
@@ -3662,7 +3662,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 .nav-tabs > li.active > a,
 .nav-tabs > li.active > a:hover,
 .nav-tabs > li.active > a:focus {
-  color: #555555;
+  color: rgba(#555,.84);
   background-color: #ffffff;
   border: 1px solid #dddddd;
   border-bottom-color: transparent;
@@ -4118,16 +4118,16 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   }
 }
 .navbar-default {
-  background-color: #f8f8f8;
-  border-color: #e7e7e7;
+  background-color: rgb(122,188,27);
+  border-color: rgb(78,126,8);
 }
 .navbar-default .navbar-brand {
   color: #777777;
 }
 .navbar-default .navbar-brand:hover,
 .navbar-default .navbar-brand:focus {
-  color: #5e5e5e;
-  background-color: transparent;
+  color: rgb(141,232,9);
+  background-color: rgb(122,188,27);
 }
 .navbar-default .navbar-text {
   color: #777777;
