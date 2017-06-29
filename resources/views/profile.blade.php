@@ -8,7 +8,7 @@
     <a href="#" onclick="w3_close()" class="w3-hide-large w3-right w3-jumbo w3-padding w3-hover-grey" title="close menu">
       <i class="fa fa-remove"></i>
     </a>
-    <img src="{{$url.$user_profile->avatar_url}}" style="width:45%;" class="w3-round"><br><br>
+    <img src="{{$url.$user_profile->avatar_url}}" style="width:50%;" class="img-thumbnail"><br><br>
     <h4><b>About</b></h4>
     <p class="w3-text-grey">{{$user_profile->bio}}</p>
   </div>

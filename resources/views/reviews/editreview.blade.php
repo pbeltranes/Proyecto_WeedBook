@@ -6,26 +6,31 @@
 @section('content')
 <!--agregar condicion de verificacion de campo vacio-->
 
-<form method="POST" action="/review/edit/save" class="form-control" >
-    {!! csrf_field() !!}
-
-<tr>
-<div class="form-group">
-      Title of your cultive actually is: <b>{{ $title }}</b>
-      <input type="text" name="title" value="" class="form-control" />
+  <div class="card-hovercard">
+          <div class="container-fluid">
+            <form method="POST" action="/review/edit/save" enctype="multipart/form-data" >
+              {!! csrf_field() !!}
+          </div>
+          <div class="form-group">
+            <h4>Actual tittle:</h4>
+            <input type="text" name="title" value="{{ $title }}" >
+          <div class=row>
+            <div class="container-fluid">
+                <h4> Cover Photo actually
+                    <img src="/images/{{ $background_image_url }}" alt="Background" style="width: 150px;height: 150px; "  class="img block-center thumbnail img-circle">
+                </h4>
+                  <input type="file" id="selectedFile" style="display: none;" name="background_image_url" class="form-control"/>
+                  <input type="button" class="btn btn-default" value="Browse..." onclick="document.getElementById('selectedFile').click();" />
+              </div>
+            </div>
+          <div class="row">
+            <div class="container-fluid">
+              <input type="hidden" name="id" value="{{ $id }}">
+              <button class="btn btn-default" type="submit" name="submit" value="Finish" >Finish</button>
+              <button class="btn btn-default" type="submit" name="submit" value="Edit" >Edit Strain</button>
+          </div>
+          </div>
+        </div>
+      </form>
   </div>
-  <div class="form-group">
-    <p> Cover Photo actually is: <img src="{{ $background_image_url }}" alt="Background" style="
-        border-radius: 50%;
-          overflow: hidden;
-          width: 150px;
-          height: 150px; "  class="w3-hover-opacity">
-        </p>
-      <input type="input" name="background_image_url" value="{{ $background_image_url }} " class="form-control"/>
-  </div>
-      <input type="hidden" name="id" value="{{ $id }}">
-      <button type="submit" name="submit" value="Finish" >Finish</button>
-      <button type="submit" name="submit" value="Edit" >Edit Strain</button>
-</tr>
-</form>
 @endsection

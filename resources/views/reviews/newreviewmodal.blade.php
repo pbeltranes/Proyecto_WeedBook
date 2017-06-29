@@ -18,7 +18,9 @@
                             </div>
                             <div class="form-group">
                               Cover Photo
-                              <input type="file" name="background_image_url" >
+            
+                              <input type="file" id="selectedFile" style="display: none;" class="form-control" name="background_image_url"/>
+                              <input type="button" class="btn btn-default" value="Browse..." onclick="document.getElementById('selectedFile').click();" />
                             </div>
                           </tr>
 

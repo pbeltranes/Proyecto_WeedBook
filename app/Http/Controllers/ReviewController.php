@@ -30,19 +30,23 @@ class ReviewController extends Controller
 {
 
   public function uploading_image($file){
-        if($file != NULL)
-       $ext = $file->getClientOriginalExtension();
-       else
-       return 'DEFAULT_REVIEW_URL.png';
-        if($ext =! 'jpg' & $ext != 'jpeg' & $ext != 'bmp' & $ext != 'gif' & $ext != 'png')
-             return 'DEFAULT_REVIEW_URL.png';
-           else{
-             $nombre = $file->getClientOriginalName();
-             $hash_name = md5($nombre. time()).'.'. $file->getClientOriginalExtension();
-             \Storage::disk('local')->put($hash_name,  \File::get($file));
-               return $hash_name;
-             }
-           }
+      if($file != NULL){
+        $ext = $file->getClientOriginalExtension();
+      }
+      else{
+        return 'DEFAULT_REVIEW_URL.png';
+      }
+
+      if($ext =! 'jpg' & $ext != 'jpeg' & $ext != 'bmp' & $ext != 'gif' & $ext != 'png' & $ext != 'JPG'){
+           return 'DEFAULT_REVIEW_URL.png';
+      }
+      else{
+           $nombre = $file->getClientOriginalName();
+           $hash_name = md5($nombre. time()).'.'. $file->getClientOriginalExtension();
+           \Storage::disk('local')->put($hash_name,  \File::get($file));
+           return $hash_name;
+      }
+   }
     /**
      * Display a listing of the resource.
      *
@@ -144,7 +148,8 @@ class ReviewController extends Controller
       $strains_id = Strain::where('review_id', $id)->selectRaw('strains.id as id')->get();
 
       foreach ($strains_id as $id) {
-      $img  = $this->uploading_image($request->file('update_image_url' . $id->id));
+      $img  = $this->uploading_image($request->file('update_image_url'.$id->id));
+
            $strain_update = StrainUpdate::create([
                   'strain_id' => $id->id,
                   'height' => $request->input('height' . $id->id),
@@ -156,7 +161,7 @@ class ReviewController extends Controller
                   'other_prod_quantity' => $request->input('other_prod_quantity' . $id->id),
                   'humidity' => $request->input('humidity' . $id->id),
                   'temp' => $request->input('temp' . $id->id),
-                  'update_image_url' => $this->uploading_image($request->file('update_image_url' . $id->id)),
+                  'update_image_url' => $img,
                   ]);
 
           $strain_update->save();
@@ -190,13 +195,17 @@ class ReviewController extends Controller
 
     public function save(request $request) // no se donde shit se sacan datos para actualizar
     {
+      
       if($request->title != ''){
         if( (Review::where('title', $request->input('title'))->count()) ){
           return back()->withErrors('   Title already exists.');
-        }else{
+        }
+        else{
+          $bgi_url = $this->uploading_image($request->file('background_image_url'));
+
           $review=Review::where("id",$request->id)->first();
           $review->title = $request->input('title');
-          $review->background_image_url = $this->uploading_image($request->input('background_image_url'));
+          $review->background_image_url = $bgi_url;
           $review->save();
         }
       }

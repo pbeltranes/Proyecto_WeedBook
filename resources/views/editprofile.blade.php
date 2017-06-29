@@ -20,7 +20,9 @@ Edit Profile
 
     Avatar
     <div class="form-group">
-        <input type="file" name="avatar_url">
+
+        <input type="file" id="selectedFile" style="display: none;" class="form-control" name="avatar_url"/>
+        <input type="button" class="btn btn-default" value="Browse..." onclick="document.getElementById('selectedFile').click();" />
     </div>
 
     <input type="hidden" name="id" value="{{ $user_id }}">

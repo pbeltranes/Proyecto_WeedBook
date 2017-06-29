@@ -4,23 +4,23 @@
 @endsection
 @section('content')
 
-      <div class="card hovercard">
-            <div class="container-fluid ">
-                <img src="{{$url.$review->background_image_url}}"  class="img-responsive img-thumbnail center-block" style="height:auto; display:block;" alt="{{$review->updated_at->format('Y-m-d')}}">
-            </div>
-            <div class="card-info">
-              <span class="card-title"><h2>{{$review->title}}</h2></span>
-            </div>
-            @if($owns_review)
-            @include('update/update', array([
-                                        'strains' => $strains,
-                                        'review' => $review,
-                                      ]))
-              @if($strain_count > 0)
-                <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#updateModal">Update Review</button>
-              @endif
+    <div class="card hovercard">
+          <div class="container-fluid ">
+              <img src="{{$url.$review->background_image_url}}"  class="img-responsive img-thumbnail center-block" style="height:auto; display:block;" alt="{{$review->updated_at->format('Y-m-d')}}">
+          </div>
+          <div class="card-info">
+            <span class="card-title"><h2>{{$review->title}}</h2></span>
+          </div>
+          @if($owns_review)
+          @include('update/update', array([
+                                      'strains' => $strains,
+                                      'review' => $review,
+                                    ]))
+            @if($strain_count > 0)
+              <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#updateModal">Update Review</button>
             @endif
-      </div>
+          @endif
+    </div>
     <div class="btn-pref btn-group btn-group-justified btn-group-lg soft-greenb" role="group" aria-label="..." >
         <div class="btn-group" role="group">
             <button type="button" class="btn btn-default soft-greenb" data-toggle="collapse" data-target="#tab1" aria-expanded="false" aria-controls="#collapseExample"><span class="fa fa-user-circle" aria-hidden="true"></span>
