@@ -10,14 +10,22 @@ Add a new strain to your grow
 
   <div class="form-group">
     Strain name
-    <input type="text" name="strain_name" value="{{ old('strain_name') }}" class="form-control"/>
+    <select class="chosen" name="strain_name">
+    @foreach($api_strains as $strain)
+      <option value = "{{$strain->name}}">{{$strain->name}}</option>
+      @endforeach
+    </select>
 
     
 
   </div>
   <div class="form-group">
     Bank
-      <input type="text" name="bank" value="{{ old('bank') }}" class="form-control" />
+  <select class="chosen" name="bank">
+  @foreach($api_banks as $bank)
+    <option value = "{{$bank->name}}">{{$bank->name}}</option>
+    @endforeach
+  </select>
   </div>
 
   <div class="form-group">

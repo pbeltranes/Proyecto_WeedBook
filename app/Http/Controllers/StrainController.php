@@ -35,9 +35,11 @@ class StrainController extends Controller
      */
     public function create($review_id)
     {
-        $data = [
-            'review_id' => $review_id,
-        ];
+
+        $data['review_id'] = $review_id;
+        $data['api_banks'] = apiBanks::selectRaw('bank_name as name')->get();
+        $data['api_strains'] = apiStrains::selectRaw('strain_name as name')->get();
+        
         return view('strains/newstrain', $data);
     }
 
@@ -57,10 +59,6 @@ class StrainController extends Controller
             'strain_name' => $request->input('strain_name'),
             'technique' => $request->get('technique'),
             'seed_type' => $request->get('seed_type'),
-            'germ_start' => $request->input('germ_start'),
-            'veg_start' => $request->input('veg_start'),
-            'flow_strat' => $request->input('flow_start'),
-            'harvest_date' => $request->input('harvest_date'),
             'active' => 1,
             'grow_type' => $request->get('grow_type'),
             'light_type' => $request->get('light_type'),

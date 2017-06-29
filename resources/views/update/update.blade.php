@@ -43,7 +43,7 @@
                               <div class="col-md-6">
                                 <div class="form-group">
                                   <label class="control-label">Height</label>
-                                  <input name="height{{$strain->id}}" maxlength="100" type="number" required="required" class="form-control" placeholder="in meters"  />
+                                  <input name="height{{$strain->id}}" maxlength="100" type="number" required="required" class="form-control" placeholder="in centimeters"  />
                                 </div>
                                 <div class="form-group">
                                   <label class="control-label">Darkness Time</label>
@@ -78,7 +78,7 @@
                                 </div>
                                 <div class="form-group">
                                   <label class="control-label">Update Image</label>
-                                  <input name="update_image_url{{$strain->id}}" maxlength="200" type="text" required="required" class="form-control" placeholder="URL"  />
+                                  <input name="update_image_url{{$strain->id}}" type="file" class="form-control"  />
                                 </div>
                                 <button class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Next</button>
                               </div>
@@ -125,7 +125,7 @@
                                 </div>
                                 <div class="form-group">
                                   <label class="control-label">Update Image</label>
-                                  <input name="update_image_url{{$strain->id}}" maxlength="200" type="text" required="required" class="form-control" placeholder="URL"  />
+                                  <input name="update_image_url{{$strain->id}}" type="file" class="form-control" />
                                 </div>
                                 <button class="btn btn-primary nextBtn btn-lg pull-right" type="submit">Update</button>
                               </div>

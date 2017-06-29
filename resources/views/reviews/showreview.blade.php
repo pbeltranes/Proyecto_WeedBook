@@ -102,23 +102,25 @@
                     <h3>Setup:</h3>
                   </div>
                   <div class="container-fluid">
-                    <div class="row">
+                    
                       <?php $actually = ''; $cont = -1; $s = 0; $u = 0?>
                       @foreach($strains as $strain)
-                      @if( $strain->strain_name != $actually)
-                      <?php $actually = $strain->strain_name;  $cont++;?>
+                      <div class="row">
+                      <?php $cont++;?>
                       <div class="col-xs-5">
+                        
                           <h4>- {{$strain->strain_name}}</h4>
-                        </div>
+                      </div>
                         <div class="col-xs-3">
                           <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal{{$strain->id}}">Information</button>
                           @include('strains/viewstrain', array(['strain' => $strain,
                           'updates' => $strain_updates,
                           ]))
-                          @endif
-                          @endforeach
+                        </div>
                       </div>
                     </div>
+                  
+                          @endforeach
                   </div>
               </div>
               <hr></hr>
@@ -141,9 +143,12 @@
                     @endif
                     @foreach($products_on_strain as $prod)
                       @if($prod->id == $strain->id)
+                    </div>
                     <h5>- {{$prod->name}}</h5>
                       @endif
+                    </div>
                     @endforeach
+
                   </div>
                   @endforeach
                 </div>

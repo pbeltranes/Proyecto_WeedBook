@@ -135,7 +135,6 @@ class UserController extends Controller
 
 
     public function profile(Request $request, $id){
-        $this->middleware('auth');
         $data['user'] = User::find($id);
         $data['user_profile'] = UsersProfile::where('user_id', $id)->first();
         $data['url'] = '/images/';
@@ -168,8 +167,6 @@ class UserController extends Controller
         $data['prom_comments_rep'] = $totalCommentRep / $totalUserComments;
 
         $data['user_reviews'] = Review::where('author_id', $id)->get();
-
-
 
 
         return view('profile', $data);
