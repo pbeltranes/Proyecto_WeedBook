@@ -95,7 +95,7 @@
 
                       <?php $actually = ''; $cont = -1; $s = 0; $u = 0?>
                       @foreach($strains as $strain)
-                      <div class="row">
+                      <div class="container-fluid">
                       <?php $cont++;?>
                       <div class="col-xs-5">
 

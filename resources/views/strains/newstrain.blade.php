@@ -13,10 +13,10 @@ Add a new strain to your grow
     <select class="chosen" name="strain_name">
     @foreach($api_strains as $strain)
       <option value = "{{$strain->name}}">{{$strain->name}}</option>
-    @endforeach
+      @endforeach
     </select>
 
-
+    
 
   </div>
   <div class="form-group">

@@ -57,7 +57,7 @@
   </ul>
 </div>
 
-<div>
+<div class="font-white">
   <ul class="list-group">
     <li class="list-group-item">
       <?php echo "@"; ?>{{$user->name}}'s Reviews
@@ -66,11 +66,21 @@
       @if($reviews_count == 0)
       This user has no reviews yet :(
       @else
+      <table class="table-padding">
+        <tr>
+          <td>Tittle</td>
+        </tr>
         @foreach($user_reviews as $user_review)
-           <div class="container-fluid">
-            <a href="{{url("/review/".$user_review->id)}}"><h4>{{$user_review->title}}</h4></a>
-           </div>
+             <style>
+               .table-padding td{
+                 padding: 3px 8px;
+               }
+             </style>
+             <tr>
+               <td><a href="{{url("/review/".$user_review->id)}}"><h4>{{$user_review->title}}</h4></a></td>
+             </tr>
         @endforeach
+      </table>
       @endif
     </li>
   </ul>
