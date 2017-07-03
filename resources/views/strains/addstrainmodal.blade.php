@@ -92,8 +92,8 @@
                             <input type="hidden" name="review_id" value="{{$review_id}}">
 
                           </div>
-                          <button type="submit" name="submit" value="Other" class = "btn btn-info btn-sm" >Add Other Strain</button>
-                          <button type="submit" name="submit" value="Ok"  class = "btn btn-info btn-sm">Create Strain</button>
+                          <button type="submit" name="submit" value="Other" class = "btn btn-info btn-sm" >Add Other Crop</button>
+                          <button type="submit" name="submit" value="Ok"  class = "btn btn-info btn-sm">Create Crop</button>
                           </tr>
                           </form>
                       </div>

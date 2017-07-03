@@ -6,7 +6,7 @@
 
     <div class="card hovercard">
           <div class="container-fluid ">
-              <img src="{{$url.$review->background_image_url}}"  class="img-responsive img-thumbnail center-block" style="height:auto; display:block;" alt="{{$review->updated_at->format('Y-m-d')}}">
+              <img src="{{$url.$review->background_image_url}}"  class="img-responsive img-thumbnail center-block" style="width:270px; display:block;" alt="{{$review->updated_at->format('Y-m-d')}}">
           </div>
           <div class="card-info">
             <span class="card-title"><h2>{{$review->title}}</h2></span>
@@ -46,7 +46,7 @@
                 <div class="row">
                     <div class="col-sm-4">
                       <div class="container-fluid">
-                        <img class="img-circle img-responsive center-block img-thumbnail" style="width:120px;height120px;" src="{{$url.$author->avatar_url}}">
+                        <img class="center-block img-thumbnail" style="width:200px;height120px;" src="{{$url.$author->avatar_url}}">
                       </div>
                     </div>
                     <div class="col-sm-4">
@@ -62,9 +62,6 @@
             </div>
             <div class="collapse" id="tab2">
               <div class="row">
-                <div class="container-fluid">
-                    <h3>Crops</h3>
-                </div>
                 <div class="container-fluid">
                     <div class="row">
                       <div class="col-xs-5">
@@ -92,7 +89,7 @@
                     </div>
                 </div>
                   <div class="container-fluid">
-                    <h3>Setup:</h3>
+                    <h3>Crop's Setup:</h3>
                   </div>
                   <div class="container-fluid">
 
@@ -157,7 +154,7 @@
             <div class="row">
               <div class="col-sm-1">
                 <a>
-                  <img class=" img-circle" src="{{$url.$comment->avatar_url}}" width="75" height="75">
+                  <img class=" img-circle" src="{{$url.$comment->avatar_url}}" style="width:64px;height:64px;padding-right:3px;">
                 </a>
               </div><!-- /col-sm-1 -->
 
@@ -168,9 +165,9 @@
                       <div class="col-sx-2 col-sm-2">
                         <strong>{{$comment->user_name}}</strong>
                       </div>
-                      <div class="col-xs-2 col-sm-4">
+                      <div class="col-xs-4 col-sm-4">
                         <span class="text-muted">
-                          <small>commented {{$comment->created_at->format('Y-m-d')}}</small>
+                          <small>Comented {{$comment->created_at->format('Y-m-d')}}</small>
                         </span>
                       </div>
 
@@ -197,7 +194,7 @@
                            </form>
                          </div>
                          @if($comment->from_user == Auth::user()->id)
-                         <div class="col-xs-1 col-xs-2 pull-right">
+                         <div class="col-xs-2 col-sm-1 pull-right">
                              <a type="button" class="btn btn-success btn-xs"  data-toggle="modal" data-target="#Modal{{$comment->id}}">Edit</a>
                          </div>
                          <div class="col-xs-2 col-lg-1 pull-right">
@@ -256,6 +253,7 @@
             <br>
           @endforeach
           <br>
+        </ul>
           <div class="row">
             <div class="container-fluid">
               <form class="form-group-lg col-md-9 " role="form" method="POST" action="/comment/save/{{$review->id}}">
@@ -269,5 +267,4 @@
               </form>
             </div>
           </div>
-        </ul>
 @endsection
