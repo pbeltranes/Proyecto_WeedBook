@@ -34,7 +34,7 @@ There is no reviews till now. Login and write a new post now!!!
          <p>Reputation: {{$review->C ? $review->C : 0}}</p>
           <form class="form-group" role="form" method="POST" action="/review/vote/{{$review->id}}">
           {!! csrf_field() !!}
-            <button class="btn btn-primary btn-xs fa fa-thumbs-o-up" >
+            <button class="btn btn-default btn-xs fa fa-thumbs-o-up" >
               Like
             </button>
          </form>

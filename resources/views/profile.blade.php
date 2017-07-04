@@ -48,10 +48,10 @@
 
       <hr />
       <tr>
-        <a href="{{url('/user/'.Auth::id().'/edit')}}"> <button class="btn btn-primary" >Edit Profile </button></a>
+        <a href="{{url('/user/'.Auth::id().'/edit')}}"> <button class="btn btn-default" >Edit Profile </button></a>
 
       </tr>
-      <a href="{{url('/user/delete/'.Auth::id().'')}}"><button class="btn btn-primary" > Delete profile </button></a>
+      <a href="{{url('/user/delete/'.Auth::id().'')}}"><button class="btn btn-default" > Delete profile </button></a>
       @endif
     </li>
   </ul>

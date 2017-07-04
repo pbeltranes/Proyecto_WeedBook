@@ -34,7 +34,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-            <a class="navbar-brand " href="{{url('/')}}"><div class="font-white">WeedBook</div></a>
+            <a class="navbar-brand" href="{{url('/')}}"><div class="font-white">WeedBook</div></a>
 
         </div>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -99,9 +99,8 @@
       @endif
       <div class="row">
         <div class="col-md-10 col-md-offset-1 ">
-          <div class="panel panel-default">
-            <div class="soft-greenb">
-              <div class="panel-heading">
+          <div class="panel panel-default btn-default">
+              <div class="panel-heading btn-default">
                 <h2 class = "font-white">@yield('title')</h2>
                 @yield('title-meta')
               </div>

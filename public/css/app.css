@@ -2587,7 +2587,7 @@ select[multiple].form-group-lg .form-control {
 }
 .has-warning .form-control:focus {
   border-color: #66512c;
-  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #c0a16b;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #6bc16c;
 }
 .has-warning .input-group-addon {
   color: #8a6d3b;
@@ -5274,12 +5274,12 @@ a.list-group-item-danger.active:focus {
   border-bottom: 1px solid #dddddd;
 }
 .panel-default {
-  border-color: #dddddd;
+  border-color: #599404;
 }
 .panel-default > .panel-heading {
-  color: #333333;
-  background-color: #f5f5f5;
-  border-color: #dddddd;
+  color: #3333#f5f5f533;
+  background-color: #7ABC1B;
+  border-color: #599404;
 }
 .panel-default > .panel-heading + .panel-collapse > .panel-body {
   border-top-color: #dddddd;
@@ -5504,7 +5504,7 @@ button.close {
   top: 0;
   right: 0;
   left: 0;
-  background-color: #584922;
+  background-color: #98bf90;
 }
 .modal-backdrop.fade {
   opacity: 0;

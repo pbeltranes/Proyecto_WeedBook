@@ -20,7 +20,7 @@
                            <div>
                                <input class="form-control" type="email" name="email" value="{{ old('email') }}">
                            </div>
-
+<!--
                             Bio
                            <div>
                                <textarea class="form-control" type="text" name="bio" value="{{ old('bio') }}">Short description of yourself
@@ -30,7 +30,7 @@
                            <div>
                                <input class="form-control" type="date" name="growing_since" value="{{ old ('growing_since') }}">
                            </div>
-
+                         -->
                             Birthday
                            <div>
                                <input class="form-control" type="date" name="birthdate" value="{{ old ('birthdate') }}">
