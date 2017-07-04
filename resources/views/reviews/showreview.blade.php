@@ -92,27 +92,30 @@
                     <h3>Crop's Setup:</h3>
                   </div>
                   <div class="container-fluid">
-
-                      <?php $actually = ''; $cont = -1; $s = 0; $u = 0?>
+                    <?php $actually = ''; $cont = -1; $s = 0; $u = 0?>
                       @foreach($strains as $strain)
+                      @if($actually != $strain->strain_name)
+
                       <div class="container-fluid">
-                      <?php $cont++;?>
                       <div class="col-xs-5">
 
                           <h4>- {{$strain->strain_name}}</h4>
                       </div>
                         <div class="col-xs-3">
                           <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal{{$strain->id}}">Information</button>
-                          @include('strains/viewstrain', array(['strain' => $strain,
+                          @include('strains/viewstrain', array([
+                          'strain' => $strain,
                           'updates' => $strain_updates,
+                          'cantidades_strains' =>  $cantidades_strains,
                           ]))
                         </div>
                       </div>
                     </div>
-
-                          @endforeach
                   </div>
               </div>
+              <?php $actually = $strain->strain_name; ?>
+              @endif
+              @endforeach
               <hr></hr>
             </div>
             <div class="collapse" id="tab3">

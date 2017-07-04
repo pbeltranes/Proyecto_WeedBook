@@ -894,7 +894,7 @@ textarea {
   line-height: inherit;
 }
 a {
-  color: #337ab7;
+  color: #7ABC1B;;
   text-decoration: none;
 }
 a:hover,
@@ -2869,9 +2869,9 @@ fieldset[disabled] .btn-primary.active {
   border-color: #599404;
 }
 .btn-success {
-  color: #416e01;
-  background-color: rgba(#bb1b1b,1);
-  border-color: #599404;
+  color: #ffffff;
+  background-color: rgba(100,164,7,.84);
+  border: 1px solid rgba(58,98,0,.84);
 }
 .btn-success:hover,
 .btn-success:focus,
@@ -2879,10 +2879,68 @@ fieldset[disabled] .btn-primary.active {
 .btn-success:active,
 .btn-success.active,
 .open > .dropdown-toggle.btn-success {
-  color: #ffffff;
-  background-color: #449d44;
+  background-color: #7ABC1B;
   border-color: #398539;
 }
+
+
+.btn-blue {
+  color: #ffffff;
+  background-color: rgba(100,164,7,.84);
+  border: 1px solid rgba(58,98,0,.84);
+}
+.btn-blue:hover,
+.btn-blue:focus,
+.btn-blue.focus,
+.btn-blue:active,
+.btn-blue.active,
+.open > .dropdown-toggle.btn-blue {
+  background-color: #1b95bb;
+  border-color: #006787;
+}
+.btn-yellow {
+  color: #ffffff;
+  background-color: rgba(100,164,7,.84);
+  border: 1px solid rgba(58,98,0,.84);
+}
+.btn-yellow:hover,
+.btn-yellow:focus,
+.btn-yellow.focus,
+.btn-yellow:active,
+.btn-yellow.active,
+.open > .dropdown-toggle.btn-yellow {
+  background-color: #dabf01;
+  border-color: #9e8a00;
+}
+.btn-red {
+  color: #ffffff;
+  background-color: rgba(100,164,7,.84);
+  border: 1px solid rgba(58,98,0,.84);
+}
+.btn-red:hover,
+.btn-red:focus,
+.btn-red.focus,
+.btn-red:active,
+.btn-red.active,
+.open > .dropdown-toggle.btn-red {
+  background-color: #bb1b1b;
+  border-color: #8e0202;
+}
+.btn-white {
+  color: #ffffff;
+  background-color: rgba(100,164,7,.84);
+  border: 1px solid rgba(58,98,0,.84);
+}
+.btn-white:hover,
+.btn-white:focus,
+.btn-white.focus,
+.btn-white:active,
+.btn-white.active,
+.open > .dropdown-toggle.btn-white {
+  background-color: #fff;
+  border-color: #aaa9a9;
+}
+
 .btn-success:active,
 .btn-success.active,
 .open > .dropdown-toggle.btn-success {
@@ -2906,12 +2964,12 @@ fieldset[disabled] .btn-success:active,
 .btn-success.disabled.active,
 .btn-success[disabled].active,
 fieldset[disabled] .btn-success.active {
-  background-color: #5cb85c;
-  border-color: #4cae4c;
+  background-color: #7abb1b;
+  border-color: #4bad4b;
 }
 .btn-success .badge {
   color: #5cb85c;
-  background-color: #ffffff;
+  background-color: #7ABC1B;
 }
 .btn-info {
   color: #ffffff;
@@ -2924,7 +2982,8 @@ fieldset[disabled] .btn-success.active {
 .btn-info:active,
 .btn-info.active,
 .open > .dropdown-toggle.btn-info {
-  color: #ffffff;
+
+  color: #ffffffrgba(238,0,0,1);
   background-color: rgba(141,238,0,.84);
   border: 1px solid rgba(58,98,0,.84);
 }
@@ -2960,8 +3019,8 @@ fieldset[disabled] .btn-info.active {
 }
 .btn-warning {
   color: #ffffff;
-  background-color: #f0ad4e;
-  border-color: #eea236;
+  background-color: rgba(100,164,7,.84);
+  border: 1px solid rgba(58,98,0,.84);
 }
 .btn-warning:hover,
 .btn-warning:focus,
@@ -2970,8 +3029,8 @@ fieldset[disabled] .btn-info.active {
 .btn-warning.active,
 .open > .dropdown-toggle.btn-warning {
   color: #ffffff;
-  background-color: #1fbeec;
-  border-color: #d58412;
+  background-color: #f0ad4e;
+  border-color: #eea236;
 }
 .btn-warning:active,
 .btn-warning.active,
@@ -3174,7 +3233,7 @@ tbody.collapse.in {
   background-color: rgba(100,164,7,.84);
   border: 1px solid rgba(58,98,0,.84);
   border-radius: 4px;
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+  box-shadow: 0 6px 12px rgba(0,0,0,.18);
   background-clip: padding-box;
 }
 .dropdown-menu.pull-right {
@@ -5445,7 +5504,7 @@ button.close {
   top: 0;
   right: 0;
   left: 0;
-  background-color: ##584922;
+  background-color: #584922;
 }
 .modal-backdrop.fade {
   opacity: 0;
@@ -6540,10 +6599,10 @@ body h1 {
 }
 @-webkit-keyframes shadow {
   from {
-    box-shadow: 0 0 0 100vmin rgba(24, 33, 45, 0), 0 0 10vmin rgba(13, 21, 31, 0);
+    box-shadow: 0 0 0 100vmin rgba(24, 33, 45, 0), 0 0 10vmin rgba(31,26,13,1);
   }
   to {
-    box-shadow: 0 0 0 100vmin rgba(24, 33, 45, 0.6), 0 0 10vmin rgba(13, 21, 31, 0.6);
+    box-shadow: 0 0 0 100vmin rgba(30,45,24,.6), 0 0 10vmin rgba(15,31,13,.6);
   }
 }
 @keyframes shadow {
@@ -6551,6 +6610,6 @@ body h1 {
     box-shadow: 0 0 0 100vmin rgba(24, 33, 45, 0), 0 0 10vmin rgba(13, 21, 31, 0);
   }
   to {
-    box-shadow: 0 0 0 100vmin rgba(24, 33, 45, 0.6), 0 0 10vmin rgba(13, 21, 31, 0.6);
+    box-shadow: 0 0 0 100vmin rgba(30,45,24,.6), 0 0 10vmin rgba(15,31,13,.6);
   }
 }

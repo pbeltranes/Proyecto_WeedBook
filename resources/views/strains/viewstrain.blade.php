@@ -3,7 +3,6 @@
                 <!-- Modal -->
                 <div id="myModal{{$strain->id}}" class="modal fade" role="dialog">
                   <div class="modal-dialog">
-
                     <!-- Modal content-->
                     <div class="modal-content">
                       <div class="modal-header">
@@ -11,21 +10,19 @@
                         <h4 class="modal-title">{{$strain->strain_name}}'s Information</h4>
                       </div>
                       <div class="modal-body">
-                      <a href="#" data-toggle="popover" title="Crops of this type:" data-content="{{$cantidad[$cont]->counter}}"><button type="button" class="btn btn-success btn-circle btn-lg"><i class="fa fa fa-leaf" aria-hidden="true"></i></button></a>
-                      <a href="#" data-toggle="popover" title="Light setup:" data-content="{{$strain->light_type}}"><button type="button" class="btn btn-info btn-circle btn-lg"><i class="fa fa-lightbulb-o" aria-hidden="true"></i></button></a>
-                      <a href="#" data-toggle="popover" title="Light power:" data-content="{{$strain->light_power}} Watts"><button type="button" class="btn btn-warning btn-circle btn-lg"><i class="fa fa-bolt" aria-hidden="true"></i></button></a>
-                      <a href="#" data-toggle="popover" title="Bank:" data-content="{{$strain->bank}}"><button type="button" class="btn btn-default btn-circle btn-lg"><i class="fa fa-envira" aria-hidden="true"></i></button></a>
-                        <!-- <p><i class="fa fa fa-leaf"> Crops of this type: {{ $cantidad[$cont]->counter}}</i></p>
-                        <p><i class="fa fa-lightbulb-o"> Light Type: {{$strain->light_type}}</i></p>
-                        <p><i class="fa fa-bolt"> Watts: {{$strain->light_power}}</i></p>
-                        <p><i class="fa fa-envira"> Bank: {{$strain->bank}}</i></p> -->
+                      @foreach($cantidades_strains as $cantidad)
+                      <a href="#" data-toggle="popover" title="Crops of this type:" data-content="{{$cantidad->counter}}"><button type="button" class="btn btn-blue btn-circle btn-lg"> <i class="fa fa fa-leaf" aria-hidden="true"></i></button></a>
+                      <a href="#" data-toggle="popover" title="Light setup:" data-content="{{$strain->light_type}}"><button type="button" class="btn btn-yellow btn-circle btn-lg"><i class="fa fa-lightbulb-o" aria-hidden="true"></i></button></a>
+                      <a href="#" data-toggle="popover" title="Light power:" data-content="{{$strain->light_power}} Watts"><button type="button" class="btn btn-red btn-circle btn-lg"><i class="fa fa-bolt" aria-hidden="true"></i></button></a>
+                      <a href="#" data-toggle="popover" title="Bank:" data-content="{{$strain->bank}}"><button type="button" class="btn btn-white btn-circle btn-lg"><i class="fa fa-envira" aria-hidden="true"></i></button></a>
+                        <?php break; ?>
+                      @endforeach
                         <script>
                           $(document).ready(function(){
                             $('[data-toggle="popover"]').popover();
                           });
                         </script>
                         <a data-toggle="collapse" data-parent="#accordion" href="#collapse{{$strain->id}}">Detailed Info</a>
-
                         <div id="collapse{{$strain->id}}" class="panel-collapse collapse">
                           <div class="panel-body">
                             <div class="btn-pref btn-group btn-group-justified btn-group-lg" role="group" aria-label="..." >

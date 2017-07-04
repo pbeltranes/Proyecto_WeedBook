@@ -195,7 +195,7 @@ class ReviewController extends Controller
 
     public function save(request $request) // no se donde shit se sacan datos para actualizar
     {
-      
+
       if($request->title != ''){
         if( (Review::where('title', $request->input('title'))->count()) ){
           return back()->withErrors('   Title already exists.');
@@ -302,7 +302,7 @@ class ReviewController extends Controller
                             ->get();
 
        // cantidad de cada strains en la review
-       $data['cantidad'] = DB::table('strains')
+       $data['cantidades_strains'] = DB::table('strains')
                     ->select(DB::raw('count(*) as counter, strains.strain_name'))
                     ->where('review_id',$id)
                     ->groupBy('strains.strain_name')
