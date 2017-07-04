@@ -1,15 +1,17 @@
 
 @extends('app')
 @section('title')
+<center>
+<div class="card-info">
+  <span class="card-title"><h2>{{$review->title}}</h2></span>
+</div>
+</center>
 @endsection
 @section('content')
 
     <div class="card hovercard">
           <div class="container-fluid ">
               <img src="{{$url.$review->background_image_url}}"  class="img-responsive img-thumbnail center-block" style="width:270px; display:block;" alt="{{$review->updated_at->format('Y-m-d')}}">
-          </div>
-          <div class="card-info">
-            <span class="card-title"><h2>{{$review->title}}</h2></span>
           </div>
           @if($owns_review)
           @include('update/update', array([
